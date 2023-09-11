@@ -19,4 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get('/recipes', [RecipeController::class, 'index']);
-Route::get('/recipes/show', [RecipeController::class, 'show']);
+Route::get('/recipes/{recipe}', [RecipeController::class, 'show']);
+Route::get('/recipess/create', [RecipeController::class, 'create']);

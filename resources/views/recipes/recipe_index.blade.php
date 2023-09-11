@@ -9,9 +9,12 @@
     <body>
         <h1>レシピ一覧</h1>
         <div class='recipes'>
+            <a href='/posts/create'>create</a>
             @foreach ($recipes as $recipe)
                 <div class='recipe'>
-                    <h2 class='title'>{{ $recipe->title }}</h2>
+                    <h2 class='title'>
+                        <a href="/recipes/{{ $recipe->id }}">{{ $recipe->title }}</a>
+                    </h2>
                     <p class='body'>材料リスト</p>
                 </div>
             @endforeach
