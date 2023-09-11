@@ -24,5 +24,13 @@ class RecipeSeeder extends Seeder
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
+        DB::table('recipes')->insert([
+            'user_id' => 1,
+            'title' => 'マグロの刺身の作り方',
+            'cooking_time' => 3,
+            'cooking_time_unit' => 'm',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
     }
 }

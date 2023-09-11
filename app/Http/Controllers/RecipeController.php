@@ -10,7 +10,8 @@ class RecipeController extends Controller
 {
     public function index(Recipe $recipe)
     {
-        return $recipe->get();
+        // Recipeモデルで定義したgetByLimitを使用
+        return view('recipes.recipe_index')->with(['recipes' => $recipe->getPaginateByLimit()]);
     }
     public function show(Procedure $recipe)
     {

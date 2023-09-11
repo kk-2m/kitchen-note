@@ -28,5 +28,17 @@ class ProcedureSeeder extends Seeder
             'created_at' => new DateTime,
             'updated_at' => new DateTime,
         ]);
+        DB::table('procedures')->insert([
+            'body' => 'マグロ下処理をします' ,
+            'recipe_id' => 2,
+            'created_at' => new DateTime,
+            'updated_at' => new DateTime,
+        ]);
+        Db::table('procedures')->insert([
+            'body' => '刺身の形に切れば完成',
+            'recipe_id' => 2,
+            'created_at' => new DateTime,
+            'updated_at' => new DateTime,
+        ]);
     }
 }
