@@ -2,24 +2,39 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <title>Blog</title>
+        <title>Recipe Management</title>
     </head>
     <body>
-        <h1>Blog Name</h1>
+        <h1>レシピ作成</h1>
         <form action="/recipes" method="POST">
             @csrf
             <div class="title">
-                <h2>Title</h2>
-                <input type="text" name="recipe[title]" placeholder="タイトル"/>
+                <h2>タイトル</h2>
+                <input type="text" name="recipe[title]" placeholder="レシピのタイトルを入力してください。"/>
+            </div>
+            <div class="property">
+                <h2>調理時間</h2>
+                <input type="text" name="recipe[cooking_time]" placeholder="調理時間を入力してください"/>
+                <input type="text" name="recipe[cooking_time_unit]" placeholder="s, m, h, d"/>
+            </div>
+            <div class="image">
+                <h2>料理画像</h2>
+                <input type="text" name="recipe[image]" placeholder="料理画像のパス"/>
+            </div>
+            <div class="ingredients">
+                <h2>材料</h2>
+                <input type="text" name="ingredients[name1]" placeholder="材料を入力してください"/>
+                <input type="text" name="ingredients[name2]" placeholder="材料を入力してください"/>
             </div>
             <div class="body">
-                <h2>Body</h2>
-                <textarea name="recipe[body]" placeholder="今日も1日お疲れさまでした。"></textarea>
+                <h2>調理手順</h2>
+                <textarea name="procedures[body1]" placeholder="例）ケトルで沸かしたお湯を注ぎ、3分待つ。"></textarea><br>
+                <textarea name="procedures[body2]" placeholder="例）ケトルで沸かしたお湯を注ぎ、3分待つ。"></textarea>
             </div>
             <input type="submit" value="store"/>
         </form>
         <div class="footer">
-            <a href="/">戻る</a>
+            <a href="/recipes">戻る</a>
         </div>
     </body>
 </html>

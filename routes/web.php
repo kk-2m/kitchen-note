@@ -19,5 +19,8 @@ Route::get('/', function () {
 });
 
 Route::get('/recipes', [RecipeController::class, 'index']);
+
+Route::get('/recipes/create', [RecipeController::class, 'create']);
+
+// このルートは1番したにしておかないと、なんでも{recipe}に入ってしまう
 Route::get('/recipes/{recipe}', [RecipeController::class, 'show']);
-Route::get('/recipess/create', [RecipeController::class, 'create']);

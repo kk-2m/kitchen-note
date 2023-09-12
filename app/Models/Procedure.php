@@ -13,4 +13,9 @@ class Procedure extends Model
     {
         return $this->belongsTo(Recipe::class);
     }
+    
+    protected $fillable = [
+        'reipe_id',
+        'body',
+    ];
 }

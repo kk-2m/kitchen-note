@@ -9,7 +9,7 @@
     <body>
         <h1>レシピ一覧</h1>
         <div class='recipes'>
-            <a href='/posts/create'>create</a>
+            <a href="/recipes/create">create</a>
             @foreach ($recipes as $recipe)
                 <div class='recipe'>
                     <h2 class='title'>

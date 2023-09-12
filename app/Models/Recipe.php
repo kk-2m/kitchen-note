@@ -25,4 +25,12 @@ class Recipe extends Model
     {
         return $this->hasMany(Procedure::class);
     }
+    
+    protected $fillable = [
+        'user_id',
+        'title',
+        'cooking_time',
+        'cooking_time_unit',
+        'image',
+    ];
 }

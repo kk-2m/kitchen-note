@@ -17,8 +17,18 @@ class RecipeController extends Controller
     {
         return view('recipes.recipe_show')->with(['recipe' => $recipe, 'procedures' => $recipe->procedures()->get()]);
     }
-    public function create(Recipe $recipe)
+    public function create()
     {
-        return view('posts.create');
+        return view('recipes.recipe_create');
     }
+//     public function store(Request $request, Recipe $recipe, Procedure $procedure)
+//     {
+//         // viewでrecipeに格納された内容をinputに渡す
+//         $input_recipe = $request['recipe'];
+//         $input_procedure = $request['procedure'];
+//         $recipe->fill($input)->save();
+//         $recipeId = $recipe->id;
+//         $procedure->fill($procedure)->save();
+//         return redirect('/recipes/' . $recipe);
+//     }
 }
