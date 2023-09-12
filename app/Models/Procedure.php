@@ -15,7 +15,7 @@ class Procedure extends Model
     }
     
     protected $fillable = [
-        'reipe_id',
+        'recipe_id',
         'body',
     ];
 }

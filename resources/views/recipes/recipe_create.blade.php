@@ -6,20 +6,20 @@
     </head>
     <body>
         <h1>レシピ作成</h1>
-        <form action="/recipes" method="POST">
+        <form action="/recipes/store" method="POST">
             @csrf
             <div class="title">
                 <h2>タイトル</h2>
-                <input type="text" name="recipe[title]" placeholder="レシピのタイトルを入力してください。"/>
+                <input type="text" name="recipes[title]" placeholder="レシピのタイトルを入力してください。"/>
             </div>
             <div class="property">
                 <h2>調理時間</h2>
-                <input type="text" name="recipe[cooking_time]" placeholder="調理時間を入力してください"/>
-                <input type="text" name="recipe[cooking_time_unit]" placeholder="s, m, h, d"/>
+                <input type="number" name="recipes[cooking_time]" placeholder="調理時間を入力してください"/>
+                <input type="text" name="recipes[cooking_time_unit]" placeholder="s, m, h, d"/>
             </div>
             <div class="image">
                 <h2>料理画像</h2>
-                <input type="text" name="recipe[image]" placeholder="料理画像のパス"/>
+                <input type="text" name="recipes[image]" placeholder="料理画像のパス"/>
             </div>
             <div class="ingredients">
                 <h2>材料</h2>
