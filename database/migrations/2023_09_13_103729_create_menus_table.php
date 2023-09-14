@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('recipes', function (Blueprint $table) {
+        Schema::create('menus', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('recipe_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('title', 50);
             $table->integer('number')->unsigned();
-            $table->unsignedTinyInteger('cooking_time');
-            $table->string('cooking_time_unit', 10);
-            $table->string('image', 100)->nullable();
+            $table->string('day', 10);
+            $table->date('date');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('recipes');
+        Schema::dropIfExists('menus');
     }
 };

@@ -19,6 +19,7 @@ class RecipeSeeder extends Seeder
         DB::table('recipes')->insert([
             'user_id' => 1,
             'title' => 'カップ麺の作り方',
+            'number' => 1,
             'cooking_time' => 3,
             'cooking_time_unit' => 'm',
             'created_at' => new DateTime(),
@@ -27,7 +28,17 @@ class RecipeSeeder extends Seeder
         DB::table('recipes')->insert([
             'user_id' => 1,
             'title' => 'マグロの刺身の作り方',
+            'number' => 1,
             'cooking_time' => 3,
+            'cooking_time_unit' => 'm',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
+        DB::table('recipes')->insert([
+            'user_id' => 1,
+            'title' => 'プロテインの飲み方',
+            'number' => 1,
+            'cooking_time' => 2,
             'cooking_time_unit' => 'm',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),

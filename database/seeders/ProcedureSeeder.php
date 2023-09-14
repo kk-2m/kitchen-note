@@ -40,5 +40,17 @@ class ProcedureSeeder extends Seeder
             'created_at' => new DateTime,
             'updated_at' => new DateTime,
         ]);
+        Db::table('procedures')->insert([
+            'body' => '豆乳150mlとお湯150mlをシェイカーに入れます',
+            'recipe_id' => 3,
+            'created_at' => new DateTime,
+            'updated_at' => new DateTime,
+        ]);
+        Db::table('procedures')->insert([
+            'body' => 'プロテインをスプーン3杯入れてシェイカーを良く振ったら完成',
+            'recipe_id' => 3,
+            'created_at' => new DateTime,
+            'updated_at' => new DateTime,
+        ]);
     }
 }

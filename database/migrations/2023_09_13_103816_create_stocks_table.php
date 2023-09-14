@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('recipes', function (Blueprint $table) {
+        Schema::create('stocks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('title', 50);
-            $table->integer('number')->unsigned();
-            $table->unsignedTinyInteger('cooking_time');
-            $table->string('cooking_time_unit', 10);
-            $table->string('image', 100)->nullable();
+            $table->foreignId('ingredient_id')->constrained();
+            $table->date('expiration_at')->nullable();
+            $table->integer('quantity')->unsigned();
+            $table->string('unit', 10);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('recipes');
+        Schema::dropIfExists('stocks');
     }
 };
