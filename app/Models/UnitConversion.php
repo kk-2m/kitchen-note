@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ingredient_category extends Model
+class UnitConversion extends Model
 {
     use HasFactory;
     
-    // 1対多のリレーション
-    public function ingredients()
+    public function units()
     {
-        return $this->hasMany(Ingredient::class);
+        return $this->belongsTo(Unit::class);
     }
 }

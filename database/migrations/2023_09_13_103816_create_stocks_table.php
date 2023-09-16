@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('ingredient_id')->constrained();
             $table->date('expiration_at')->nullable();
             $table->integer('quantity')->unsigned();
-            $table->string('unit', 10);
+            $table->foreignId('unit_id')->constrained()->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

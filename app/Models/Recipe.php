@@ -21,6 +21,10 @@ class Recipe extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function units()
+    {
+        return $this->belongsTo(Unit::class);
+    }
     
     // 1対多のリレーション
     public function procedures()
@@ -39,13 +43,15 @@ class Recipe extends Model
     }
     public function ingredients()
     {
-        return $this->belongsToMany(Ingredient::class);
+        return $this->belongsToMany(Ingredient::class, 'ingredient_recipe', 'recipe_id', 'ingredient_id')
+            ->withPivot('quantity', 'unit_id');
     }
     
     
     protected $fillable = [
         'user_id',
         'title',
+        'number',
         'cooking_time',
         'cooking_time_unit',
         'image',

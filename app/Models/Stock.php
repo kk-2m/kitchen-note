@@ -14,8 +14,12 @@ class Stock extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function ingredient()
+    public function ingredient_recipe()
     {
         return $this->belongsTo(Ingredient::class);
+    }
+    public function units()
+    {
+        return $this->belongsTo(Unit::class);
     }
 }

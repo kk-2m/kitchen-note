@@ -21,7 +21,8 @@ class RecipeSeeder extends Seeder
             'title' => 'カップ麺の作り方',
             'number' => 1,
             'cooking_time' => 3,
-            'cooking_time_unit' => 'm',
+            'cooking_time_unit' => 2,
+            'image' => 'storage/dish_image/cup_noodle.jpg',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -30,7 +31,8 @@ class RecipeSeeder extends Seeder
             'title' => 'マグロの刺身の作り方',
             'number' => 1,
             'cooking_time' => 3,
-            'cooking_time_unit' => 'm',
+            'cooking_time_unit' => 2,
+            'image' => 'storage/dish_image/tuna_img.jpg',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -39,7 +41,8 @@ class RecipeSeeder extends Seeder
             'title' => 'プロテインの飲み方',
             'number' => 1,
             'cooking_time' => 2,
-            'cooking_time_unit' => 'm',
+            'cooking_time_unit' => 2,
+            'image' => 'storage/dish_image/protein.jpg',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);

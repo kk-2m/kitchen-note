@@ -28,5 +28,18 @@ class IngredientSeeder extends Seeder
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
+        DB::table('ingredients')->insert([
+            'ingredient_category_id' => 8,
+            'name' => 'カップ麵',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
+        DB::table('ingredients')->insert([
+            'ingredient_category_id' => 16,
+            'name' => 'プロテイン',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
+        
     }
 }

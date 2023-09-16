@@ -21,7 +21,7 @@ class ShoppingListSeeder extends Seeder
             'ingredient_id' => 1,
             'status' => 0,
             'number' => 3,
-            'unit' => '匹',
+            'unit_id' => 17,
             'created_at' => new DateTime,
             'updated_at' => new DateTime,
         ]);

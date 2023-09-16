@@ -18,4 +18,8 @@ class Shopping_list extends Model
     {
         return $this->belongsTo(Ingredient::class);
     }
+    public function units()
+    {
+        return $this->belongsTo(Unit::class);
+    }
 }

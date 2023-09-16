@@ -15,7 +15,8 @@ use Database\Seeders\ShoppingListSeeder;
 use Database\Seeders\StockSeeder;
 use Database\Seeders\CategoryRecipeSeeder;
 use Database\Seeders\IngredientRecipeSeeder;
-
+use Database\Seeders\UnitSeeder;
+use Database\Seeders\UnitConversionSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -33,6 +34,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call(UserSeeder::class);
+        $this->call(UnitSeeder::class);
         $this->call(RecipeSeeder::class);
         $this->call(ProcedureSeeder::class);
         $this->call(IngredientCategorySeeder::class);
@@ -43,5 +45,6 @@ class DatabaseSeeder extends Seeder
         $this->call(StockSeeder::class);
         $this->call(CategoryRecipeSeeder::class);
         $this->call(IngredientRecipeSeeder::class);
+        $this->call(UnitConversionSeeder::class);
     }
 }

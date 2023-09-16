@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ingredient_recipe', function (Blueprint $table) {
+        Schema::create('units', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('recipe_id')->constrained()->onDelete('cascade');
-            $table->foreignId('ingredient_id')->constrained()->onDelete('cascade');
-            $table->integer('quantity')->unsigned();
-            $table->foreignId('unit_id')->constrained()->onDelete('cascade');
+            $table->string('name', 100);
+            $table->string('abbreviation', 10)->nullable();
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ingredient_recipe');
+        Schema::dropIfExists('units');
     }
 };

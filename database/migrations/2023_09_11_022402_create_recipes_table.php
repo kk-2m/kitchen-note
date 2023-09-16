@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('title', 50);
-            $table->integer('number')->unsigned();
-            $table->unsignedTinyInteger('cooking_time');
-            $table->string('cooking_time_unit', 10);
+            $table->string('title', 100);
+            $table->unsignedTinyInteger('number');
+            $table->integer('cooking_time');
+            $table->unsignedTinyInteger('cooking_time_unit');
             $table->string('image', 100)->nullable();
             $table->timestamps();
             $table->softDeletes();

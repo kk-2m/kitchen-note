@@ -17,8 +17,16 @@ class CategoryRecipeSeeder extends Seeder
     public function run()
     {
         DB::table('category_recipe')->insert([
+            'recipe_id' => 1,
+            'category_id' => 6,
+        ]);
+        DB::table('category_recipe')->insert([
             'recipe_id' => 2,
             'category_id' => 2,
+        ]);
+        DB::table('category_recipe')->insert([
+            'recipe_id' => 3,
+            'category_id' => 12,
         ]);
     }
 }

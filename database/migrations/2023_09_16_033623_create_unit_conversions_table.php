@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ingredient_recipe', function (Blueprint $table) {
+        Schema::create('unit_conversions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('recipe_id')->constrained()->onDelete('cascade');
-            $table->foreignId('ingredient_id')->constrained()->onDelete('cascade');
-            $table->integer('quantity')->unsigned();
-            $table->foreignId('unit_id')->constrained()->onDelete('cascade');
+            $table->foreignId('from_unit_id')->constrained('units', 'id')->onDelete('cascade');
+            $table->foreignId('to_unit_id')->constrained('units', 'id')->onDelete('cascade');
+            $table->decimal('conversion_factor', 8, 4);
         });
     }
 
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ingredient_recipe');
+        Schema::dropIfExists('unit_conversions');
     }
 };

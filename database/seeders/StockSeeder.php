@@ -21,7 +21,7 @@ class StockSeeder extends Seeder
             'ingredient_id' => 1,
             'expiration_at' => date("2023-09-26"),
             'quantity' => 1,
-            'unit' => "匹",
+            'unit_id' => 17,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
