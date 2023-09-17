@@ -23,5 +23,9 @@ Route::get('/recipes', [RecipeController::class, 'index']);
 Route::get('/recipes/create', [RecipeController::class, 'create']);
 Route::post('/recipes/store', [RecipeController::class, 'store']);
 
+
+
 // このルートは1番したにしておかないと、なんでも{recipe}に入ってしまう
 Route::get('/recipes/{recipe}', [RecipeController::class, 'show']);
+Route::get('/recipes/{recipe}/edit', [RecipeController::class, 'edit']);
+Route::put('/recipes/{recipe}', [RecipeController::class, 'update']);

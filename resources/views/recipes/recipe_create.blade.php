@@ -6,26 +6,28 @@
     </head>
     <body>
         <h1>レシピ作成</h1>
+        <!--　/recipes/storeにフォームのデータが渡され、web.phpで指定したRecipeControllerのstoreメソッドが実行される　-->
         <form action="/recipes/store" method="POST" enctype="multipart/form-data">
             @csrf
             <!-- タイトルの入力 -->
             <div class="title">
                 <h2>タイトル</h2>
-                <input type="text" name="recipes[title]" placeholder="レシピのタイトルを入力してください。"/><br>
+                <input type="text" name="recipe[title]" placeholder="レシピのタイトルを入力してください。"/><br>
+
                 @foreach ($categories as $category)
-                    <input class="dish category checkbox" type="checkbox" name=categories value="{{ $category->id }}" id="{{ $category->id }}"/>
+                    <input class="dish_category_checkbox" type="checkbox" name="category" value="{{ $category->id }}" id="{{ $category->id }}"/>
                     <label for="{{ $category->id }}">{{ $category->name }}</label>
                 @endforeach
             </div>
             
             <!-- 人数を入力 -->
-            <input type="number" name="recipes[number]" placeholder="何人前？"/>
+            <input type="number" name="recipe[number]" placeholder="何人前？"/>
             
             <!-- 調理時間の入力 -->
             <div class="cooking_time">
                 <h2>調理時間</h2>
-                <input type="number" name="recipes[cooking_time]" placeholder="調理時間を入力してください"/>
-            <!--    <select name="recipes[cooking_time_unit]" id="cooking_time_unit">-->
+                <input type="number" name="recipe[cooking_time]" placeholder="調理時間を入力してください"/>
+            <!--    <select name="recipe[cooking_time_unit]" id="cooking_time_unit">-->
             <!--        <option value="">単位</option>-->
             <!--        <option value="1">秒</option>-->
             <!--        <option value="2">分</option>-->
@@ -39,7 +41,7 @@
             <!-- 料理画像の入力 -->
             <div class="image">
                 <h2>料理画像</h2>
-                <input type="file" name="recipes[image]"/>
+                <input type="file" name="recipe[image]"/>
             </div>
             
             <!-- 材料の入力 -->

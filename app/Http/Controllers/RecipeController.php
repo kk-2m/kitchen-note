@@ -26,26 +26,29 @@ class RecipeController extends Controller
         // Recipeモデルで定義したgetByLimitを使用
         return view('recipes.recipe_index')->with(['recipes' => $recipe->getPaginateByLimit()]);
     }
+    
     public function show(Recipe $recipe)
     {
         return view('recipes.recipe_show')->with(['recipe' => $recipe, 'procedures' => $recipe->procedures()->get()]);
     }
+    
     public function create(Recipe $recipe, Category $category, IngredientCategory $ingredient_category)
     {
         return view('recipes.recipe_create')->with(['recipes' => $recipe->get(), 'categories' => $category->get(), 'ingredient_categories' => $ingredient_category->get()]);
     }
+    
     public function store(Request $request, Recipe $recipe)
     {
         // アップロードされたファイル名を取得
-        $file_name = $request->file('recipes.image')->getClientOriginalName();
+        $file_name = $request->file('recipe.image')->getClientOriginalName();
         // 取得したファイル名で保存
-        $request->file('recipes.image')->storeAs('public/dish_image/', $file_name);
+        $request->file('recipe.image')->storeAs('public/dish_image/', $file_name);
         
         // *recipesテーブルへの保存*
         // viewでrecipeに格納された内容をinputに渡す
         // dd($request['recipes']);
-        $input_recipe = $request['recipes'];
-        $input_procedures = $request['procedures'];
+        $input_recipe = $request['recipe'];
+        $input_procedures = $request['procedure'];
         // ログイン処理がログイン情報に基づいて、ユーザーIDを取得する処理に変える
         // それまでは便宜上user_idを1とする
         $input_recipe += array('user_id'=>1);
@@ -65,6 +68,22 @@ class RecipeController extends Controller
             // keyを'body'に変更
             $procedure->fill(['body'=>$value, 'recipe_id'=>$recipeId])->save();
         }
+        
+        // categories
+        
         return redirect('/recipes/' . $recipeId);
+    }
+    
+    public function edit(Recipe $recipe, Category $category)
+    {
+        return view('recipes.recipe_edit')->with(['recipe' => $recipe, 'procedures' => $recipe->procedures()->get(), 'categories' => $category->get()]);
+    }
+    
+    public function update(RecipeRequest $request, Recipe $recipe)
+    {
+        $input_recipe = $request['recipe'];
+        $recipe->fill($input_recipe)->save();
+    
+        return redirect('/recipes/' . $recipe->id);
     }
 }

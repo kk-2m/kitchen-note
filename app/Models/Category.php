@@ -14,4 +14,9 @@ class Category extends Model
     {
         return $this->belongsToMany(Recipe::class);
     }
+    
+    protected $fillable = [
+        'id',
+        'name',
+    ];
 }
