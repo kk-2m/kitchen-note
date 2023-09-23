@@ -4,10 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use AjCastro\EagerLoadPivotRelations\EagerLoadPivotTrait;
 
 class Ingredient extends Model
 {
     use HasFactory;
+    use EagerLoadPivotTrait;
+    
+    protected $fillable = [
+        'name',
+        'ingredient_category_id',
+    ];
     
     // 多対1のリレーション
     public function ingredient_category()
@@ -32,7 +39,7 @@ class Ingredient extends Model
     // 多対多のリレーション
     public function recipes()
     {
-        return $this->belongsToMany(recipe::class, 'ingredient_recipe', 'ingredient_id', 'recipe_id')
+        return $this->belongsToMany(Recipe::class, 'ingredient_recipe', 'ingredient_id', 'recipe_id')
                     ->withPivot('quantity', 'unit_id');
     }
     

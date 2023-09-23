@@ -16,6 +16,15 @@ class Recipe extends Model
         return $this->orderBy('updated_at', 'DESC')->paginate($limit_count); // ->get();
     }
     
+    protected $fillable = [
+        'user_id',
+        'title',
+        'number',
+        'cooking_time',
+        'cooking_time_unit',
+        'image',
+    ];
+    
     // 多対1のリレーション
     public function user()
     {
@@ -43,17 +52,7 @@ class Recipe extends Model
     }
     public function ingredients()
     {
-        return $this->belongsToMany(Ingredient::class, 'ingredient_recipe', 'recipe_id', 'ingredient_id')
-            ->withPivot('quantity', 'unit_id');
+        return $this->belongsToMany(Ingredient::class)
+            ->using(IngredientRecipePivot::class)->withPivot('quantity', 'unit_id');
     }
-    
-    
-    protected $fillable = [
-        'user_id',
-        'title',
-        'number',
-        'cooking_time',
-        'cooking_time_unit',
-        'image',
-    ];
 }

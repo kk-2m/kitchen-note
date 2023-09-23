@@ -9,9 +9,27 @@ class IngredientRecipe extends Model
 {
     use HasFactory;
     
+    protected $table = 'ingredient_recipe';
+    protected $fillable = [
+        'ingredient_id',
+        'recipe_id',
+        'quantity',
+        'unit_id',
+    ];
+    
     // 多対1のリレーション
-    // public function units()
-    // {
-    //     return $this->belongsTo(Unit::class);
-    // }
+    public function ingredient()
+    {
+        return $this->belongsTo(Ingredient::class);
+    }
+
+    public function recipe()
+    {
+        return $this->belongsTo(Recipe::class);
+    }
+
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
 }

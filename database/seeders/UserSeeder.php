@@ -16,12 +16,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'name' => 'koki',
-            'email' => 'kishi.koki6@gmail.com',
-            'password' => '88180103',
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime(),
-        ]);
+        // 
     }
 }

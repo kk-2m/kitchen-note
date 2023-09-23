@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecipeController;
 
@@ -9,23 +10,35 @@ use App\Http\Controllers\RecipeController;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::controller(RecipeController::class)->middleware(['auth'])->group(function(){
+    Route::get('/recipes', 'index')->name('index');
+    Route::post('/recipes', 'store')->name('store');
+    Route::get('/recipes/create', 'create')->name('create');
+    Route::get('/recipes/{recipe}', 'show')->name('show');
+    Route::put('/recipes/{recipe}', 'update')->name('update');
+    Route::delete('/recipes/{recipe}', 'delete')->name('delete');
+    Route::get('/recipes/{recipe}/edit', 'edit')->name('edit');
 });
 
-Route::get('/recipes', [RecipeController::class, 'index']);
+// Route::get('/categories/{category}', [CategoryController::class,'index'])->middleware("auth");
 
-Route::get('/recipes/create', [RecipeController::class, 'create']);
-Route::post('/recipes/store', [RecipeController::class, 'store']);
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-
-
-// このルートは1番したにしておかないと、なんでも{recipe}に入ってしまう
-Route::get('/recipes/{recipe}', [RecipeController::class, 'show']);
-Route::get('/recipes/{recipe}/edit', [RecipeController::class, 'edit']);
-Route::put('/recipes/{recipe}', [RecipeController::class, 'update']);
+require __DIR__.'/auth.php';
