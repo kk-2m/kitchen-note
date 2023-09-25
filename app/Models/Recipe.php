@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Recipe extends Model
 {
     use HasFactory;
+    use SoftDeletes;
     
     // 1度のページに表示する件数を制限
     public function getPaginateByLimit(int $limit_count = 2)

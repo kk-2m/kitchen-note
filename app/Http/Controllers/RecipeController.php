@@ -160,10 +160,10 @@ class RecipeController extends Controller
                     ])->save();
             }
         }
-        // dd($input_categories);
-        // dd(array_filter($input_categories));
         
         // *categorie_recipeテーブルへの保存*
+        // array_filter(array)でNULL以外を取り出す
+        // sync(array)で同期処理(requestのあったカテゴリのみチェック)
         $recipe->categories()->sync(array_filter($input_categories));
         
         // *ingredientsテーブルへの保存*
@@ -211,5 +211,11 @@ class RecipeController extends Controller
         }
         
         return redirect('/recipes/' . $recipeId);
+    }
+    
+    public function delete(Recipe $recipe)
+    {
+        $recipe->delete();
+        return redirect('/recipes');
     }
 }

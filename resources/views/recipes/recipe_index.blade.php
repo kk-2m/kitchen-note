@@ -50,6 +50,16 @@
                                 @foreach ($recipe->categories as $category)
                                     <p class='tag'>{{ $category->name }}</p>
                                 @endforeach
+                                <form action="/recipes/{{ $recipe->id }}" id="form_{{ $recipe->id }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    {{--
+                                        typeにbuttonを指定する（デフォルトはsubmit）
+                                        onclick(deleteRecipe)：要素がクリックされたさいに引数deleteRecipeを実行
+                                    --}}
+                                    <button type="button" id="delete_button{{$loop->index}}" data-id={{ $recipe->id }}>delete</button>
+                                    {{-- <button type="button" onclick="deleteRecipe({{ $recipe->id }})">delete</button> --}}
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -58,7 +68,24 @@
         @endforeach
     </div>
                     
-    <div class='paginate'>
-        {{ $recipes->links() }}
-    </div>
+    <div class='paginate'>{{ $recipes->links() }}</div>
+    
+    {{-- <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const delete_button = document.getElementById("delete_button");
+            const delete_id = delete_button.getAttribute("data-id");
+            
+            console.log('こんにちは');
+            console.log('Hello World');
+            console.log(`${delete_id}`);
+            
+            delete_button.addEventListener('click', ()=>{
+                'use strict';
+                
+                if (confirm('削除すると復元できません。\n本当に削除しますか？')) {
+                    document.getElementById(`form_${delete_id}`).submit();
+                }
+            });
+        });
+    </script> --}}
 </x-app-layout>

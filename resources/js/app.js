@@ -1,4 +1,5 @@
 import './bootstrap';
+import './deleteRecipe';
 
 import Alpine from 'alpinejs';
 
