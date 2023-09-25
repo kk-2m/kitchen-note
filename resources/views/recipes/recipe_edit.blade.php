@@ -106,5 +106,8 @@
             
             <input type="submit" value="更新">
         </form>
+        <div class='footer'>
+            <a href="/recipes/{{ $recipe->id }}">戻る</a>
+        </div>
     </div>
 </x-app-layout>
