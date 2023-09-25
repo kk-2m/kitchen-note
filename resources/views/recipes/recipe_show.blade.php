@@ -6,7 +6,11 @@
     </x-slot>
     <body>
         <div class='contents'>
-            <img src="{{ asset($recipe->image) }}", alt='料理写真'>
+            @if ($recipe->image != '')
+                <img src="{{ asset($recipe->image) }}">
+            @else
+                <img src="{{ \Storage::url('dish_image/noimage.png') }}", alt='料理写真' width="50%">
+            @endif
             <h2 class='title'>{{ $recipe->title }}</h2>
 
             <p class='cooking_time'>調理時間 : {{ $recipe->cooking_time }}

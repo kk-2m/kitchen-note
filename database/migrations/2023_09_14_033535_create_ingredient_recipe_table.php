@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('recipe_id')->constrained()->onDelete('cascade');
             $table->foreignId('ingredient_id')->constrained()->onDelete('cascade');
-            $table->integer('quantity')->unsigned();
+            $table->integer('quantity')->unsigned()->nullable();
             $table->foreignId('unit_id')->constrained()->onDelete('cascade');
         });
     }

@@ -40,7 +40,11 @@
                                         @endif
                                     </p>
                                 @endforeach
-                                <img src="{{ asset($recipe->image) }}", alt='料理写真'>
+                                @if ($recipe->image != '')
+                                    <img src="{{ asset($recipe->image) }}">
+                                @else
+                                    <img src="{{ \Storage::url('dish_image/noimage.png') }}", alt='料理写真' width="50%">
+                                @endif
             
                                 <p>カテゴリ</p>
                                 @foreach ($recipe->categories as $category)

@@ -13,7 +13,7 @@ class RecipeRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
+        return [
             'recipe.title' => 'required|string|max:100',
             'recipe.number' => 'required|integer|between:0,255',
             'recipe.cooking_time' => 'required|integer|between:1,2147483647',
@@ -24,13 +24,5 @@ class RecipeRequest extends FormRequest
             "ingredient_recipe.*.unit_id" => "required|integer",
             "procedure.*.body" => "required|string|max:200",
         ];
-        // for ($i=1; $i<=30; $i++){
-        //         $rules += array("ingredient.name{$i}" => "required|string|max:50");
-        //         $rules += array("ingredient.ingredient_category_id{$i}" => "required|integer");
-        //         $rules += array("procedure.body{$i}" => "required|string|max:200");
-        //         $rules += array("ingredient_recipe.quantity{$i}" => "required|integer|between:0, 2147483647");
-        //         $rules += array("ingredient_recipe.unit_id{$i}" => "required|integer");
-        // }
-        return $rules;
     }
 }
