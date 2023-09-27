@@ -15,9 +15,18 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
-                        {{ __('Index') }}
+                    <x-nav-link :href="route('recipe_index')" :active="request()->routeIs('recipe_index')">
+                        {{ __('My Recipes') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('rakuten-recipe_category')" :active="request()->routeIs('rakuten-recipe_category')">
+                        {{ __('Rakuten Recipes') }}
+                    </x-nav-link>
+                    {{-- <x-nav-link :href="route('stock_index')" :active="request()->routeIs('stock_index')">
+                        {{ __('My Stocks') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('menu_index')" :active="request()->routeIs('menu_index')">
+                        {{ __('My Menus') }}
+                    </x-nav-link> --}}
                 </div>
             </div>
 

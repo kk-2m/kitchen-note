@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
     <!--　/recipes/storeにフォームのデータが渡され、web.phpで指定したRecipeControllerのstoreメソッドが実行される　-->
-    <form action="{{ route('store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('recipe_store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         
         <!-- 料理写真の入力 -->

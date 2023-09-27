@@ -9,14 +9,19 @@ class Category extends Model
 {
     use HasFactory;
     
+    protected $fillable = [
+        'id',
+        'name',
+    ];
+    
     // 多対多のリレーション
     public function recipes()
     {
         return $this->belongsToMany(Recipe::class);
     }
     
-    protected $fillable = [
-        'id',
-        'name',
-    ];
+    public function rakuten_recipe_categories()
+    {
+        return $this->hasMany(RakutenRecipeCategory::class);
+    }
 }

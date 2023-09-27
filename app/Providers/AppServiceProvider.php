@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind('RakutenRecipeService', \App\Services\RakutenRecipeService::class);
     }
 
     /**

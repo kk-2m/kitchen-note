@@ -8,7 +8,8 @@
             ログインユーザー：{{ Auth::user()->name }}
     </div>
     <div class='recipes'>
-        <button type="button"><a href="{{ route('create') }}">create</a></button>
+        <button type="button"><a href="{{ route('recipe_create') }}">create</a></button>
+        <button type="button"><a href="/recipes/getCategories">get categories</a></button>
         @foreach ($recipes as $recipe)
             <div class="py-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -41,9 +42,9 @@
                                     </p>
                                 @endforeach
                                 @if ($recipe->image != '')
-                                    <img src="{{ asset($recipe->image) }}">
+                                    <img src="{{ asset($recipe->image) }}" alt='料理写真' width='50%'>
                                 @else
-                                    <img src="{{ \Storage::url('dish_image/noimage.png') }}", alt='料理写真' width="50%">
+                                    <img src="{{ asset('storage/dish_image/noimage.png') }}" alt='料理写真' width='300px'>
                                 @endif
             
                                 <p>カテゴリ</p>
@@ -67,25 +68,26 @@
             </div>
         @endforeach
     </div>
+    
+    <div class=rakuten_recipes>
+        <h1>楽天レシピ</h1>
+        @foreach($rakuten_recipes as $rakuten_recipe)
+            <div>
+                <a href={{ $rakuten_recipe['recipeUrl'] }}>
+                    {{ $rakuten_recipe['recipeTitle'] }}
+                </a>
+                <p class='cooking_time'>調理時間 : {{ $rakuten_recipe['recipeIndication'] }}</p>
+                
+                <h3 class='ingrediens'>材料リスト({{ $rakuten_recipe['recipeNumber'] }}人前)</h3>
+                @foreach ($rakuten_recipe['recipeMaterialQuantity'] as $ingredient)
+                    <p class='ingredient'>
+                        {{ $ingredient['name'] }}　{{ $ingredient['serving'] }}
+                    </p>
+                @endforeach
+                <img src="{{ $rakuten_recipe['foodImageUrl'] }}" width='300px'>
+            </div>
+        @endforeach
+    </div>
                     
     <div class='paginate'>{{ $recipes->links() }}</div>
-    
-    {{-- <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const delete_button = document.getElementById("delete_button");
-            const delete_id = delete_button.getAttribute("data-id");
-            
-            console.log('こんにちは');
-            console.log('Hello World');
-            console.log(`${delete_id}`);
-            
-            delete_button.addEventListener('click', ()=>{
-                'use strict';
-                
-                if (confirm('削除すると復元できません。\n本当に削除しますか？')) {
-                    document.getElementById(`form_${delete_id}`).submit();
-                }
-            });
-        });
-    </script> --}}
 </x-app-layout>
