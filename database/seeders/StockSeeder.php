@@ -25,5 +25,14 @@ class StockSeeder extends Seeder
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
+        DB::table('stocks')->insert([
+            'user_id' => 1,
+            'ingredient_id' => 2,
+            'expiration_at' => date("2023-09-26"),
+            'quantity' => 1,
+            'unit_id' => 17,
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
     }
 }

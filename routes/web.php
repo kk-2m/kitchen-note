@@ -36,6 +36,17 @@ Route::controller(RecipeController::class)->middleware(['auth'])->group(function
     Route::get('/recipes/{recipe}/edit', 'recipe_edit')->name('recipe_edit');
 });
 
+Route::controller(StockController::class)->middleware(['auth'])->group(function(){
+    Route::get('/stocks', 'stock_index')->name('stock_index');
+    Route::post('/recipes', 'recipe_store')->name('recipe_store');
+    Route::get('/recipes/getCategories', 'getCategories');
+    Route::get('/recipes/create', 'recipe_create')->name('recipe_create');
+    Route::get('/recipes/{recipe}', 'recipe_show')->name('recipe_show');
+    Route::put('/recipes/{recipe}', 'recipe_update')->name('recipe_update');
+    Route::delete('/recipes/{recipe}', 'recipe_delete')->name('recipe_delete');
+    Route::get('/recipes/{recipe}/edit', 'recipe_edit')->name('recipe_edit');
+});
+
 Route::controller(RakutenRecipeController::class)->middleware(['auth'])->group(function(){
     Route::get('/rakuten-recipes', 'category')->name('rakuten-recipe_category');
     Route::post('/rakuten-recipes', 'recipe_store')->name('rakuten-recipe_store');
