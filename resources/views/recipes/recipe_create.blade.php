@@ -24,7 +24,7 @@
         <!-- 調理時間の入力 -->
         <div class="cooking_time">
             <h2>調理時間</h2>
-            <input type="number" name="recipe[cooking_time]" placeholder="調理時間を入力してください" value="{{ old('recipe.cooking_time') }}"/>
+            <input type="number" name="recipe[cooking_time]" placeholder="調理時間を入力してください" value="{{ old('recipe.cooking_time') }}" min="0"/>
             <p class="cooking_time_error" style="color:red">{{ $errors->first('recipe.cooking_time') }}</p><br>
             <select name="recipe[cooking_time_unit]" id="cooking_time_unit">
                 <option value="">単位</option>
@@ -48,7 +48,7 @@
         <!-- 人数を入力 -->
         <div class='number'>
             <h4>何人前？</h4>
-            <input type="number" name="recipe[number]" placeholder="人数を入力してください" value="{{ old('recipe.number') }}"/>人前
+            <input type="number" name="recipe[number]" placeholder="人数を入力してください" value="{{ old('recipe.number') }}" min="0" max="100"/>人前
             <p class="title_error" style="color:red">{{ $errors->first('recipe.number') }}</p><br>
         </div>
         
@@ -59,7 +59,7 @@
             <input type="text" name="ingredient[1][name]" id="ingredient1" placeholder="材料を入力してください" value="{{ old('ingredient.1.name') }}"/>
             <p class="ingredient_error" style="color:red">{{ $errors->first('ingredient.1.name') }}</p>
             <label for="ingredient_quantity1">　量：</label>
-            <input type="text" name="ingredient_recipe[1][quantity]" id="ingredient_quantity1" placeholder="必要な量を入力してください" value="{{ old('ingredient_recipe.1.quantity') }}"/>
+            <input type="number" name="ingredient_recipe[1][quantity]" id="ingredient_quantity1" placeholder="必要な量を入力してください" value="{{ old('ingredient_recipe.1.quantity') }}" min="0"/>
             <p class="ingredient_quantity_error" style="color:red">{{ $errors->first('ingredient_recipe.1.quantity') }}</p>
             <label for="unit1">　単位を選択：</label>
             <select name="ingredient_recipe[1][unit_id]" id="unit1">

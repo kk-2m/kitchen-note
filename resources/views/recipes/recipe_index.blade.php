@@ -34,10 +34,19 @@
                                 @foreach ($recipe->ingredients as $ingredient)
                                     <p class='ingredient'>
                                         {{ $ingredient->name }}　
+                                        <!--　小さじや大さじは　-->
                                         @if ($ingredient->pivot->unit->id === 14 || $ingredient->pivot->unit->id === 15)
-                                            {{ $ingredient->pivot->unit->name }}{{ $ingredient->pivot->quantity }}
+                                            <!-- 小数点以下が0は整数表記 -->
+                                            @if ($ingredient->pivot->quantity == (int)$ingredient->pivot->quantity) {{ $ingredient->pivot->unit->name }}{{ number_format($ingredient->pivot->quantity) }}
+                                            @else {{ $ingredient->pivot->unit->name }}{{ $ingredient->pivot->quantity }}
+                                            @endif
+                                        <!-- 適量は適量のみ表示 -->
+                                        @elseif ($ingredient->pivot->unit->id === 16) {{ $ingredient->pivot->unit->name }}
                                         @else
-                                            {{ $ingredient->pivot->quantity }}{{ $ingredient->pivot->unit->name }}
+                                            @if ($ingredient->pivot->quantity == (int)$ingredient->pivot->quantity) {{ number_format($ingredient->pivot->quantity) }}{{ $ingredient->pivot->unit->name }}
+                                            @else {{ $ingredient->pivot->quantity }}{{ $ingredient->pivot->unit->name }}
+                                            @endif
+                                            
                                         @endif
                                     </p>
                                 @endforeach

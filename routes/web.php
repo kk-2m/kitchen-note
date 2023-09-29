@@ -38,13 +38,11 @@ Route::controller(RecipeController::class)->middleware(['auth'])->group(function
 
 Route::controller(StockController::class)->middleware(['auth'])->group(function(){
     Route::get('/stocks', 'stock_index')->name('stock_index');
-    Route::post('/recipes', 'recipe_store')->name('recipe_store');
-    Route::get('/recipes/getCategories', 'getCategories');
-    Route::get('/recipes/create', 'recipe_create')->name('recipe_create');
-    Route::get('/recipes/{recipe}', 'recipe_show')->name('recipe_show');
-    Route::put('/recipes/{recipe}', 'recipe_update')->name('recipe_update');
-    Route::delete('/recipes/{recipe}', 'recipe_delete')->name('recipe_delete');
-    Route::get('/recipes/{recipe}/edit', 'recipe_edit')->name('recipe_edit');
+    Route::post('/stocks', 'stock_store')->name('stock_store');
+    Route::get('/stocks/create', 'stock_create')->name('stock_create');
+    Route::put('/stocks/{stock}', 'stock_update')->name('stock_update');
+    Route::delete('/stocks/{stock}', 'stock_delete')->name('stock_delete');
+    Route::get('/stocks/{stock}/edit', 'stock_edit')->name('stock_edit');
 });
 
 Route::controller(RakutenRecipeController::class)->middleware(['auth'])->group(function(){

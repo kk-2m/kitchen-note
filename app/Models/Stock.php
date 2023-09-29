@@ -15,6 +15,14 @@ class Stock extends Model
         return $this->orderBy('updated_at', 'DESC')->paginate($limit_count); // ->get();
     }
     
+    protected $fillable = [
+        'user_id',
+        'ingredient_id',
+        'expiration_at',
+        'quantity',
+        'unit_id',
+    ];
+    
     // 多対1のリレーション
     public function user()
     {
@@ -24,7 +32,7 @@ class Stock extends Model
     {
         return $this->belongsTo(Ingredient::class);
     }
-    public function units()
+    public function unit()
     {
         return $this->belongsTo(Unit::class);
     }

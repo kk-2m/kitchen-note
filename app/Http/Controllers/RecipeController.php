@@ -168,6 +168,8 @@ class RecipeController extends Controller
         
         // *ingredientsテーブルへの保存*
         for ($i=1; $i<count($input_ingredients)+1; $i++) {
+            // nameによりDBからingredientを取得します
+            // DBにない場合はname、ingredient_category_id属性を使用してingredientを作成します。
             $ingredient = Ingredient::firstOrCreate(
                 ['name' => $input_ingredients["{$i}"]["name"]],
                 ['ingredient_category_id' => $input_ingredients["{$i}"]["ingredient_category_id"]]

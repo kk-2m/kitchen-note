@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('ingredient_id')->constrained();
             $table->date('expiration_at')->nullable();
-            $table->integer('quantity')->unsigned();
+            $table->unsignedDecimal('quantity', 10, 2)->unsigned();
             $table->foreignId('unit_id')->constrained()->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();

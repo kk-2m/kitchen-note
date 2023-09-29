@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('ingredient_id')->constrained();
             $table->unsignedTinyInteger('status')->default(0);
-            $table->decimal('number')->unsigned();
+            $table->decimal('number', 10, 2)->unsigned();
             $table->foreignId('unit_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
