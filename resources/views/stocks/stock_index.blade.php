@@ -24,6 +24,16 @@
                                     @endif <br>
                                     購入日：{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $stock->created_at)->format('Y-m-d') }}<br>
                                     賞味・消費期限：{{ $stock->expiration_at }}
+                                    <form action="/stocks/{{ $stock->id }}" id="form_{{ $stock->id }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    {{--
+                                        typeにbuttonを指定する（デフォルトはsubmit）
+                                        onclick(deleteRecipe)：要素がクリックされたさいに引数deleteRecipeを実行
+                                    --}}
+                                    <button type="button" id="delete_button{{$loop->index}}" data-id={{ $stock->id }}>delete</button>
+                                    {{-- <button type="button" onclick="deleteRecipe({{ $recipe->id }})">delete</button> --}}
+                                </form>
                                 </h2>
                             </div>
                         </div>
