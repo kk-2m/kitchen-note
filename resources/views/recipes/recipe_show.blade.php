@@ -42,7 +42,7 @@
                         {{ $ingredient->pivot->unit->name }}
                     @else
                         <!-- 小数点以下が0は整数表記 -->
-                        @if ($ingredient->pivot->quantity == (int)$ingredient->pivot->quantity) {{ $ingredient->pivot->quantity }}{{ number_format($ingredient->pivot->unit->name) }}
+                        @if ($ingredient->pivot->quantity == (int)$ingredient->pivot->quantity) {{ number_format($ingredient->pivot->quantity) }}{{ $ingredient->pivot->unit->name }}
                         @else {{ $ingredient->pivot->quantity }}{{ $ingredient->pivot->unit->name }}
                         @endif
                     @endif

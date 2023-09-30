@@ -21,14 +21,14 @@
                     <option value="{{ $ingredient_category->id }}">{{ $ingredient_category->category }}</option>
                 @endforeach
             </select><br>
-            <p class="ingredient_category_error" style="color:red">{{ $errors->first('ingredient.ingredient_category_id') }}</p>
+            {{-- <p class="ingredient_category_error" style="color:red">{{ $errors->first('ingredient.ingredient_category_id') }}</p> --}}
         </div>
         
         <!-- 個数を入力 -->
         <div class='number'>
             <h4><label for="quantity">個数</label></h4>
-            <input type="number" name="stock[quantity]" id="quantity" placeholder="個数を入力してください" value="{{ old('stock.quantity') }}" min="1" step="0.01" max="99999999"/>
-            <p class="quantity_error" style="color:red">{{ $errors->first('stock.quantity') }}</p><br>
+            <input type="number" name="stock[quantity]" id="quantity" placeholder="個数を入力してください" value="{{ old('stock.quantity') }}" min="0" step="0.01"/>
+            {{-- <p class="title_error" style="color:red">{{ $errors->first('recipe.number') }}</p><br> --}}
              <label for="unit">　単位を選択：</label>
             <select name="stock[unit_id]" id="unit">
                 <option value="">単位を選んでください</option>
@@ -36,7 +36,6 @@
                     <option value="{{ $unit->id }}">{{ $unit->name }}</option>
                 @endforeach
             </select><br>
-            <p class="unit_error" style="color:red">{{ $errors->first('stock.unit_id') }}</p>
         </div>
         
         
@@ -44,7 +43,7 @@
         <div class='date'>
             <h4><label for="expiration">賞味・消費期限</label></h4>
             <input type="date" name="stock[expiration_at]" id="expiration" value="{{ old('stock.expiration_at') }}"/>
-            <p class="expiration_error" style="color:red">{{ $errors->first('stock.expiration_at') }}</p><br>
+            {{-- <p class="title_error" style="color:red">{{ $errors->first('recipe.number') }}</p><br> --}}
         </div>
         
         <!-- 送信ボタン -->

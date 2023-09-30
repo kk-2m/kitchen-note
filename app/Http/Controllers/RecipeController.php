@@ -113,12 +113,22 @@ class RecipeController extends Controller
     
     public function recipe_show(Recipe $recipe)
     {
-        return view('recipes.recipe_show')->with(['recipe' => $recipe, 'procedures' => $recipe->procedures()->get()]);
+        return view('recipes.recipe_show')->with(
+            [
+                'recipe' => $recipe,
+                'procedures' => $recipe->procedures()->get()
+            ]);
     }
     
     public function recipe_create(Recipe $recipe, Category $category, IngredientCategory $ingredient_category, Unit $unit)
     {
-        return view('recipes.recipe_create')->with(['recipes' => $recipe->get(), 'categories' => $category->get(), 'ingredient_categories' => $ingredient_category->get(), 'units' => $unit->get()]);
+        return view('recipes.recipe_create')->with(
+            [
+                'recipes' => $recipe->get(),
+                'categories' => $category->get(),
+                'ingredient_categories' => $ingredient_category->get(),
+                'units' => $unit->get()
+            ]);
     }
     
     public function recipe_store(RecipeRequest $request, Recipe $recipe)
@@ -190,7 +200,13 @@ class RecipeController extends Controller
     
     public function recipe_edit(Recipe $recipe, Category $category, IngredientCategory $ingredient_category, Unit $unit)
     {
-        return view('recipes.recipe_edit')->with(['recipe' => $recipe, 'categories' => $category->get(), 'ingredient_categories' => $ingredient_category->get(), 'units' => $unit->get()]);
+        return view('recipes.recipe_edit')->with(
+            [
+                'recipe' => $recipe,
+                'categories' => $category->get(),
+                'ingredient_categories' => $ingredient_category->get(),
+                'units' => $unit->get()
+            ]);
     }
     
     public function recipe_update(RecipeRequest $request, Recipe $recipe)

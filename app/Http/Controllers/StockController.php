@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StockRequest;
 use Carbon\Carbon;
 use App\Models\Stock;
 use App\Models\Ingredient;
@@ -29,7 +30,32 @@ class StockController extends Controller
             'units' => $unit->get()]);
     }
     
-    public function stock_store(Request $request, Stock $stock)
+    public function stock_store(StockRequest $request, Stock $stock)
+    {
+        // viewでrecipeに格納された内容をinputに渡す
+        $input_stock = $request['stock'];
+        $input_ingredient = $request['ingredient'];
+        
+        $ingredient = Ingredient::firstOrCreate(
+            ['name' => $input_ingredient["name"]],
+            ['ingredient_category_id' => $input_ingredient["ingredient_category_id"]
+        ]);
+        
+        $input_stock += array('user_id' => $request->user()->id, 'ingredient_id' => $ingredient->id);
+        // dd($input_stock);
+        $stock->fill($input_stock)->save();
+        
+        // index bladeに取得したデータを渡す
+        // Recipeモデルで定義したgetByLimitを使用
+        return redirect('/stocks/');
+    }
+    
+    // public function stock_edit(Stock $stock)
+    // {
+    //     return view('stocks.stock_create')->
+    // }
+    
+    public function stock_update(StockRequest $request, Stock $stock)
     {
         // viewでrecipeに格納された内容をinputに渡す
         $input_stock = $request['stock'];
@@ -47,5 +73,11 @@ class StockController extends Controller
         // index bladeに取得したデータを渡す
         // Recipeモデルで定義したgetByLimitを使用
         return redirect('/stocks/');
+    }
+    
+    public function stock_delete(Stock $stock)
+    {
+        $stock->delete();
+        return redirect('/stocks');
     }
 }

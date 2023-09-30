@@ -9,7 +9,7 @@
     </div>
     <div class='recipes'>
         <button type="button"><a href="{{ route('recipe_create') }}">create</a></button>
-        <button type="button"><a href="/recipes/getCategories">get categories</a></button>
+        <!--<button type="button"><a href="/recipes/getCategories">get categories</a></button>-->
         @foreach ($recipes as $recipe)
             <div class="py-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
