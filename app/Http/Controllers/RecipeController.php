@@ -268,13 +268,11 @@ class RecipeController extends Controller
         $recipe->categories()->sync(array_filter($input_categories));
         
         // *ingredientsテーブルへの保存*
-        for ($i=1; $i<count($input_ingredients)+1; $i++) {
+        $i = 1;
+        foreach ($recipe->ingredients as $ingredient) {
             // nameによりDBからingredientを取得します
             // DBにない場合はname、ingredient_category_id属性を使用してingredientを作成します。
-            $ingredient = Ingredient::firstOrCreate(
-                ['name' => $input_ingredients["{$i}"]["name"]],
-                ['ingredient_category_id' => $input_ingredients["{$i}"]["ingredient_category_id"]]
-            );
+            $ingredient->fill($input_ingredients["{$i}"])->save();
             
             // *ingredient_recipeテーブルへの保存*
             // 既存の中間レコードを特定
@@ -309,6 +307,7 @@ class RecipeController extends Controller
                         'unit_id' => $input_ingredient_recipe["{$i}"]["unit_id"]
                     ]]);
             }
+            $i += 1;
         }
         
         return redirect('/recipes/' . $recipeId);

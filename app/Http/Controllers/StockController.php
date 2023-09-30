@@ -50,10 +50,13 @@ class StockController extends Controller
         return redirect('/stocks/');
     }
     
-    // public function stock_edit(Stock $stock)
-    // {
-    //     return view('stocks.stock_create')->
-    // }
+    public function stock_edit(Stock $stock, IngredientCategory $ingredient_category, Unit $unit)
+    {
+        return view('stocks.stock_edit')->with([
+            'stock' => $stock,
+            'ingredient_categories' => $ingredient_category->get(),
+            'units' => $unit->get()]);
+    }
     
     public function stock_update(StockRequest $request, Stock $stock)
     {
@@ -61,12 +64,9 @@ class StockController extends Controller
         $input_stock = $request['stock'];
         $input_ingredient = $request['ingredient'];
         
-        $ingredient = Ingredient::firstOrCreate(
-            ['name' => $input_ingredient["name"]],
-            ['ingredient_category_id' => $input_ingredient["ingredient_category_id"]]
-        );
+        $stock->ingredient->fill($input_ingredient)->save();
         
-        $input_stock += array('user_id' => $request->user()->id, 'ingredient_id' => $ingredient->id);
+        $input_stock += array('user_id' => $request->user()->id, 'ingredient_id' => $stock->ingredient_id);
         // dd($input_stock);
         $stock->fill($input_stock)->save();
         

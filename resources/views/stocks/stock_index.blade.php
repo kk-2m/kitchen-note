@@ -8,13 +8,14 @@
             ログインユーザー：{{ Auth::user()->name }}
     </div>
     <div class='stocks'>
-        <button type="button"><a href="{{ route('stock_create') }}">create</a></button>
+        <button type="button"><a href="{{ route('stock_create') }}">[create]</a></button>
         @foreach ($stocks as $stock)
             <div class="py-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6 text-gray-900">
                             <div class='stock'>
+                                <a href="/stocks/{{ $stock->id }}/edit">[edit]</a>
                                 <h2 class='name'>
                                     {{ $stock->ingredient->name }}<br>
                                     個数：
