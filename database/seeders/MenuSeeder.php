@@ -20,8 +20,15 @@ class MenuSeeder extends Seeder
             'recipe_id' => 2,
             'user_id' => 1,
             'number' => 4,
-            'day' => '金',
-            'date' => date('2023-09-25'),
+            'date' => date('2023-010-9'),
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ]);
+        DB::table('menus')->insert([
+            'recipe_id' => 3,
+            'user_id' => 1,
+            'number' => 4,
+            'date' => date('2023-010-8'),
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);

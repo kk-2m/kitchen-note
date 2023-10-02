@@ -21,9 +21,9 @@
                     <x-nav-link :href="route('stock_index')" :active="request()->routeIs('stock_index')">
                         {{ __('My Stocks') }}
                     </x-nav-link>
-                    {{-- <x-nav-link :href="route('menu_index')" :active="request()->routeIs('menu_index')">
+                    <x-nav-link :href="route('menu_index')" :active="request()->routeIs('menu_index')">
                         {{ __('My Menus') }}
-                    </x-nav-link> --}}
+                    </x-nav-link>
                     <x-nav-link :href="route('rakuten-recipe_category')" :active="request()->routeIs('rakuten-recipe_category')">
                         {{ __('Rakuten Recipes') }}
                     </x-nav-link>

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\RakutenRecipeController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\MenuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,11 @@ Route::controller(StockController::class)->middleware(['auth'])->group(function(
     Route::put('/stocks/{stock}', 'stock_update')->name('stock_update');
     Route::delete('/stocks/{stock}', 'stock_delete')->name('stock_delete');
     Route::get('/stocks/{stock}/edit', 'stock_edit')->name('stock_edit');
+});
+
+Route::controller(MenuController::class)->middleware(['auth'])->group(function(){
+    Route::get('/menus', 'menu_index')->name('menu_index');
+    Route::delete('/menus/{menus}', 'menu_delete')->name('menu_delete');
 });
 
 Route::controller(RakutenRecipeController::class)->middleware(['auth'])->group(function(){

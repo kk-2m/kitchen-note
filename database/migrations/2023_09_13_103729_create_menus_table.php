@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignId('recipe_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->integer('number')->unsigned();
-            $table->string('day', 10);
             $table->date('date');
             $table->timestamps();
             $table->softDeletes();

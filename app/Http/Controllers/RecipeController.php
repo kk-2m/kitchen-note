@@ -105,10 +105,11 @@ class RecipeController extends Controller
         
         // index bladeに取得したデータを渡す
         // Recipeモデルで定義したgetByLimitを使用
-        return view('recipes.recipe_index')->with([
-            'recipes' => $recipe->getPaginateByLimit(),
-            'rakuten_recipes' => $rakuten_recipes,
-        ]);
+        return view('recipes.recipe_index')->with(
+            [
+                'recipes' => $recipe->getPaginateByLimit(),
+                'rakuten_recipes' => $rakuten_recipes,
+            ]);
     }
     
     public function recipe_show(Recipe $recipe)
