@@ -48,6 +48,8 @@ Route::controller(StockController::class)->middleware(['auth'])->group(function(
 
 Route::controller(MenuController::class)->middleware(['auth'])->group(function(){
     Route::get('/menus', 'menu_index')->name('menu_index');
+    Route::post('/menus', 'menu_store')->name('menu_store');
+    Route::get('/menus/create', 'menu_create')->name('menu_create');
     Route::delete('/menus/{menus}', 'menu_delete')->name('menu_delete');
 });
 

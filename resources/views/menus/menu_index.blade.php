@@ -8,6 +8,7 @@
             ログインユーザー：{{ Auth::user()->name }}
     </div>
     <div class='menus'>
+        <button type='button'><a href="{{ route('menu_create') }}">create</a></button>
         @foreach ($menus as $menu)
             <div class="py-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
