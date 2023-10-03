@@ -171,11 +171,9 @@ class RecipeController extends Controller
         }
         
         // *categorie_recipeテーブルへの保存*
-        foreach ($input_categories as $key => $value) {
-            // syncWithoutDetachingで完全な重複以外を許容
-            // https://biz.addisteria.com/syncwithoutdetaching/
-            $recipe->categories()->syncWithoutDetaching($value);
-        }
+        // array_filter(array)でNULL以外を取り出す
+        // sync(array)で同期処理(requestのあったカテゴリのみチェック)
+        $recipe->categories()->sync(array_filter($input_categories));
         
         // *ingredientsテーブルへの保存*
         for ($i=1; $i<count($input_ingredients)+1; $i++) {

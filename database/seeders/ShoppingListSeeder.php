@@ -20,7 +20,7 @@ class ShoppingListSeeder extends Seeder
             'user_id' => 1,
             'ingredient_id' => 1,
             'status' => 0,
-            'number' => 3,
+            'quantity' => 3,
             'unit_id' => 17,
             'created_at' => new DateTime,
             'updated_at' => new DateTime,

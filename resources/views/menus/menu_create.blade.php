@@ -23,8 +23,8 @@
         
         <!-- 個数を入力 -->
         <div class='number'>
-            <h4><label for="number">人数</label></label></h4>
-            <input type="number" name="menu[number]" id="number" placeholder="個数を入力してください" value="{{ old('menu.number') }}" min="1" max="99999999">人前</input>
+            <h4><label for="number">人数</label></h4>
+            <input type="number" name="menu[number]" id="number" placeholder="例)5" value="{{ old('menu.number') }}" min="1" max="200">人前</input>
             <p class="number_error" style="color:red">{{ $errors->first('menu.number') }}</p><br>
         </div>
         
@@ -32,7 +32,7 @@
         <!-- 賞味・消費期限を入力 -->
         <div class='date'>
             <h4><label for="date">日付</label></h4>
-            <input type="date" name="menu[date]" id="date" value="{{ old('menu.date') }}"/>
+            <input type="date" name="menu[date]" id="date" value="{{ old('menu.date') }}" min="{{ \Carbon\Carbon::now()->toDateString() }}"/>
             <p class="date_error" style="color:red">{{ $errors->first('menu.date') }}</p><br>
         </div>
         

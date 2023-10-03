@@ -14,7 +14,7 @@ class MenuController extends Controller
         $now = Carbon::today();
         $weekLater = $now->copy()->addWeek();
         
-        // dd($weekLater);
+        $menu->get();
         
         return view('menus.menu_index')->with(
             [
@@ -32,5 +32,29 @@ class MenuController extends Controller
             [
                 'recipes' => $recipe->get(),
             ]);
+    }
+    
+    public function menu_store(Request $request, Menu $menu)
+    {
+        $input_menu = $request['menu'];
+        $input_menu += array('user_id' => $request->user()->id);
+        $menu->fill($input_menu)->save();
+        
+        $recipe = $menu->recipe;
+        $ingredients = $recipe->ingredients;
+        $i = 0;
+        foreach ($ingredients as $ingredient) {
+            $quantity = $ingredient->pivot->quantity / $recipe->number * $menu->number;
+            $menu->ingredients()
+                ->syncWithoutDetaching([
+                    $ingredient->pivot->ingredient_id=>[
+                        'quantity' => $quantity,
+                        'unit_id' => $ingredient->pivot->unit_id]
+                    ]);
+            $i += 1;
+        }
+        dd($menu->ingredients);
+        
+        return redirect('/menus/');
     }
 }

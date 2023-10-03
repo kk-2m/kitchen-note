@@ -31,15 +31,16 @@ class Ingredient extends Model
     {
         return $this->hasMany(ShoppingList::class);
     }
-    public function menus()
-    {
-        return $this->hasMany(Menu::class);
-    }
     
     // 多対多のリレーション
     public function recipes()
     {
         return $this->belongsToMany(Recipe::class, 'ingredient_recipe', 'ingredient_id', 'recipe_id')
+                    ->withPivot('quantity', 'unit_id');
+    }
+    public function menus()
+    {
+        return $this->belongsToMany(Menu::class)
                     ->withPivot('quantity', 'unit_id');
     }
     

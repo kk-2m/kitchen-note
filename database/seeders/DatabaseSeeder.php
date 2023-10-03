@@ -17,6 +17,7 @@ use Database\Seeders\CategoryRecipeSeeder;
 use Database\Seeders\IngredientRecipeSeeder;
 use Database\Seeders\UnitSeeder;
 use Database\Seeders\UnitConversionSeeder;
+use Database\Seeders\IngredientMenuSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -45,6 +46,7 @@ class DatabaseSeeder extends Seeder
         $this->call(StockSeeder::class);
         $this->call(CategoryRecipeSeeder::class);
         $this->call(IngredientRecipeSeeder::class);
+        $this->call(IngredientMenuSeeder::class);
         $this->call(UnitConversionSeeder::class);
     }
 }

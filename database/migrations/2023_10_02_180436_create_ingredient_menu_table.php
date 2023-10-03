@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('shopping_lists', function (Blueprint $table) {
+        Schema::create('ingredient_menu', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('ingredient_id')->constrained();
-            $table->unsignedTinyInteger('status')->default(0);
-            $table->decimal('number', 10, 2)->unsigned();
+            $table->foreignId('menu_id')->constrained()->onDelete('cascade');
+            $table->foreignId('ingredient_id')->constrained()->onDelete('cascade');
+            $table->unsignedDecimal('quantity', 10, 2)->nullable();
             $table->foreignId('unit_id')->constrained()->onDelete('cascade');
-            $table->timestamps();
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shopping_lists');
+        Schema::dropIfExists('ingredient_menu');
     }
 };
