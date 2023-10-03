@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use App\Http\Requests\RecipeRequest;
+use Illuminate\Support\Facades\Http;
 use App\Models\Recipe;
 use App\Models\Procedure;
 use App\Models\Category;
