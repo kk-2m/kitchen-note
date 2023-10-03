@@ -238,7 +238,6 @@ class RecipeController extends Controller
         $procedureId = $recipe->procedures()->pluck('id');
         // あるレシピが持っている中間テーブルのidを$pibotIdに配列として格納
         $pivotId = $recipe->ingredients->pluck('pivot.id');
-        // dd($pivotId[1]);
         
         // *proceduresテーブルへの保存*
         // input_procedureに格納されている連想配列にrecipe_idを追加

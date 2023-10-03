@@ -45,17 +45,66 @@ class MenuController extends Controller
         
         $recipe = $menu->recipe;
         $ingredients = $recipe->ingredients;
-        $i = 0;
         foreach ($ingredients as $ingredient) {
             $quantity = $ingredient->pivot->quantity / $recipe->number * $menu->number;
-            $menu->ingredients()
-                ->syncWithoutDetaching([
-                    $ingredient->pivot->ingredient_id=>[
-                        'quantity' => $quantity,
-                        'unit_id' => $ingredient->pivot->unit_id]
+            $menu->ingredients()->syncWithoutDetaching(
+                    [
+                        $ingredient->pivot->ingredient_id=>[
+                                'quantity' => $quantity,
+                                'unit_id' => $ingredient->pivot->unit_id,
+                            ]
                     ]);
+        }
+        
+        return redirect('/menus/');
+    }
+    
+    public function menu_edit(Menu $menu, Recipe $recipe)
+    {
+        return view('menus.menu_edit')->with(
+            [
+                'menu' => $menu,
+                'recipes' => $recipe->get(),
+                
+            ]);
+    }
+    
+    public function menu_update(Request $request, Menu $menu)
+    {
+        // *menusテーブルの保存*
+        $input_menu = $request['menu'];
+        $input_menu += array('user_id' => $request->user()->id);
+        $menu->fill($input_menu)->save();
+        
+        // dd($menu['ingredients']['0']['pivot']);
+        $recipe = $menu->recipe;
+        // dd($recipe);
+        $ingredients = $recipe->ingredients;
+        // dd($ingredients);
+        
+        $i = 0;
+        $input_ingredient_menu = [];
+        foreach ($ingredients as $ingredient) {
+            $quantity = $ingredient->pivot->quantity / $recipe->number * $menu->number;
+            // dd($ingredient->pivot->unit_id);
+            $input_ingredient_menu[] = array(
+                                            'ingredient_id' => $ingredient->id,
+                                            'quantity' => $quantity,
+                                            'unit_id' => $ingredient->pivot->unit_id,
+                                        );
+            
+            // if ($menu["ingredients"]["{$i}"]["pivot"]["ingredient_id"] !== $ingredient->id) {
+            //     $menu->pivot->ingredient_id = 100;
+            // }
+            // dd($menu["ingredients"]["{$i}"]["pivot"]["ingredient_id"]);
+            // $menu->ingredients()->updateExistingPivot($ingredient->id, [
+            //         'quantity' => $quantity,
+            //         'unit_id' => $ingredient->pivot->unit_id,
+            //     ]);
             $i += 1;
         }
+        // dd($input_ingredient_menu);
+        $menu->ingredients()->sync($input_ingredient_menu);
         
         return redirect('/menus/');
     }

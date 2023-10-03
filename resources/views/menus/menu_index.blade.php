@@ -17,6 +17,8 @@
                             <div class='menu'>
                                 <div>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $menu->date)->isoFormat('dddd') }}</div>
                                 
+                                <button type='button'><a href="/menus/{{ $menu->id }}/edit">edit</a></button>
+                                
                                 <h2 class='name'>
                                     <a href="/recipes/{{ $menu->recipe_id }}">{{ $menu->recipe->title }}</a>
                                 </h2>

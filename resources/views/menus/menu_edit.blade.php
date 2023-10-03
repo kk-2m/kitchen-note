@@ -5,8 +5,9 @@
         </h2>
     </x-slot>
     <!--　/recipes/storeにフォームのデータが渡され、web.phpで指定したRecipeControllerのstoreメソッドが実行される　-->
-    <form action="{{ route('menu_store') }}" method="POST">
+    <form action="/menus/{{ $menu->id }}" method="POST">
         @csrf
+        @method('PUT')
         
         
         <!-- 食材の名前の入力 -->
@@ -15,7 +16,7 @@
             <select name="menu[recipe_id]" id="recipe">
                 <option value="">レシピを選んでください</option>
                 @foreach ($recipes as $recipe)
-                    <option value="{{ $recipe->id }}" @if ((int)$recipeId === $recipe->id) selected @endif>{{ $recipe->title }}</option>
+                    <option value="{{ $recipe->id }}" @if ((int)$menu->recipe_id === $recipe->id) selected @endif>{{ $recipe->title }}</option>
                 @endforeach
             </select><br>
             <p class="recipe_error" style="color:red">{{ $errors->first('menu.recipe_id') }}</p>
@@ -24,7 +25,7 @@
         <!-- 個数を入力 -->
         <div class='number'>
             <h4><label for="number">人数</label></h4>
-            <input type="number" name="menu[number]" id="number" placeholder="例)5" value="{{ old('menu.number') }}" min="1" max="200">人前</input>
+            <input type="number" name="menu[number]" id="number" placeholder="例)5" value="{{ old('menu.number', $menu->number) }}" min="1" max="200">人前</input>
             <p class="number_error" style="color:red">{{ $errors->first('menu.number') }}</p><br>
         </div>
         
@@ -32,7 +33,7 @@
         <!-- 献立の日を入力 -->
         <div class='date'>
             <h4><label for="date">日付</label></h4>
-            <input type="date" name="menu[date]" id="date" value="{{ old('menu.date') }}" min="{{ \Carbon\Carbon::now()->toDateString() }}"/>
+            <input type="date" name="menu[date]" id="date" value="{{ old('menu.date', $menu->date) }}" min="{{ \Carbon\Carbon::now()->toDateString() }}"/>
             <p class="date_error" style="color:red">{{ $errors->first('menu.date') }}</p><br>
         </div>
         
