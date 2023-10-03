@@ -16,6 +16,9 @@
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6 text-gray-900">
                             <div class='recipe'>
+                                <!-- リンクを使用し、献立作成画面に各レシピのidを渡す -->
+                                <button type="button"><a href="{{ route('menu_create', ['recipe_id' => $recipe->id]) }}">Add Menu</a></button>
+                                
                                 <h2 class='title'>
                                     <a href="/recipes/{{ $recipe->id }}">{{ $recipe->title }}</a>
                                 </h2>

@@ -26,11 +26,14 @@ class MenuController extends Controller
             ]);
     }
     
-    public function menu_create(Recipe $recipe)
+    public function menu_create(Request $request, Recipe $recipe)
     {
+        $recipeId = $request->input('recipe_id');
+        
         return view('menus.menu_create')->with(
             [
                 'recipes' => $recipe->get(),
+                'recipeId' => $recipeId,
             ]);
     }
     

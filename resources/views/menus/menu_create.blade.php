@@ -15,7 +15,7 @@
             <select name="menu[recipe_id]" id="recipe">
                 <option value="">レシピを選んでください</option>
                 @foreach ($recipes as $recipe)
-                    <option value="{{ $recipe->id }}">{{ $recipe->title }}</option>
+                    <option value="{{ $recipe->id }}" @if ((int)$recipeId === $recipe->id) selected @endif>{{ $recipe->title }}</option>
                 @endforeach
             </select><br>
             <p class="recipe_error" style="color:red">{{ $errors->first('menu.recipe_id') }}</p>

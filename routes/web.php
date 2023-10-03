@@ -3,9 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecipeController;
-use App\Http\Controllers\RakutenRecipeController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\RakutenRecipeController;
 
 /*
 |--------------------------------------------------------------------------
