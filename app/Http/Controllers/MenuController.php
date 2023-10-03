@@ -53,8 +53,13 @@ class MenuController extends Controller
                     ]);
             $i += 1;
         }
-        dd($menu->ingredients);
         
         return redirect('/menus/');
+    }
+    
+    public function menu_delete(Menu $menu)
+    {
+        $menu->delete();
+        return redirect('/menus');
     }
 }

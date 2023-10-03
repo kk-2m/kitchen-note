@@ -18,13 +18,16 @@
                                 <a href="/stocks/{{ $stock->id }}/edit">[edit]</a>
                                 <h2 class='name'>
                                     {{ $stock->ingredient->name }}<br>
+                                </h2>
+                                <div class='body'>
                                     個数：
                                     @if ($stock->quantity == (int)$stock->quantity) {{ number_format($stock->quantity) }}{{ $stock->unit->name }}
                                     @else {{ $stock->quantity }}{{ $stock->unit->name }}
                                     @endif <br>
                                     購入日：{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $stock->created_at)->format('Y-m-d') }}<br>
                                     賞味・消費期限：{{ $stock->expiration_at }}
-                                    <form action="/stocks/{{ $stock->id }}" id="form_{{ $stock->id }}" method="post">
+                                </div>
+                                <form action="/stocks/{{ $stock->id }}" id="form_{{ $stock->id }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     {{--
@@ -34,7 +37,6 @@
                                     <button type="button" id="delete_button{{$loop->index}}" data-id={{ $stock->id }}>delete</button>
                                     {{-- <button type="button" onclick="deleteRecipe({{ $recipe->id }})">delete</button> --}}
                                 </form>
-                                </h2>
                             </div>
                         </div>
                     </div>

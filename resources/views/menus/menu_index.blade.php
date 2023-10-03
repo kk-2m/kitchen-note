@@ -20,30 +20,42 @@
                                 <h2 class='name'>
                                     <a href="/recipes/{{ $menu->recipe_id }}">{{ $menu->recipe->title }}</a>
                                 </h2>
-                                材料{{ $menu->number }}人前<br>
-                                @foreach($menu->ingredients as $ingredient)
-                                    <p class='ingredient'>
-                                        {{ $ingredient->name }}　
-                                        <!--　小さじ, 大さじ　-->
-                                        @if ($ingredient->pivot->unit->id === 14 || $ingredient->pivot->unit->id === 15)
-                                            <!-- 小数点以下が0は整数表記 -->
-                                            @if ($ingredient->pivot->quantity == (int)$ingredient->pivot->quantity) {{ $ingredient->pivot->unit->name }}{{ number_format($ingredient->pivot->quantity) }}
-                                            @else {{ $ingredient->pivot->unit->name }}{{ $ingredient->pivot->quantity }}
+                                <div class='body'>
+                                    材料{{ $menu->number }}人前<br>
+                                    @foreach($menu->ingredients as $ingredient)
+                                        <p class='ingredient'>
+                                            {{ $ingredient->name }}　
+                                            <!--　小さじ, 大さじ　-->
+                                            @if ($ingredient->pivot->unit->id === 14 || $ingredient->pivot->unit->id === 15)
+                                                <!-- 小数点以下が0は整数表記 -->
+                                                @if ($ingredient->pivot->quantity == (int)$ingredient->pivot->quantity) {{ $ingredient->pivot->unit->name }}{{ number_format($ingredient->pivot->quantity) }}
+                                                @else {{ $ingredient->pivot->unit->name }}{{ $ingredient->pivot->quantity }}
+                                                @endif
+                                            <!-- 適量は適量のみ表示 -->
+                                            @elseif ($ingredient->pivot->unit->id === 16) {{ $ingredient->pivot->unit->name }}
+                                            @else
+                                                @if ($ingredient->pivot->quantity == (int)$ingredient->pivot->quantity) {{ number_format($ingredient->pivot->quantity) }}{{ $ingredient->pivot->unit->name }}
+                                                @else {{ $ingredient->pivot->quantity }}{{ $ingredient->pivot->unit->name }}
+                                                @endif
                                             @endif
-                                        <!-- 適量は適量のみ表示 -->
-                                        @elseif ($ingredient->pivot->unit->id === 16) {{ $ingredient->pivot->unit->name }}
-                                        @else
-                                            @if ($ingredient->pivot->quantity == (int)$ingredient->pivot->quantity) {{ number_format($ingredient->pivot->quantity) }}{{ $ingredient->pivot->unit->name }}
-                                            @else {{ $ingredient->pivot->quantity }}{{ $ingredient->pivot->unit->name }}
-                                            @endif
-                                        @endif
-                                    </p>
-                                @endforeach
-                                @if ($menu->recipe->image != '')
-                                    <img src="{{ asset($menu->recipe->image) }}" alt='料理写真' width='50%'>
-                                @else
-                                    <img src="{{ asset('storage/dish_image/noimage.png') }}" alt='料理写真' width='300px'>
-                                @endif
+                                        </p>
+                                    @endforeach
+                                    @if ($menu->recipe->image != '')
+                                        <img src="{{ asset($menu->recipe->image) }}" alt='料理写真' width='50%'>
+                                    @else
+                                        <img src="{{ asset('storage/dish_image/noimage.png') }}" alt='料理写真' width='300px'>
+                                    @endif
+                                </div>
+                                <form action="/menus/{{ $menu->id }}" id="form_{{ $menu->id }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    {{--
+                                        typeにbuttonを指定する（デフォルトはsubmit）
+                                        JSにdata-idでmenuのidを渡す
+                                        それに対応するレコードを削除
+                                    --}}
+                                    <button type="button" id="delete_button{{$loop->index}}" data-id={{ $menu->id }}>delete</button>
+                                </form>
                             </div>
                         </div>
                     </div>
