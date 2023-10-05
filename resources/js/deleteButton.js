@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     // id属性が"delete_button"で始まるすべてのボタン要素を取得
+    // `^`は「〜で始まる」という意味
     const deleteButtons = document.querySelectorAll('[id^="delete_button"]');
     
     // forEachを使い各ボタンに対しての処理を設定

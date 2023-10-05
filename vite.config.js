@@ -10,6 +10,8 @@ export default defineConfig({
                 'resources/js/add_ingredient.js',
                 'resources/js/add_procedure.js',
                 'resources/js/deleteButton.js',
+                'resources/js/delete_ingredient.js',
+                'resources/js/delete_procedure.js',
             ],
             refresh: true,
         }),

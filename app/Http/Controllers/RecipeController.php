@@ -133,6 +133,8 @@ class RecipeController extends Controller
     
     public function recipe_store(RecipeRequest $request, Recipe $recipe)
     {
+        // dd($request['procedure']);
+        
         // viewでrecipeに格納された内容をinputに渡す
         $input_recipe = $request['recipe'];
         $input_procedures = $request['procedure'];
@@ -156,6 +158,7 @@ class RecipeController extends Controller
         // *proceduresテーブルへの保存*
         // resipesテーブルにインサートされたときに付けれられるidを取得
         $recipeId = $recipe->id;
+        // dd(count($input_procedures));
         // input_procedureに格納されている連想配列にrecipe_idを追加
         for ($i=1; $i<count($input_procedures)+1; $i++) {
             // $procedureをループ毎にインスタンス化しないと追加されない

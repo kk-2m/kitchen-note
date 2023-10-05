@@ -55,70 +55,158 @@
         <!-- 材料の入力 -->
         <div class="ingredients" id="ingredient-container">
             <h2>材料</h2>
-            <label for="ingredient1">材料1：</label>
-            <input type="text" name="ingredient[1][name]" id="ingredient1" placeholder="材料を入力してください" value="{{ old('ingredient.1.name') }}"/>
-            <p class="ingredient_error" style="color:red">{{ $errors->first('ingredient.1.name') }}</p>
-            <label for="ingredient_quantity1">　量：</label>
-            <input type="number" name="ingredient_recipe[1][quantity]" id="ingredient_quantity1" placeholder="必要な量を入力してください" value="{{ old('ingredient_recipe.1.quantity') }}" min="1" max="99999999"/>
-            <p class="ingredient_quantity_error" style="color:red">{{ $errors->first('ingredient_recipe.1.quantity') }}</p>
-            <label for="unit1">　単位を選択：</label>
-            <select name="ingredient_recipe[1][unit_id]" id="unit1">
-                <option value="">単位を選んでください</option>
-                @foreach ($units as $unit)
-                    <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+            @empty (old('ingredient') && old('ingredient_recipe'))
+                <div class="ingredient-item" id="ingredient1">
+                    <h3 class="ingredient_title">材料1</h3>
+                    <div class="ingredient_category">
+                        <label for="ingredient_category1">　カテゴリを選択：</label>
+                        <select name="ingredient[1][ingredient_category_id]" id="ingredient_category1">
+                            <option value="">カテゴリを選んでください</option>
+                            @foreach ($ingredient_categories as $ingredient_category)
+                                <option value="{{ $ingredient_category->id }}">{{ $ingredient_category->category }}</option>
+                            @endforeach
+                        </select><br>
+                        <p class="ingredient_category_error" style="color:red">{{ $errors->first('ingredient.1.ingredient_category_id') }}</p>
+                    </div>
+                    <div class="ingredient_name">
+                        <label for="ingredient1">　材料名：</label>
+                        <input type="text" name="ingredient[1][name]" id="ingredient_name1" placeholder="材料を入力してください" value="{{ old('ingredient.1.name') }}"/>
+                        <p class="ingredient_error" style="color:red">{{ $errors->first('ingredient.1.name') }}</p>
+                    </div>
+                    <div class="ingredient_qantity">
+                        <label for="ingredient_quantity1">　量：</label>
+                        <input type="number" name="ingredient_recipe[1][quantity]" id="ingredient_quantity1" placeholder="必要な量を入力してください" value="{{ old('ingredient_recipe.1.quantity') }}" min="1" max="99999999"/>
+                        <p class="ingredient_quantity_error" style="color:red">{{ $errors->first('ingredient_recipe.1.quantity') }}</p>
+                    </div>
+                    <div class="ingredient_unit">
+                        <label for="unit1">　単位を選択：</label>
+                        <select name="ingredient_recipe[1][unit_id]" id="ingredient_unit1">
+                            <option value="">単位を選んでください</option>
+                            @foreach ($units as $unit)
+                                <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                            @endforeach
+                        </select><br>
+                        <p class="unit_error" style="color:red">{{ $errors->first('ingredient_recipe.1.unit_id') }}</p>
+                    </div>
+                    <button type="button" class="ingredient-delete-button" data-id="1">削除</button>
+                </div>
+                
+                <div class="ingredient-item" id="ingredient2">
+                    <h3 class="ingredient_title">材料2</h3>
+                    <div class="ingredient_category">
+                        <label for="ingredient_category2">　カテゴリを選択：</label>
+                        <select name="ingredient[2][ingredient_category_id]" id="ingredient_category2">
+                            <option value="">カテゴリを選んでください</option>
+                            @foreach ($ingredient_categories as $ingredient_category)
+                                <option value="{{ $ingredient_category->id }}">{{ $ingredient_category->category }}</option>
+                            @endforeach
+                        </select><br>
+                        <p class="ingredient_category_error" style="color:red">{{ $errors->first('ingredient.2.ingredient_category_id') }}</p>
+                    </div>
+                    <div class="ingredient_name">
+                        <label for="ingredient2">　材料名：</label>
+                        <input type="text" name="ingredient[2][name]"　id="ingredient2" placeholder="材料を入力してください" value="{{ old('ingredient.2.name') }}"/>
+                        <p class="ingredient_error" style="color:red">{{ $errors->first('ingredient.2.name') }}</p>
+                    </div>
+                    <div class="ingredient_qantity">
+                        <label for="ingredient_quantity2">　量：</label>
+                        <input type="text" name="ingredient_recipe[2][quantity]" id="ingredient_quantity2" placeholder="必要な量を入力してください" value="{{ old('ingredient_recipe.2.quantity') }}" min="1" max="99999999"/>
+                        <p class="ingredient_quantity_error" style="color:red">{{ $errors->first('ingredient_recipe.2.quantity') }}</p>
+                    </div>
+                    <div class="ingredient_unit">
+                        <label for="unit2">　単位を選択：</label>
+                        <select name="ingredient_recipe[2][unit_id]" id="unit2">
+                            <option value="">　単位を選んでください</option>
+                            @foreach ($units as $unit)
+                                <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                            @endforeach
+                        </select><br>
+                        <p class="unit_error" style="color:red">{{ $errors->first('ingredient_recipe.2.unit_id') }}</p>
+                    </div>
+                    <button type="button" class="ingredient-delete-button" data-id="2">削除</button>
+                </div>
+            @else
+                @php
+                    $Error = empty(old('ingredient')) ? old('ingredient') : old('ingredient_ingredient');
+                @endphp
+                @foreach ($Error as $key => $value)
+                    <div class="ingredient-item" id="ingredient{{ $key }}">
+                        <h3 class="ingredient_title">材料{{ $key }}</h3>
+                        <div class="ingredient_category">
+                            <label for="ingredient_category{{ $key }}">　カテゴリを選択：</label>
+                            <select name="ingredient[{{ $key }}][ingredient_category_id]" id="ingredient_category{{ $key }}">
+                                <option value="">カテゴリを選んでください</option>
+                                @foreach ($ingredient_categories as $ingredient_category)
+                                    <option value="{{ $ingredient_category->id }}">{{ $ingredient_category->category }}</option>
+                                @endforeach
+                            </select><br>
+                            <p class="ingredient_category_error" style="color:red">{{ $errors->first("ingredient.{$key}.ingredient_category_id") }}</p>
+                        </div>
+                        <div class="ingredient_name">
+                            <label for="ingredient{{ $key }}">　材料名：</label>
+                            <input type="text" name="ingredient[{{ $key }}][name]"　id="ingredient{{ $key }}" placeholder="材料を入力してください" value="{{ old("ingredient.{$key}.name") }}"/>
+                            <p class="ingredient_error" style="color:red">{{ $errors->first("ingredient.{$key}.name") }}</p>
+                        </div>
+                        <div class="ingredient_qantity">
+                            <label for="ingredient_quantity{{ $key }}">　量：</label>
+                            <input type="text" name="ingredient_recipe[{{ $key }}][quantity]" id="ingredient_quantity{{ $key }}" placeholder="必要な量を入力してください" value="{{ old("ingredient_recipe.{$key}.quantity") }}" min="1" max="99999999"/>
+                            <p class="ingredient_quantity_error" style="color:red">{{ $errors->first("ingredient_recipe.{$key}.quantity") }}</p>
+                        </div>
+                        <div class="ingredient_unit">
+                            <label for="unit{{ $key }}">　単位を選択：</label>
+                            <select name="ingredient_recipe[{{ $key }}][unit_id]" id="unit{{ $key }}">
+                                <option value="">　単位を選んでください</option>
+                                @foreach ($units as $unit)
+                                    <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                                @endforeach
+                            </select><br>
+                            <p class="unit_error" style="color:red">{{ $errors->first("ingredient_recipe.{$key}.unit_id") }}</p>
+                        </div>
+                        <button type="button" class="ingredient-delete-button" data-id={{ $key }}>削除</button>
+                    </div>
                 @endforeach
-            </select><br>
-            <p class="unit_error" style="color:red">{{ $errors->first('ingredient_recipe.1.unit_id') }}</p>
-            
-            <label for="ingredient_category1">　カテゴリを選択：</label>
-            <select name="ingredient[1][ingredient_category_id]" id="ingredient_category1">
-                <option value="">カテゴリを選んでください</option>
-                @foreach ($ingredient_categories as $ingredient_category)
-                    <option value="{{ $ingredient_category->id }}">{{ $ingredient_category->category }}</option>
-                @endforeach
-            </select><br>
-            <p class="ingredient_category_error" style="color:red">{{ $errors->first('ingredient.1.ingredient_category_id') }}</p>
-            
-             <label for="ingredient2">材料2：</label>
-            <input type="text" name="ingredient[2][name]"　id="ingredient2" placeholder="材料を入力してください" value="{{ old('ingredient.2.name') }}"/>
-            <p class="ingredient_error" style="color:red">{{ $errors->first('ingredient.2.name') }}</p>
-            <label for="ingredient_quantity2">　量：</label>
-            <input type="text" name="ingredient_recipe[2][quantity]" id="ingredient_quantity2" placeholder="必要な量を入力してください" value="{{ old('ingredient_recipe.2.quantity') }}" min="1" max="99999999"/>
-            <p class="ingredient_quantity_error" style="color:red">{{ $errors->first('ingredient_recipe.2.quantity') }}</p>
-            <label for="unit2">　単位を選択：</label>
-            <select name="ingredient_recipe[2][unit_id]" id="unit2">
-                <option value="">　単位を選んでください</option>
-                @foreach ($units as $unit)
-                    <option value="{{ $unit->id }}">{{ $unit->name }}</option>
-                @endforeach
-            </select><br>
-            <p class="unit_error" style="color:red">{{ $errors->first('ingredient_recipe.2.unit_id') }}</p>
-
-            <label for="ingredient_category2">　カテゴリを選択：</label>
-            <select name="ingredient[2][ingredient_category_id]" id="ingredient_category2">
-                <option value="">カテゴリを選んでください</option>
-                @foreach ($ingredient_categories as $ingredient_category)
-                    <option value="{{ $ingredient_category->id }}">{{ $ingredient_category->category }}</option>
-                @endforeach
-            </select><br>
-            <p class="ingredient_category_error" style="color:red">{{ $errors->first('ingredient.2.ingredient_category_id') }}</p>
-            <button type="button" id="add-ingredient">入力欄を増やす</button><br>
+            @endempty
         </div>
+        
+        <button type="button" id="add-ingredient">入力欄を増やす</button><br>
         
         <!-- 調理手順の入力 -->
         <div class="procedures" id="procedure-container">
             <h2>調理手順</h2>
-            <label for="procedure1">手順1：</label>
-            <textarea name="procedure[1][body]" rows="4" cols="40" class='procedures' id="procedure1" placeholder="例）ケトルで沸かしたお湯を注ぎ、3分待つ。">{{ old('procedure.1.body') }}</textarea><br>
-            <p class="procedure_error" style="color:red">{{ $errors->first('procedure.1.body') }}</p>
-            
-            <label for="procedure2">手順2：</label>
-            <textarea name="procedure[2][body]" rows="4" cols="40" class='procedures' id="procedure2" placeholder="例）ケトルで沸かしたお湯を注ぎ、3分待つ。">{{ old('procedure.2.body') }}</textarea>
-            <p class="procedure_error" style="color:red">{{ $errors->first('procedure.2.body') }}</p>
+            @empty (old('procedure'))
+                <div class="procedure-item" id="procedure1">
+                    <div class="textarea">
+                        <label for="procedure1">手順1：</label>
+                        <textarea name="procedure[1][body]" rows="4" cols="40" class='procedures' id="form1" placeholder="例）ケトルで沸かしたお湯を注ぎ、3分待つ。">{{ old('procedure.1.body') }}</textarea><br>
+                    </div>
+                    <p class="procedure_error" style="color:red">{{ $errors->first('procedure.1.body') }}</p>
+                    <button type="button" class="delete-button" data-id="1">削除</button>
+                </div>
+                
+                <div class="procedure-item" id="procedure2">
+                    <div class="textarea">
+                        <label for="procedure2">手順2：</label>
+                        <textarea name="procedure[2][body]" rows="4" cols="40" class='procedures' id="form2" placeholder="例）ケトルで沸かしたお湯を注ぎ、3分待つ。">{{ old('procedure.2.body') }}</textarea>
+                    </div>
+                    <p class="procedure_error" style="color:red">{{ $errors->first('procedure.2.body') }}</p>
+                    <button type="button" class="delete-button" data-id="2">削除</button>
+                </div>
+            @else
+                @foreach (old('procedure') as $key => $value)
+                    <div class="procedure-item" id="procedure{{ $key }}">
+                        <div class="textarea">
+                            <label for="procedure{{ $key }}">手順{{ $key }}：</label>
+                            <textarea name="procedure[{{ $key }}][body]" rows="4" cols="40" class='procedures' id="form{{ $key }}" placeholder="例）ケトルで沸かしたお湯を注ぎ、3分待つ。">{{ old("procedure.{$key}.body") }}</textarea>
+                        </div>
+                        <p class="procedure_error" style="color:red">{{ $errors->first("procedure.{$key}.body") }}</p>
+                        <button type="button" class="procedure-delete-button" data-id={{ $key }}>削除</button>
+                    </div>
+                @endforeach
+            @endempty
         </div>
         
         <!-- テキストエリアを追加するボタン -->
-        <!--<button type="button" id="add-procedure">手順を追加</button><br>-->
+        <button type="button" id="add-procedure">手順を追加</button><br>
         
         <!-- 送信ボタン -->
         <input type="submit" value="保存"/>
