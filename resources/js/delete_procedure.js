@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     deleteButtons.forEach(function(button) {
         button.addEventListener('click', function() {
             // buttonのdata_idを抜き出す
-            const dataId = button.getAttribute('data-id');
+            const dataId = parseInt(button.getAttribute('data-id'));
             const procedureItem = document.getElementById(`procedure${dataId}`);
             
             if (procedureItem) {
@@ -20,20 +20,28 @@ document.addEventListener('DOMContentLoaded', function () {
     
     function renumberProcedureItems(startIndex) {
         let formCount = document.querySelectorAll('textarea.procedures').length;
-        for (let i = startIndex; i <= formCount + 1; i++) {
+        console.log(`renumber/ingredientCount:${typeof formCount}`);
+        console.log(`startIndex:${typeof startIndex}`)
+        console.log("Before loop");
+        for (let i = startIndex + 1; i <= formCount + 1; i++) {
+            console.log("enter")
             const procedureItem = document.getElementById(`procedure${i}`);
+            console.log(procedureItem)
             if (procedureItem) {
                 procedureItem.id = `procedure${i - 1}`;
+                console.log(procedureItem)
+                
                 const label = procedureItem.querySelector('label');
                 label.htmlFor = `procedure${i - 1}`;
                 label.textContent = `手順${i - 1}：`;
                 const textarea = procedureItem.querySelector('textarea');
                 textarea.name = `procedure[${i - 1}][body]`;
                 textarea.id = `form${i - 1}`;
-                const deleteButton = procedureItem.querySelector('.delete-button');
+                const deleteButton = procedureItem.querySelector('.procedure-delete-button');
                 deleteButton.dataset.id = i - 1;
             }
         }
+        console.log("After loop");
     }
     
 });

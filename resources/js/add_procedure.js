@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     addButton.addEventListener('click', function(){
         
-        let formCount = document.querySelectorAll('h3.ingredient_title').length;
+        let formCount = document.querySelectorAll('textarea.procedures').length;
         // 現在のフォームの数に1を足す
         // 今表示されている手順の次の手順を足すため
         formCount++;
@@ -77,7 +77,9 @@ document.addEventListener('DOMContentLoaded', function () {
     
     function renumberProcedureItems(startIndex) {
         let formCount = document.querySelectorAll('textarea.procedures').length;
-        for (let i = startIndex; i <= formCount + 1; i++) {
+        console.log(`renumber/ingredientCount:${formCount}`);
+        console.log(`startIndex${startIndex}`)
+        for (let i = startIndex + 1; i <= formCount + 1; i++) {
             const procedureItem = document.getElementById(`procedure${i}`);
             if (procedureItem) {
                 procedureItem.id = `procedure${i - 1}`;
@@ -87,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const textarea = procedureItem.querySelector('textarea');
                 textarea.name = `procedure[${i - 1}][body]`;
                 textarea.id = `form${i - 1}`;
-                const deleteButton = procedureItem.querySelector('.delete-button');
+                const deleteButton = procedureItem.querySelector('.procedure-delete-button');
                 deleteButton.dataset.id = i - 1;
             }
         }

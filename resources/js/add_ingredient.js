@@ -1,93 +1,230 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const addButton = document.getElementById('add-ingredient');
     const container = document.getElementById('ingredient-container');
+    const addButton = document.getElementById('add-ingredient');
+    const ingredientCategoryData = JSON.parse(container.dataset.ingredientcategories);
+    console.log(ingredientCategoryData);
+    const unitData = JSON.parse(container.dataset.units);
+    console.log(unitData);
     
     addButton.addEventListener('click', function(){
         
-        let formCount = document.querySelectorAll('textarea.procedures').length;
+        // querySelectorでクラス名を参照する場合は.を前に付ける
+        let ingredientCount = document.querySelectorAll('.ingredient-item').length;
         // 現在のフォームの数に1を足す
         // 今表示されている手順の次の手順を足すため
-        formCount++;
-        console.log(`addFormCount:${formCount}`);
+        ingredientCount++;
+        console.log(`addFormCount:${ingredientCount}`);
         
-        // 新しい'procedure-item'のdivタグ
-        const newProcedure = document.createElement('div');
-        newProcedure.classList.add('procedure-item');
-        newProcedure.id = `procedure${formCount}`;
+        // 新しい'ingredient-item'のdivタグ
+        const newItem = document.createElement('div');
+        newItem.classList.add('ingredient-item');
+        newItem.id = `ingredient-item${ingredientCount}`;
         
-        // 新しい'textarea'のdivタグ
-        const newTextarea = document.createElement('div');
-        newTextarea.classList.add('textarea');
+        const newTitle = document.createElement('h3');
+        newTitle.classList.add('ingredient_title');
+        newTitle.textContent = `材料${ingredientCount}：`;
+        
+        // 新しい'ingredient_category'のdivタグ
+        const newIngredientCategory = document.createElement('div');
+        newIngredientCategory.classList.add('ingredient_category');
         
         // 新しいラベル
-        const label = document.createElement('label');
-        label.htmlFor = `procedure${formCount}`;
-        label.textContent = `手順${formCount}：`;
+        const ingredientCategoryLabel = document.createElement('label');
+        ingredientCategoryLabel.htmlFor = `ingredient_category${ingredientCount}`;
+        ingredientCategoryLabel.textContent = "カテゴリを選択：";
         
-        // 新しいテキストエリア
-        const textarea = document.createElement('textarea');
-        textarea.name = `procedure[${formCount}][body]`;
-        textarea.rows = 4;
-        textarea.cols = 40;
-        textarea.className = 'procedures';
-        textarea.id = `form${formCount}`;
-        textarea.placeholder = '例）ケトルで沸かしたお湯を注ぎ、3分待つ。';
+        // 新しいselectタグ
+        const ingredientCategorySelect = document.createElement('select');
+        ingredientCategorySelect.name = `ingredient[${ingredientCount}][ingredient_category_id]`;
+        ingredientCategorySelect.id = `select_ingredient_category${ingredientCount}`;
+        
+        // カテゴリのオプションを追加
+        const ingredientCategoryOption = document.createElement('option');
+        ingredientCategoryOption.value = '';
+        ingredientCategoryOption.textContent = 'カテゴリを選んでください';
+        ingredientCategorySelect.appendChild(ingredientCategoryOption);
+        
+        // カテゴリデータを元にオプションを追加
+        for (const category of ingredientCategoryData) {
+            const ingredientCategoryOption = document.createElement('option');
+            ingredientCategoryOption.value = category.id;
+            ingredientCategoryOption.textContent = category.category;
+            ingredientCategorySelect.appendChild(ingredientCategoryOption);
+        }
         
         // 新しいバリデーションエラー表示タグ
-        const newValidation = document.createElement('p');
-        newValidation.className = 'procedure_error';
-        newValidation.setAttribute('style', "color:red");
+        const newIngredientCategoryValidation = document.createElement('p');
+        newIngredientCategoryValidation.className = 'ingredient_category_error';
+        newIngredientCategoryValidation.setAttribute('style', "color:red");
+        
+        // 新しい'ingredient_name'のdivタグ
+        const newIngredientName = document.createElement('div');
+        newIngredientName.classList.add('ingredient_name');
+        
+        // 新しいラベル
+        const ingredientNameLabel = document.createElement('label');
+        ingredientNameLabel.htmlFor = `ingredient_name${ingredientCount}`;
+        ingredientNameLabel.textContent = "材料名：";
+        
+        const ingredientNameInput = document.createElement('input');
+        ingredientNameInput.type = "text";
+        ingredientNameInput.name = `ingredient[${ingredientCount}][name]`;
+        ingredientNameInput.id = `input_ingredient_name${ingredientCount}`;
+        ingredientNameInput.placeholder = "材料を入力してください";
+        
+        // 新しいバリデーションエラー表示タグ
+        const newIngredientNameValidation = document.createElement('p');
+        newIngredientNameValidation.className = 'ingredient_error';
+        newIngredientNameValidation.setAttribute('style', "color:red");
+        
+        // 新しい'ingredient_quantity'のdivタグ
+        const newIngredientQuantity = document.createElement('div');
+        newIngredientQuantity.classList.add('ingredient_quantity');
+        
+        // 新しいラベル
+        const ingredientQuantityLabel = document.createElement('label');
+        ingredientQuantityLabel.htmlFor = `ingredient_quantity${ingredientCount}`;
+        ingredientQuantityLabel.textContent = "量：";
+        
+        const ingredientQuantityInput = document.createElement('input');
+        ingredientQuantityInput.type = "text";
+        ingredientQuantityInput.name = `ingredient_recipe[${ingredientCount}][quantity]`;
+        ingredientQuantityInput.id = `input_ingredient_quantity${ingredientCount}`;
+        ingredientQuantityInput.placeholder = "必要な量を入力してください";
+        ingredientQuantityInput.min = 1;
+        ingredientQuantityInput.max = 99999999;
+        
+        // 新しいバリデーションエラー表示タグ
+        const newIngredientQuantityValidation = document.createElement('p');
+        newIngredientQuantityValidation.className = 'ingredient_quantity_error';
+        newIngredientQuantityValidation.setAttribute('style', "color:red");
+        
+        // 新しい'ingredient_unit'のdivタグ
+        const newIngredientUnit = document.createElement('div');
+        newIngredientUnit.classList.add('ingredient_unit');
+        
+        // 新しいラベル
+        const ingredientUnitLabel = document.createElement('label');
+        ingredientUnitLabel.htmlFor = `ingredient_unit${ingredientCount}`;
+        ingredientUnitLabel.textContent = "単位を選択：";
+        
+        // 新しいselectタグ
+        const ingredientUnitSelect = document.createElement('select');
+        ingredientUnitSelect.name = `ingredient_recipe[${ingredientCount}][unit_id]`;
+        ingredientUnitSelect.id = `select_ingredient_unit${ingredientCount}`;
+        
+        // カテゴリのオプションを追加
+        const ingredientUnitOption = document.createElement('option');
+        ingredientUnitOption.value = '';
+        ingredientUnitOption.textContent = '単位を選んでください';
+        ingredientUnitSelect.appendChild(ingredientUnitOption);
+        
+        // カテゴリデータを元にオプションを追加
+        for (const unit of unitData) {
+            const ingredientUnitOption = document.createElement('option');
+            ingredientUnitOption.value = unit.id;
+            ingredientUnitOption.textContent = unit.name;
+            ingredientUnitSelect.appendChild(ingredientUnitOption);
+        }
+        
+        // 新しいバリデーションエラー表示タグ
+        const newIngredientUnitValidation = document.createElement('p');
+        newIngredientUnitValidation.className = 'unit_error';
+        newIngredientUnitValidation.setAttribute('style', "color:red");
         
         // 新しい削除ボタン
         const deleteButton = document.createElement('button');
         deleteButton.type = 'button';
-        deleteButton.classList.add('delete-button');
-        deleteButton.dataset.id = `${formCount}`;
+        deleteButton.classList.add('ingredient-delete-button');
+        deleteButton.dataset.id = `${ingredientCount}`;
         deleteButton.textContent = '削除';
         
         // 削除ボタンがクリックされたときの処理
         deleteButton.addEventListener('click', function(){
             // 新しく追加された手順項目のid属性から手順番号を抽出している
-            const currentProcedureCount = parseInt(newProcedure.id.match(/\d+/)[0]);
+            const currentIngredientCount = parseInt(newItem.id.match(/\d+/)[0]);
             
             // 手順番号を動的に変更
-            formCount--;
+            ingredientCount--;
             
-            console.log(`currentCount:${currentProcedureCount}`);
-            console.log(`formCount:${formCount}`);
+            console.log(`currentCount:${currentIngredientCount}`);
+            console.log(`ingredientCount:${ingredientCount}`);
             
             // 手順項目を削除
-            container.removeChild(newProcedure);
+            container.removeChild(newItem);
             
             // 手順番号を振りなおす
-            renumberProcedureItems(currentProcedureCount);
+            renumberIngredientItems(currentIngredientCount);
         });
         
-        newTextarea.appendChild(label);
-        newTextarea.appendChild(textarea);
-        newTextarea.appendChild(document.createElement('br'));
+        newIngredientCategory.appendChild(ingredientCategoryLabel);
+        newIngredientCategory.appendChild(ingredientCategorySelect);
+        newIngredientCategory.appendChild(newIngredientCategoryValidation);
         
-        newProcedure.appendChild(newTextarea);
-        newProcedure.appendChild(newValidation);
-        newProcedure.appendChild(deleteButton);
+        newIngredientName.appendChild(ingredientNameLabel);
+        newIngredientName.appendChild(ingredientNameInput);
+        newIngredientName.appendChild(newIngredientNameValidation);
+        
+        newIngredientQuantity.appendChild(ingredientQuantityLabel);
+        newIngredientQuantity.appendChild(ingredientQuantityInput);
+        newIngredientQuantity.appendChild(newIngredientQuantityValidation);
+        
+        newIngredientUnit.appendChild(ingredientUnitLabel);
+        newIngredientUnit.appendChild(ingredientUnitSelect);
+        newIngredientUnit.appendChild(newIngredientUnitValidation);
+        
+        newItem.appendChild(newTitle);
+        newItem.appendChild(newIngredientCategory);
+        newItem.appendChild(newIngredientName);
+        newItem.appendChild(newIngredientQuantity);
+        newItem.appendChild(newIngredientUnit);
+        newItem.appendChild(deleteButton);
         
         
-        container.appendChild(newProcedure);
+        container.appendChild(newItem);
     });
     
-    function renumberProcedureItems(startIndex) {
-        let formCount = document.querySelectorAll('textarea.procedures').length;
-        for (let i = startIndex; i <= formCount + 1; i++) {
-            const procedureItem = document.getElementById(`procedure${i}`);
-            if (procedureItem) {
-                procedureItem.id = `procedure${i - 1}`;
-                const label = procedureItem.querySelector('label');
-                label.htmlFor = `procedure${i - 1}`;
-                label.textContent = `手順${i - 1}：`;
-                const textarea = procedureItem.querySelector('textarea');
-                textarea.name = `procedure[${i - 1}][body]`;
-                textarea.id = `form${i - 1}`;
-                const deleteButton = procedureItem.querySelector('.delete-button');
+    function renumberIngredientItems(startIndex) {
+        let ingredientCount = document.querySelectorAll('.ingredient-item').length;
+        console.log(`renumber/ingredientCount:${ingredientCount}`);
+        for (let i = startIndex + 1; i <= ingredientCount + 1; i++) {
+            const ingredientItem = document.getElementById(`ingredient-item${i}`);
+            console.log(`i = ${i}`)
+            console.log(ingredientItem)
+            if (ingredientItem) {
+                
+                ingredientItem.id = `ingredient-item${i - 1}`;
+                console.log(ingredientItem)
+                
+                const ingredientTitle = ingredientItem.querySelector('h3');
+                ingredientTitle.textContent = `材料${i - 1}`;
+                const ingredientCategoryLabel = ingredientItem.querySelector(`label[for="ingredient_category${i}"]`);
+                ingredientCategoryLabel.htmlFor = `ingredient_category${i - 1}`;
+                const ingredientCategorySelect = ingredientItem.querySelector(`#select_ingredient_category${i}`);
+                console.log(ingredientCategorySelect);
+                ingredientCategorySelect.name = `ingredient[${i - 1}][ingredient_category_id]`;
+                ingredientCategorySelect.id = `select_ingredient_category${i - 1}`;
+                const ingredientNameLabel = ingredientItem.querySelector(`label[for="ingredient_name${i}"]`);
+                ingredientNameLabel.htmlFor = `ingredient_name${i - 1}`;
+                const ingredientNameInput = ingredientItem.querySelector(`#input_ingredient_name${i}`);
+                console.log(ingredientNameInput);
+                ingredientNameInput.name = `ingredient[${i - 1}][name]`;
+                ingredientNameInput.id = `input_ingredient_name${i - 1}`;
+                const ingredientQuantityLabel = ingredientItem.querySelector(`label[for="ingredient_quantity${i}"]`);
+                console.log(ingredientQuantityLabel);
+                ingredientQuantityLabel.htmlFor = `ingredient_quantity${i - 1}`;
+                const ingredientQuantityInput = ingredientItem.querySelector(`#input_ingredient_quantity${i}`);
+                console.log(ingredientQuantityInput);
+                ingredientQuantityInput.name = `ingredient_recipe[${i - 1}][quantity]`;
+                ingredientQuantityInput.id = `input_ingredient_quantity${i - 1}`;
+                const ingredientUnitLabel = ingredientItem.querySelector(`label[for="ingredient_unit${i}"]`);
+                console.log(ingredientUnitLabel);
+                ingredientUnitLabel.htmlFor = `ingredient_unit${i - 1}`;
+                const ingredientUnitSelect = ingredientItem.querySelector(`#select_ingredient_unit${i}`);
+                console.log(ingredientUnitSelect);
+                ingredientUnitSelect.name = `ingredient_recipe[${i - 1}][unit_id]`;
+                ingredientUnitSelect.id = `select_ingredient_unit${i - 1}`;
+                const deleteButton = ingredientItem.querySelector('.ingredient-delete-button');
                 deleteButton.dataset.id = i - 1;
             }
         }
