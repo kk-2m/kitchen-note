@@ -28,19 +28,19 @@
             <p class="cooking_time_error" style="color:red">{{ $errors->first('recipe.cooking_time') }}</p><br>
             <select name="recipe[cooking_time_unit]" id="cooking_time_unit">
                 <option value="">単位</option>
-                <option value="1">秒</option>
-                <option value="2">分</option>
-                <option value="3">時間</option>
-                <option value="4">日</option>
-                <option value="5">カ月</option>
-                <option value="6">年</option>
+                <option value="1" @if ((int)old("recipe.cooking_time_unit") === 1) selected @endif>秒</option>
+                <option value="2" @if ((int)old("recipe.cooking_time_unit") === 2) selected @endif>分</option>
+                <option value="3" @if ((int)old("recipe.cooking_time_unit") === 3) selected @endif>時間</option>
+                <option value="4" @if ((int)old("recipe.cooking_time_unit") === 4) selected @endif>日</option>
+                <option value="5" @if ((int)old("recipe.cooking_time_unit") === 5) selected @endif>カ月</option>
+                <option value="6" @if ((int)old("recipe.cooking_time_unit") === 6) selected @endif>年</option>
             </select><br>
         </div>
         
         <!-- カテゴリの入力 -->
         <div class='categories'>カテゴリ :
             @foreach ($categories as $category)
-                <input class="dish_category_checkbox" type="checkbox" name="category[{{ $loop->iteration }}]" value="{{ $category->id }}" id="{{ $category->id }}"/>
+                <input class="dish_category_checkbox" type="checkbox" name="category[{{ $loop->iteration }}]" value="{{ $category->id }}" id="{{ $category->id }}" @if ((int)old("category.{$loop->iteration}") === $category->id) checked @endif/>
                 <label for="{{ $category->id }}">{{ $category->name }}</label>
             @endforeach
         </div>
@@ -140,14 +140,14 @@
                             <select name="ingredient[{{ $key }}][ingredient_category_id]" id="select_ingredient_category{{ $key }}">
                                 <option value="">カテゴリを選んでください</option>
                                 @foreach ($ingredient_categories as $ingredient_category)
-                                    <option value="{{ $ingredient_category->id }}">{{ $ingredient_category->category }}</option>
+                                    <option value="{{ $ingredient_category->id }}" @if ((int)old("ingredient.{$key}.ingredient_category_id") === $ingredient_category->id) selected @endif>{{ $ingredient_category->category }}</option>
                                 @endforeach
                             </select><br>
                             <p class="ingredient_category_error" style="color:red">{{ $errors->first("ingredient.{$key}.ingredient_category_id") }}</p>
                         </div>
                         <div class="ingredient_name">
                             <label for="ingredient_name{{ $key }}">　材料名：</label>
-                            <input type="text" name="ingredient[{{ $key }}][name]"　id="input_ingredient_name{{ $key }}" placeholder="材料を入力してください" value="{{ old("ingredient.{$key}.name") }}"/>
+                            <input type="text" name="ingredient[{{ $key }}][name]" id="input_ingredient_name{{ $key }}" placeholder="材料を入力してください" value="{{ old("ingredient.{$key}.name") }}"/>
                             <p class="ingredient_error" style="color:red">{{ $errors->first("ingredient.{$key}.name") }}</p>
                         </div>
                         <div class="ingredient_qantity">
@@ -160,7 +160,7 @@
                             <select name="ingredient_recipe[{{ $key }}][unit_id]" id="select_ingredient_unit{{ $key }}">
                                 <option value="">　単位を選んでください</option>
                                 @foreach ($units as $unit)
-                                    <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                                    <option value="{{ $unit->id }}" @if ((int)old("ingredient_recipe.{$key}.unit_id") == $unit->id) selected @endif>{{ $unit->name }}</option>
                                 @endforeach
                             </select><br>
                             <p class="unit_error" style="color:red">{{ $errors->first("ingredient_recipe.{$key}.unit_id") }}</p>
