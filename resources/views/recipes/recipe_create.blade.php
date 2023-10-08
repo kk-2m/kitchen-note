@@ -177,7 +177,7 @@
         <div class="procedures" id="procedure-container">
             <h2>調理手順</h2>
             @empty (old('procedure'))
-                <div class="procedure-item" id="procedure1">
+                <div class="procedure-item" id="procedure-item1">
                     <div class="textarea">
                         <label for="procedure1">手順1：</label>
                         <textarea name="procedure[1][body]" rows="4" cols="40" class='procedures' id="form1" placeholder="例）ケトルで沸かしたお湯を注ぎ、3分待つ。">{{ old('procedure.1.body') }}</textarea><br>
@@ -186,7 +186,7 @@
                     <button type="button" class="procedure-delete-button" data-id="1">削除</button>
                 </div>
                 
-                <div class="procedure-item" id="procedure2">
+                <div class="procedure-item" id="procedure-item2">
                     <div class="textarea">
                         <label for="procedure2">手順2：</label>
                         <textarea name="procedure[2][body]" rows="4" cols="40" class='procedures' id="form2" placeholder="例）ケトルで沸かしたお湯を注ぎ、3分待つ。">{{ old('procedure.2.body') }}</textarea>
@@ -196,7 +196,7 @@
                 </div>
             @else
                 @foreach (old('procedure') as $key => $value)
-                    <div class="procedure-item" id="procedure{{ $key }}">
+                    <div class="procedure-item" id="procedure-item{{ $key }}">
                         <div class="textarea">
                             <label for="procedure{{ $key }}">手順{{ $key }}：</label>
                             <textarea name="procedure[{{ $key }}][body]" rows="4" cols="40" class='procedures' id="form{{ $key }}" placeholder="例）ケトルで沸かしたお湯を注ぎ、3分待つ。">{{ old("procedure.{$key}.body") }}</textarea>

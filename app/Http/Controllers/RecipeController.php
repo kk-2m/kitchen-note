@@ -158,7 +158,6 @@ class RecipeController extends Controller
         // *proceduresテーブルへの保存*
         // resipesテーブルにインサートされたときに付けれられるidを取得
         $recipeId = $recipe->id;
-        // dd(count($input_procedures));
         // input_procedureに格納されている連想配列にrecipe_idを追加
         for ($i=1; $i<count($input_procedures)+1; $i++) {
             // $procedureをループ毎にインスタンス化しないと追加されない
@@ -241,26 +240,60 @@ class RecipeController extends Controller
         // あるレシピが持っている中間テーブルのidを$pibotIdに配列として格納
         $pivotId = $recipe->ingredients->pluck('pivot.id');
         
+        // dd($recipe->procedures);
         // *proceduresテーブルへの保存*
         // input_procedureに格納されている連想配列にrecipe_idを追加
-        for ($i=1; $i<count($input_procedures)+1; $i++) {
-            // dd($recipeId);
-            // $procedureをループ毎にインスタンス化しないと追加されない
-            // https://yama-weblog.com/can-not-save-multiple-record-using-foreach-in-laravel8/
-            $procedure = Procedure::where('recipe_id', $recipeId)
-                // $procedureIdは0から始まる
-                ->where('id', $procedureId[$i-1])
-                ->first();
+        // リクエストが既存のproceduresテーブルのレコードよりも多かった場合
+        // 超過分のレコードを新しく保存
+        if (count($recipe->procedures) <= count($input_procedures)) {
+            for ($i=1; $i<count($input_procedures)+1; $i++) {
+                // dd($recipeId);
+                // $procedureをループ毎にインスタンス化しないと追加されない
+                // https://yama-weblog.com/can-not-save-multiple-record-using-foreach-in-laravel8/
+                if ($i <= count($recipe->procedures)) {
+                    $procedure = Procedure::where('recipe_id', $recipeId)
+                        // $procedureIdは0から始まる
+                        ->where('id', $procedureId[$i-1])
+                        ->first();    
+                }
+                else $procedure = new Procedure();
+                    
+                // keyを'body'に変更
+                // saveをする前に$procedureの存在確認
+                if ($procedure) {
+                    $procedure->fill(
+                        [
+                            'body' => $input_procedures["{$i}"]['body'],
+                            'recipe_id' => $recipeId,
+                        ])->save();
+                }
+            }    
+        }
+        // リクエストが既存のproceduresテーブルのレコードよりも少なかった場合
+        // （既存のレコード数）ー（リクエスト数）を削除する
+        else {
+            for ($i=1; $i<count($recipe->procedures)+1; $i++) {
+                // dd($recipeId);
+                // $procedureをループ毎にインスタンス化しないと追加されない
+                // https://yama-weblog.com/can-not-save-multiple-record-using-foreach-in-laravel8/
                 
-            // keyを'body'に変更
-            if ($procedure) {
-                $procedure->fill(
-                    [
-                        'body' => $input_procedures["{$i}"]['body'],
-                        'recipe_id' => $recipeId,
-                    ])->save();
+                $procedure = Procedure::where('recipe_id', $recipeId)
+                    // $procedureIdは0から始まる
+                    ->where('id', $procedureId[$i-1])
+                    ->first();
+                // dd($i, count($input_procedures), count($recipe->procedures));
+                if ($i <= count($input_procedures) and $procedure) {
+                    $procedure->fill(
+                        [
+                            'body' => $input_procedures["{$i}"]['body'],
+                            'recipe_id' => $recipeId,
+                        ])->save();
+                }
+                // リクエストより多いレコードは削除
+                else $procedure->delete();
             }
         }
+        
         
         // *categorie_recipeテーブルへの保存*
         // array_filter(array)でNULL以外を取り出す
@@ -269,46 +302,59 @@ class RecipeController extends Controller
         
         // *ingredientsテーブルへの保存*
         $i = 1;
-        foreach ($recipe->ingredients as $ingredient) {
+        // foreach ($recipe->ingredients as $ingredient) {
+        //     // nameによりDBからingredientを取得します
+        //     // DBにない場合はname、ingredient_category_id属性を使用してingredientを作成します。
+        //     $ingredient->fill($input_ingredients["{$i}"])->save();
+            
+        //     // *ingredient_recipeテーブルへの保存*
+        //     // 既存の中間レコードを特定
+        //     // あるレシピが持つ中間テーブルのidを用いてレコードを一意に定める
+        //     // クエリがレコードの数より多ければ新規作成*1
+        //     $j = $i-1;
+        //     $existingPivotRecord = $recipe->ingredients()
+        //         ->wherePivot('id', $pivotId["{$j}"])
+        //         ->get();
+            
+        //     // DBの中間テーブルにアクセスし、requestのingredient idと同じか判定
+        //     // 同じじゃなければDBのingredient idをrequestのingredient idに変更*2
+        //     if ($existingPivotRecord[0]->pivot->ingredient_id !==  $ingredient->id){
+        //         $existingPivotRecord[0]->pivot->ingredient_id = $ingredient->id;
+        //         $existingPivotRecord[0]->pivot->save();
+        //     }
+
+        //     // *1 中間レコードが見つかれば更新、見つからなければ新規作成
+        //     if ($existingPivotRecord) {
+        //         // updateExistingPivotを用いて更新
+        //         // *2でrequestのingredient idに変更しているため、updateExistingPivotを使って更新可能(既存のレコード)
+        //         $recipe->ingredients()->updateExistingPivot($ingredient->id, [
+        //             'quantity' => $input_ingredient_recipe["{$i}"]["quantity"],
+        //             'unit_id' => $input_ingredient_recipe["{$i}"]["unit_id"]
+        //         ]);
+        //     }else {
+        //         // requestが既存のレコードより多ければ新規作成
+        //         $recipe->ingredients()
+        //             ->syncWithoutDetaching([
+        //                 $ingredient->id=>[
+        //                 'quantity' => $input_ingredient_recipe["{$i}"]["quantity"],
+        //                 'unit_id' => $input_ingredient_recipe["{$i}"]["unit_id"]
+        //             ]]);
+        //     }
+        //     $i += 1;
+        // }
+        
+        // dd($input_ingredient_recipe);
+        for ($i=1; $i<count($input_ingredients)+1; $i++) {
             // nameによりDBからingredientを取得します
             // DBにない場合はname、ingredient_category_id属性を使用してingredientを作成します。
-            $ingredient->fill($input_ingredients["{$i}"])->save();
-            
-            // *ingredient_recipeテーブルへの保存*
-            // 既存の中間レコードを特定
-            // あるレシピが持つ中間テーブルのidを用いてレコードを一意に定める
-            // クエリがレコードの数より多ければ新規作成*1
-            $j = $i-1;
-            $existingPivotRecord = $recipe->ingredients()
-                ->wherePivot('id', $pivotId["{$j}"])
-                ->get();
-            
-            // DBの中間テーブルにアクセスし、requestのingredient idと同じか判定
-            // 同じじゃなければDBのingredient idをrequestのingredient idに変更*2
-            if ($existingPivotRecord[0]->pivot->ingredient_id !==  $ingredient->id){
-                $existingPivotRecord[0]->pivot->ingredient_id = $ingredient->id;
-                $existingPivotRecord[0]->pivot->save();
-            }
-
-            // *1 中間レコードが見つかれば更新、見つからなければ新規作成
-            if ($existingPivotRecord) {
-                // updateExistingPivotを用いて更新
-                // *2でrequestのingredient idに変更しているため、updateExistingPivotを使って更新可能(既存のレコード)
-                $recipe->ingredients()->updateExistingPivot($ingredient->id, [
-                    'quantity' => $input_ingredient_recipe["{$i}"]["quantity"],
-                    'unit_id' => $input_ingredient_recipe["{$i}"]["unit_id"]
-                ]);
-            }else {
-                // requestが既存のレコードより多ければ新規作成
-                $recipe->ingredients()
-                    ->syncWithoutDetaching([
-                        $ingredient->id=>[
-                        'quantity' => $input_ingredient_recipe["{$i}"]["quantity"],
-                        'unit_id' => $input_ingredient_recipe["{$i}"]["unit_id"]
-                    ]]);
-            }
-            $i += 1;
+            $ingredient = Ingredient::firstOrCreate(
+                ['name' => $input_ingredients["{$i}"]["name"]],
+                ['ingredient_category_id' => $input_ingredients["{$i}"]["ingredient_category_id"]]
+            );
         }
+        // *ingredient_recipeテーブルへの保存*
+        // syncWithoutDetachingで完全な重複以外を許容
+        $recipe->ingredients()->sync($input_ingredient_recipe);
         
         return redirect('/recipes/' . $recipeId);
     }

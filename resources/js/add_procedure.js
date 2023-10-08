@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // 新しい'procedure-item'のdivタグ
         const newProcedure = document.createElement('div');
         newProcedure.classList.add('procedure-item');
-        newProcedure.id = `procedure${formCount}`;
+        newProcedure.id = `procedure-item${formCount}`;
         
         // 新しい'textarea'のdivタグ
         const newTextarea = document.createElement('div');
@@ -80,9 +80,9 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(`renumber/ingredientCount:${formCount}`);
         console.log(`startIndex${startIndex}`)
         for (let i = startIndex + 1; i <= formCount + 1; i++) {
-            const procedureItem = document.getElementById(`procedure${i}`);
+            const procedureItem = document.getElementById(`procedure-item${i}`);
             if (procedureItem) {
-                procedureItem.id = `procedure${i - 1}`;
+                procedureItem.id = `procedure-item${i - 1}`;
                 const label = procedureItem.querySelector('label');
                 label.htmlFor = `procedure${i - 1}`;
                 label.textContent = `手順${i - 1}：`;

@@ -170,18 +170,18 @@
                 <h2>調理手順</h2>
                 @empty (old('procedure'))
                     @foreach ($recipe->procedures as $procedure)
-                        <div class="procedure-item" id="procedure{{ $loop->iteration }}">
+                        <div class="procedure-item" id="procedure-item{{ $loop->iteration }}">
                             <div class="textarea">
                                 <label for="procedure{{ $loop->iteration }}">手順{{ $loop->iteration }}：</label>
                                 <textarea name="procedure[{{ $loop->iteration }}][body]" rows="4" cols="40" class='procedures' id="form{{ $loop->iteration }}" placeholder="例）ケトルで沸かしたお湯を注ぎ、3分待つ。">{{ $procedure->body }}</textarea>
                             </div>
-                        </div>
-                        <p class="procedure_error" style="color:red">{{ $errors->first("procedure.{$loop->iteration}.body") }}</p>
+                            <p class="procedure_error" style="color:red">{{ $errors->first("procedure.{$loop->iteration}.body") }}</p>
                         <button type="button" class="procedure-delete-button" data-id={{ $loop->iteration }}>削除</button>
+                        </div>
                     @endforeach
                 @else
                     @foreach (old('procedure') as $key => $value)
-                        <div class="procedure-item" id="procedure{{ $key }}">
+                        <div class="procedure-item" id="procedure-item{{ $key }}">
                             <div class="textarea">
                                 <label for="procedure{{ $key }}">手順{{ $key }}：</label>
                                 <textarea name="procedure[{{ $key }}][body]" rows="4" cols="40" class='procedures' id="form{{ $key }}" placeholder="例）ケトルで沸かしたお湯を注ぎ、3分待つ。">{{ old("procedure.{$key}.body") }}</textarea>
