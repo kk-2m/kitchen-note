@@ -20,7 +20,7 @@ class MenuSeeder extends Seeder
             'recipe_id' => 2,
             'user_id' => 1,
             'number' => 4,
-            'date' => date('2023-010-9'),
+            'date' => date('2024-010-10'),
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -28,7 +28,7 @@ class MenuSeeder extends Seeder
             'recipe_id' => 3,
             'user_id' => 1,
             'number' => 4,
-            'date' => date('2023-010-8'),
+            'date' => date('2023-010-14'),
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
