@@ -2,13 +2,8 @@
     "private": true,
      "scripts": {
         "dev": "vite",
-<<<<<<< HEAD
         "build": "vite build", 
         "heroku-postbuild": "npm run build"
-=======
-        "build": "vite build",
-        "watch": "vite build --watch"
->>>>>>> origin/master
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
