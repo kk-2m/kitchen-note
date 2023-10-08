@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\MenuRequest;
 use Carbon\Carbon;
 use App\Models\Recipe;
 use App\Models\Menu;
@@ -37,7 +38,7 @@ class MenuController extends Controller
             ]);
     }
     
-    public function menu_store(Request $request, Menu $menu)
+    public function menu_store(MenuRequest $request, Menu $menu)
     {
         $input_menu = $request['menu'];
         $input_menu += array('user_id' => $request->user()->id);
@@ -69,7 +70,7 @@ class MenuController extends Controller
             ]);
     }
     
-    public function menu_update(Request $request, Menu $menu)
+    public function menu_update(MenuRequest $request, Menu $menu)
     {
         // *menusテーブルの保存*
         $input_menu = $request['menu'];
