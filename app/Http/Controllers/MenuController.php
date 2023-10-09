@@ -7,20 +7,21 @@ use App\Http\Requests\MenuRequest;
 use Carbon\Carbon;
 use App\Models\Recipe;
 use App\Models\Menu;
+use App\Models\Stock;
 
 class MenuController extends Controller
 {
     public function menu_index(Menu $menu)
     {
-        $now = Carbon::today();
-        $weekLater = $now->copy()->addWeek();
+        $today = Carbon::today();
+        $weekLater = $today->copy()->addWeek();
         
         $menu->get();
         
         return view('menus.menu_index')->with(
             [
                 'menus' => $menu
-                            ->where('date', '>=', $now)
+                            ->where('date', '>=', $today)
                             ->where('date', '<', $weekLater)
                             ->orderBy('date', 'ASC')
                             ->get(),
@@ -114,5 +115,42 @@ class MenuController extends Controller
     {
         $menu->delete();
         return redirect('/menus');
+    }
+    
+    public function menu_expired_delete()
+    {
+        $today = Carbon::today();
+        
+        echo $today, "\n";
+        // 献立の日付が過ぎたものを取得
+        $expiredMenus = Menu::whereDate('date', '<', $today)->get();
+        
+        
+        foreach ($expiredMenus as $menu) {
+            // 献立に紐づく材料の処理
+            echo $menu, "\n";
+            // echo $menu->pivot, "\n";
+            foreach ($menu->ingredients as $ingredient) {
+                // 在庫から材料の個数を引く
+                echo "ingredient id", $ingredient->id, "\n";
+                echo "unit id", $ingredient->pivot->unit_id, "\n";
+                $stockItem = Stock::where('ingredient_id', $ingredient->id)
+                                    ->where('unit_id', $ingredient->pivot->unit_id)
+                                    ->first();
+                echo $ingredient->pivot, "\n";
+                echo $stockItem, "\n";
+                echo $stockItem->quantity, "\n";
+                if ($stockItem) {
+                    // 在庫がある場合
+                    $newQuantity = $stockItem->quantity - $ingredient->pivot->quantity;
+                    echo "new quantity:", $newQuantity, "\n";
+                    $stockItem->update(['quantity' => max(0, $newQuantity)]);
+                }
+            }
+
+            // 献立を削除
+            $menu->delete();
+        }
+        
     }
 }

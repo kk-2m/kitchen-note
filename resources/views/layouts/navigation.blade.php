@@ -82,6 +82,18 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('recipe_index')" :active="request()->routeIs('recipe_index')">
+                {{ __('My Recipes') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('stock_index')" :active="request()->routeIs('stock_index')">
+                {{ __('My Stocks') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('menu_index')" :active="request()->routeIs('menu_index')">
+                {{ __('My Menus') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('rakuten-recipe_category')" :active="request()->routeIs('rakuten-recipe_category')">
+                {{ __('Rakuten Recipes') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

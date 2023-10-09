@@ -80,7 +80,7 @@
         @endforeach
     </div>
     
-    <div class=rakuten_recipes>
+    {{-- <div class=rakuten_recipes>
         <h1>楽天レシピ</h1>
         @foreach($rakuten_recipes as $rakuten_recipe)
             <div>
@@ -98,7 +98,7 @@
                 <img src="{{ $rakuten_recipe['foodImageUrl'] }}" width='300px'>
             </div>
         @endforeach
-    </div>
+    </div> --}}
                     
     <div class='paginate'>{{ $recipes->links() }}</div>
 </x-app-layout>
