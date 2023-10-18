@@ -87,18 +87,18 @@ class RecipeController extends Controller
         // $serviceにRakutenRecipeServiceクラスをインスタンス化
         $service = app()->make('RakutenRecipeService');
         
-        for ($i=0; $i<count($rakuten_recipes); $i++)
-        {
-            // レシピの材料を取得
-            $quantity = $service->getQuantity($rakuten_recipes[$i]['recipeUrl']);
-            $rakuten_recipes[$i] += array("recipeMaterialQuantity" => $quantity);
-            // レシピの想定人数を取得
-            $number = $service->getNumber($rakuten_recipes[$i]['recipeUrl']);
-            $rakuten_recipes[$i] += array("recipeNumber" => $number);
-            // レシピの調理手順を取得
-            $procedure = $service->getProcedure($rakuten_recipes[$i]['recipeUrl']);
-            $rakuten_recipes[$i] += array("recipeProcedure" => $procedure);
-        }
+        // for ($i=0; $i<count($rakuten_recipes); $i++)
+        // {
+        //     // レシピの材料を取得
+        //     $quantity = $service->getQuantity($rakuten_recipes[$i]['recipeUrl']);
+        //     $rakuten_recipes[$i] += array("recipeMaterialQuantity" => $quantity);
+        //     // レシピの想定人数を取得
+        //     $number = $service->getNumber($rakuten_recipes[$i]['recipeUrl']);
+        //     $rakuten_recipes[$i] += array("recipeNumber" => $number);
+        //     // レシピの調理手順を取得
+        //     $procedure = $service->getProcedure($rakuten_recipes[$i]['recipeUrl']);
+        //     $rakuten_recipes[$i] += array("recipeProcedure" => $procedure);
+        // }
         
         
         
@@ -107,7 +107,7 @@ class RecipeController extends Controller
         return view('recipes.recipe_index')->with(
             [
                 'recipes' => $recipe->getPaginateByLimit(),
-                'rakuten_recipes' => $rakuten_recipes,
+                // 'rakuten_recipes' => $rakuten_recipes,
             ]);
     }
     
