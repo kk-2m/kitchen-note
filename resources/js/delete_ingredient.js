@@ -52,9 +52,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log(ingredientQuantityInput);
                 ingredientQuantityInput.name = `ingredient_recipe[${i - 1}][quantity]`;
                 ingredientQuantityInput.id = `input_ingredient_quantity${i - 1}`;
-                const ingredientUnitLabel = ingredientItem.querySelector(`label[for="ingredient_unit${i}"]`);
-                console.log(ingredientUnitLabel);
-                ingredientUnitLabel.htmlFor = `ingredient_unit${i - 1}`;
+                // const ingredientUnitLabel = ingredientItem.querySelector(`label[for="ingredient_unit${i}"]`);
+                // console.log(ingredientUnitLabel);
+                // ingredientUnitLabel.htmlFor = `ingredient_unit${i - 1}`;
                 const ingredientUnitSelect = ingredientItem.querySelector(`#select_ingredient_unit${i}`);
                 console.log(ingredientUnitSelect);
                 ingredientUnitSelect.name = `ingredient_recipe[${i - 1}][unit_id]`;

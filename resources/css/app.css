@@ -6,4 +6,12 @@
     .my-btn{
         @apply rounded border border-gray-300 text-center p-1 bg-gray-100 text-gray-900 hover:bg-gray-200
     }
+    
+    .my-link{
+        @apply rounded border border-gray-300 text-center p-1 hover:bg-gray-200
+    }
+    
+    .my-store-btn{
+        @apply rounded text-center p-1 bg-gray-800 text-gray-100 w-64 hover:bg-gray-900
+    }
 }

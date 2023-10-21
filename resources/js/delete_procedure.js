@@ -31,10 +31,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 procedureItem.id = `procedure-item${i - 1}`;
                 console.log(procedureItem);
                 
-                const label = procedureItem.querySelector('label');
-                console.log(label);
-                label.htmlFor = `procedure${i - 1}`;
-                label.textContent = `手順${i - 1}：`;
+                const label = procedureItem.querySelector('h3');
+                label.textContent = `材料${i - 1}`;
                 const textarea = procedureItem.querySelector('textarea');
                 console.log(textarea);
                 textarea.name = `procedure[${i - 1}][body]`;

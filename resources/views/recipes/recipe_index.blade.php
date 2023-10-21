@@ -24,12 +24,12 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="flex w-64 justify-end">
-                                        <div class="flex1 w-30 px-4">
+                                    <div class="flex justify-end">
+                                        <div class="flex-none">
                                             <!-- リンクを使用し、献立作成画面に各レシピのidを渡す -->
                                             <button type="button" class="my-btn"><a href="{{ route('menu_create', ['recipe_id' => $recipe->id]) }}">献立追加</a></button>
                                         </div>
-                                        <div class="flex1 w-10">
+                                        <div class="flex-none px-4">
                                             <form action="/recipes/{{ $recipe->id }}" id="form_{{ $recipe->id }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
@@ -55,9 +55,14 @@
                                             @elseif ( $recipe->cooking_time_unit  == 6) 年
                                             @endif
                                         </p>
+                                        
+                                        <div class="text-lg font-semibold">カテゴリ</div>
+                                        @foreach ($recipe->categories as $category)
+                                            <p class='tag'>{{ $category->name }}</p>
+                                        @endforeach
                         
                                         <div class='ingrediens'>
-                                            <div class="text-lg font-semibold">
+                                            <div class="text-lg font-semibold pt-4">
                                                 材料リスト({{ $recipe->number }}人前)
                                             </div>
                                         </div>
@@ -78,11 +83,6 @@
                                                     @endif
                                                 @endif
                                             </p>
-                                        @endforeach
-                    
-                                        <div class="text-lg font-semibold">カテゴリ</div>
-                                        @foreach ($recipe->categories as $category)
-                                            <p class='tag'>{{ $category->name }}</p>
                                         @endforeach
                                     </div>
                                     <div class="flex-1">
@@ -121,5 +121,35 @@
         @endforeach
     </div> --}}
                     
-    <div class='paginate'>{{ $recipes->links() }}</div>
+    {{-- <div class='paginate'>{{ $recipes->links() }}</div> --}}
+    @if ($recipes->lastPage() > 1)
+        <div class="flex items-center justify-center">
+            <ul class="flex space-x-2 border border-2 border-gray-300 rounded overflow-hidden">
+                <li class="page-item {{ ($recipes->currentPage() == 1) ? ' disabled' : '' }} border-r-2 border-gray-300 hover:underline">
+                    <a class="page-link block py-2 px-4" href="{{ $recipes->url(1) }}">First Page</a>
+                </li>
+                <li class="page-item {{ ($recipes->currentPage() == 1) ? ' disabled' : '' }} border-r-2 border-gray-300 hover:underline">
+                    <a class="page-link block py-2 px-4" href="{{ $recipes->url(1) }}">
+                        <span aria-hidden="true">«</span>
+                        {{-- Previous --}}
+                    </a>
+                </li>
+                @for ($i = 1; $i <= $recipes->lastPage(); $i++)
+                    <li class="page-item {{ ($recipes->currentPage() == $i) ? ' active bg-blue-500 text-white' : '' }} border-r-2 border-gray-300 hover:underline">
+                        <a class="page-link block py-2 px-4" href="{{ $recipes->url($i) }}">{{ $i }}</a>
+                    </li>
+                @endfor
+                <li class="page-item {{ ($recipes->currentPage() == $recipes->lastPage()) ? ' disabled' : '' }} border-r-2 border-gray-300 hover:underline">
+                    <a class="page-link block py-2 px-4" href="{{ $recipes->url($recipes->currentPage()+1) }}" >
+                        <span aria-hidden="true">»</span>
+                        {{-- Next --}}
+                    </a>
+                </li>
+                <li class="page-item {{ ($recipes->currentPage() == $recipes->lastPage()) ? ' disabled' : '' }} hover:underline">
+                    <a class="page-link block py-2 px-4" href="{{ $recipes->url($recipes->lastPage()) }}">Last Page</a>
+                </li>
+            </ul>
+        </div>
+    @endif
+
 </x-app-layout>
