@@ -4,15 +4,16 @@
             {{ __('レシピ作成') }}
         </h2>
     </x-slot>
-    <!--　/recipes/storeにフォームのデータが渡され、web.phpで指定したRecipeControllerのstoreメソッドが実行される　-->
-    <form action="{{ route('recipe_store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">
     
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+
+                    <!--　/recipes/storeにフォームのデータが渡され、web.phpで指定したRecipeControllerのstoreメソッドが実行される　-->
+                    <form action="{{ route('recipe_store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+
                         <!-- タイトルの入力 -->
                         <div class="title">
                             <div class="font-semibold">タイトル</div>
@@ -66,7 +67,7 @@
                         <div class='number'>
                             <div class="font-semibold pt-6">何人前？</div>
                             <input type="number" name="recipe[number]" placeholder="人数" value="{{ old('recipe.number') }}" min="1" max="100"/>人前
-                            <p class="title_error" style="color:red">{{ $errors->first('recipe.number') }}</p><br>
+                            <p class="number_error" style="color:red">{{ $errors->first('recipe.number') }}</p><br>
                         </div>
                         
                         <!-- 材料の入力 -->
@@ -99,7 +100,7 @@
                                         <div class="flex py-1 px-8">
                                             <div class="ingredient_qantity">
                                                 <label for="ingredient_quantity1">量：</label>
-                                                <input type="number" name="ingredient_recipe[1][quantity]" id="input_ingredient_quantity1" placeholder="値を入力" value="{{ old('ingredient_recipe.1.quantity') }}" min="1" max="99999999"/>
+                                                <input type="number" name="ingredient_recipe[1][quantity]" id="input_ingredient_quantity1" placeholder="値を入力" value="{{ old('ingredient_recipe.1.quantity') }}" min="1" step="0.01" max="99999999"/>
                                                 <p class="ingredient_quantity_error" style="color:red">{{ $errors->first('ingredient_recipe.1.quantity') }}</p>
                                             </div>
                                             <div class="ingredient_unit pl-2">
@@ -141,7 +142,7 @@
                                         <div class="flex py-1 px-8">
                                             <div class="ingredient_qantity">
                                                 <label for="ingredient_quantity2">量：</label>
-                                                <input type="number" name="ingredient_recipe[2][quantity]" id="input_ingredient_quantity2" placeholder="値を入力" value="{{ old('ingredient_recipe.2.quantity') }}" min="1" max="99999999"/>
+                                                <input type="number" name="ingredient_recipe[2][quantity]" id="input_ingredient_quantity2" placeholder="値を入力" value="{{ old('ingredient_recipe.2.quantity') }}" min="1" step="0.01" max="99999999"/>
                                                 <p class="ingredient_quantity_error" style="color:red">{{ $errors->first('ingredient_recipe.2.quantity') }}</p>
                                             </div>
                                             <div class="ingredient_unit pl-2">
@@ -190,7 +191,7 @@
                                             <div class="flex py-1 px-8">
                                                 <div class="ingredient_qantity">
                                                     <label for="ingredient_quantity{{ $key }}">量：</label>
-                                                    <input type="text" name="ingredient_recipe[{{ $key }}][quantity]" id="input_ingredient_quantity{{ $key }}" placeholder="値を入力" value="{{ old("ingredient_recipe.{$key}.quantity") }}" min="1" max="99999999"/>
+                                                    <input type="number" name="ingredient_recipe[{{ $key }}][quantity]" id="input_ingredient_quantity{{ $key }}" placeholder="値を入力" value="{{ old("ingredient_recipe.{$key}.quantity") }}" min="1" step="0.01" max="99999999"/>
                                                     <p class="ingredient_quantity_error" style="color:red">{{ $errors->first("ingredient_recipe.{$key}.quantity") }}</p>
                                                 </div>
                                                 <div class="ingredient_unit pl-2">
@@ -268,14 +269,14 @@
                         <div class="py-3 mx-auto text-center">
                             <input class="my-store-btn" type="submit" value="作成"/>
                         </div>
-                        
-                        <!-- 戻るボタン -->
-                        <div class="footer ">
-                            <button type="button" class="my-btn"><a href="/recipes">戻る</a></button>
-                        </div>
+                    </form>
+                    
+                    <!-- 戻るボタン -->
+                    <div class="footer">
+                        <button type="button" class="my-btn"><a href="/recipes">戻る</a></button>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 </x-app-layout>

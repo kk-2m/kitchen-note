@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
         ingredientQuantityLabel.textContent = "量：";
         
         const ingredientQuantityInput = document.createElement('input');
-        ingredientQuantityInput.type = "text";
+        ingredientQuantityInput.type = "number";
         ingredientQuantityInput.name = `ingredient_recipe[${ingredientCount}][quantity]`;
         ingredientQuantityInput.id = `input_ingredient_quantity${ingredientCount}`;
         ingredientQuantityInput.placeholder = "量を入力";

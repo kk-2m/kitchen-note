@@ -42,7 +42,6 @@
                                             </form>
                                         </div>
                                     </div>
-                                    
                                 </div>
                                 <div class="flex">
                                     <div class="flex-1">
@@ -56,14 +55,14 @@
                                             @endif
                                         </p>
                                         
-                                        <div class="text-lg font-semibold">カテゴリ</div>
+                                        <div class="text-lg font-semibold pt-4">カテゴリ</div>
                                         @foreach ($recipe->categories as $category)
                                             <p class='tag'>{{ $category->name }}</p>
                                         @endforeach
                         
                                         <div class='ingrediens'>
                                             <div class="text-lg font-semibold pt-4">
-                                                材料リスト({{ $recipe->number }}人前)
+                                                材料リスト（{{ $recipe->number }}人前）
                                             </div>
                                         </div>
                                         @foreach ($recipe->ingredients as $ingredient)
@@ -89,7 +88,7 @@
                                         @if ($recipe->image != '')
                                             <img src="{{ asset($recipe->image) }}" alt='料理写真' width='50%'>
                                         @else
-                                            <img src="{{ asset('storage/dish_image/noimage.png') }}" alt='料理写真' width='300px'>
+                                            <img src="{{ asset('storage/dish_image/noimage.png') }}" alt='料理写真'>
                                         @endif
                                     </div>
                                 </div>
@@ -128,23 +127,27 @@
                 <li class="page-item {{ ($recipes->currentPage() == 1) ? ' disabled' : '' }} border-r-2 border-gray-300 hover:underline">
                     <a class="page-link block py-2 px-4" href="{{ $recipes->url(1) }}">First Page</a>
                 </li>
-                <li class="page-item {{ ($recipes->currentPage() == 1) ? ' disabled' : '' }} border-r-2 border-gray-300 hover:underline">
-                    <a class="page-link block py-2 px-4" href="{{ $recipes->url(1) }}">
-                        <span aria-hidden="true">«</span>
-                        {{-- Previous --}}
-                    </a>
-                </li>
+                @if ($recipes->currentPage() > 1)
+                    <li class="page-item border-r-2 border-gray-300 hover:underline">
+                        <a class="page-link block py-2 px-4" href="{{ $recipes->url($recipes->currentPage()-1) }}">
+                            <span aria-hidden="true">«</span>
+                            {{-- Previous --}}
+                        </a>
+                    </li>
+                @endif
                 @for ($i = 1; $i <= $recipes->lastPage(); $i++)
                     <li class="page-item {{ ($recipes->currentPage() == $i) ? ' active bg-blue-500 text-white' : '' }} border-r-2 border-gray-300 hover:underline">
                         <a class="page-link block py-2 px-4" href="{{ $recipes->url($i) }}">{{ $i }}</a>
                     </li>
                 @endfor
-                <li class="page-item {{ ($recipes->currentPage() == $recipes->lastPage()) ? ' disabled' : '' }} border-r-2 border-gray-300 hover:underline">
-                    <a class="page-link block py-2 px-4" href="{{ $recipes->url($recipes->currentPage()+1) }}" >
-                        <span aria-hidden="true">»</span>
-                        {{-- Next --}}
-                    </a>
-                </li>
+                @if ($recipes->currentPage() < $recipes->lastPage())
+                    <li class="page-item {{ ($recipes->currentPage() == $recipes->lastPage()) ? ' disabled' : '' }} border-r-2 border-gray-300 hover:underline">
+                        <a class="page-link block py-2 px-4" href="{{ $recipes->url($recipes->currentPage()+1) }}" >
+                            <span aria-hidden="true">»</span>
+                            {{-- Next --}}
+                        </a>
+                    </li>
+                @endif
                 <li class="page-item {{ ($recipes->currentPage() == $recipes->lastPage()) ? ' disabled' : '' }} hover:underline">
                     <a class="page-link block py-2 px-4" href="{{ $recipes->url($recipes->lastPage()) }}">Last Page</a>
                 </li>

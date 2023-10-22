@@ -91,14 +91,9 @@
                             <p class='cooking_procedure'>{{ $procedure->body }}</p>
                         @endforeach
                         
-                        <div class='footer'>
-                            <div class="w-20 pt-4">
-                                <div class="my-btn">
-                                    <a href="/recipes">戻る</a>
-                                </div>
-                            </div>
+                        <div class="footer w-20 pt-4">
+                            <button type="button" class="my-btn" onclick="history.back()">戻る</button>
                         </div>
-                        
                     </div>
                 </div>
             </div>

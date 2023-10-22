@@ -133,7 +133,7 @@ class RecipeController extends Controller
     
     public function recipe_store(RecipeRequest $request, Recipe $recipe)
     {
-        // dd($request['procedure']);
+        // dd($request['ingredient_recipe']);
         
         // viewでrecipeに格納された内容をinputに渡す
         $input_recipe = $request['recipe'];
@@ -218,6 +218,8 @@ class RecipeController extends Controller
         $input_categories = $request['category'];
         $input_ingredients = $request['ingredient'];
         $input_ingredient_recipe = $request['ingredient_recipe'];
+        
+        // dd($input_ingredients);
         
         // *recipesテーブルへの保存*
         // ログイン処理がログイン情報に基づいて、ユーザーIDを取得する処理に変える
@@ -343,7 +345,6 @@ class RecipeController extends Controller
         //     $i += 1;
         // }
         
-        // dd($input_ingredient_recipe);
         for ($i=1; $i<count($input_ingredients)+1; $i++) {
             // nameによりDBからingredientを取得します
             // DBにない場合はname、ingredient_category_id属性を使用してingredientを作成します。
@@ -351,9 +352,10 @@ class RecipeController extends Controller
                 ['name' => $input_ingredients["{$i}"]["name"]],
                 ['ingredient_category_id' => $input_ingredients["{$i}"]["ingredient_category_id"]]
             );
+            // 中間テーブルのリクエストにrecipe_idと、ingredient_idを追加
+            $input_ingredient_recipe["{$i}"] += array('recipe_id'=>$recipeId, 'ingredient_id'=>$ingredient->id);
         }
         // *ingredient_recipeテーブルへの保存*
-        // syncWithoutDetachingで完全な重複以外を許容
         $recipe->ingredients()->sync($input_ingredient_recipe);
         
         return redirect('/recipes/' . $recipeId);
