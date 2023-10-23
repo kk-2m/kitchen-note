@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -13,8 +14,9 @@ class Stock extends Model
     
     public function getPaginateByLimit(int $limit_count = 1)
     {
+        $userId = Auth::id();
         // paginate関数でget()を実行しているので、書く必要がない
-        return $this->orderBy('updated_at', 'DESC')->paginate($limit_count); // ->get();
+        return $this->where('user_id', $userId)->orderBy('updated_at', 'DESC')->paginate($limit_count); // ->get();
     }
     
     protected $fillable = [

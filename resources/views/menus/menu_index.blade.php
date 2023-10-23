@@ -1,11 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('献立一覧') }}
-        </h2>
-        <div class="flex justify-end">
-            <button type='button' class="my-btn"><a href="{{ route('menu_create') }}">献立作成</a></button>
+        <div class="flex justify-between">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('献立一覧') }}
+            </h2>
+            <div class="flex justify-end">
+                <button type='button' class="my-btn"><a href="{{ route('menu_create') }}">献立作成</a></button>
+            </div>
         </div>
+        
     </x-slot>
 
     <div class='menus'>
@@ -22,7 +25,7 @@
                                     </div>
                                     <div class="flex justify-end">
                                         <div class="flex-none">
-                                            <button type='button' class="my-btn"><a href="/menus/{{ $menu->id }}/edit">edit</a></button>
+                                            <button type='button' class="my-btn"><a href="/menus/{{ $menu->id }}/edit">編集</a></button>
                                         </div>
                                         <div class="flex-none px-4">
                                             <form action="/menus/{{ $menu->id }}" id="form_{{ $menu->id }}" method="post">
@@ -33,7 +36,7 @@
                                                     JSにdata-idでmenuのidを渡す
                                                     それに対応するレコードを削除
                                                 --}}
-                                                <button type="button" class="my-btn" id="delete_button{{$loop->index}}" data-id={{ $menu->id }}>delete</button>
+                                                <button type="button" class="my-btn" id="delete_button{{$loop->index}}" data-id={{ $menu->id }}>削除</button>
                                             </form>
                                         </div>
                                     </div>

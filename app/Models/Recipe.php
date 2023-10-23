@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -14,8 +15,9 @@ class Recipe extends Model
     // 1度のページに表示する件数を制限
     public function getPaginateByLimit(int $limit_count = 2)
     {
+        $userId = Auth::id();
         // paginate関数でget()を実行しているので、書く必要がない
-        return $this->orderBy('updated_at', 'DESC')->paginate($limit_count); // ->get();
+        return $this->where('user_id', $userId)->orderBy('updated_at', 'DESC')->paginate($limit_count); // ->get();
     }
     
     protected $fillable = [

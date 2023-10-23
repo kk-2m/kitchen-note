@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ShoppingListController;
 use App\Http\Controllers\RakutenRecipeController;
 
 /*
@@ -53,6 +54,16 @@ Route::controller(MenuController::class)->middleware(['auth'])->group(function()
     Route::put('/menus/{menu}', 'menu_update')->name('menu_update');
     Route::delete('/menus/{menu}', 'menu_delete')->name('menu_delete');
     Route::get('/menus/{menu}/edit', 'menu_edit')->name('menu_edit');
+});
+
+Route::controller(ShoppingListController::class)->middleware(['auth'])->group(function(){
+    Route::get('/shoppinglists', 'shoppinglist_index')->name('shoppinglist_index');
+    Route::post('/shoppinglists', 'shoppinglist_store')->name('shoppinglist_store');
+    Route::get('/shoppinglists/create', 'shoppinglist_create')->name('shoppinglist_create');
+    Route::put('/shoppinglists/{shoppinglist}', 'shoppinglist_update')->name('shoppinglist_update');
+    Route::put('/shoppinglists/{shoppinglist}/status', 'shoppinglist_updateStatus')->name('shoppinglist_updateStatus');
+    Route::delete('/shoppinglists/{shoppinglist}', 'shoppinglist_delete')->name('shoppinglist_delete');
+    Route::get('/shoppinglists/{shoppinglist}/edit', 'shoppinglist_edit')->name('shoppinglist_edit');
 });
 
 Route::controller(RakutenRecipeController::class)->middleware(['auth'])->group(function(){

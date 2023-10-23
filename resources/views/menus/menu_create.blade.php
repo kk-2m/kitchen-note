@@ -78,7 +78,7 @@
                         
                         <!-- 送信ボタン -->
                         <div class="py-3 mx-auto text-center">
-                            <input class="my-store-btn" type="submit" value="保存"/>
+                            <input class="my-store-btn" type="submit" value="作成"/>
                         </div>
                     </form>
                     

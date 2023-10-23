@@ -1,14 +1,17 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('レシピ一覧') }}
-        </h2>
+        <div class="flex justify-between">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('レシピ一覧') }}
+            </h2>
+            <div class="flex justify-end">
+                <button type="button" class="my-btn"><a href="{{ route('recipe_create') }}">レシピ作成</a></button>
+            </div>
+        </div>
+        
     </x-slot>
     
     <div class='recipes'>
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-5 -mb-7">
-            <button type="button" class="my-btn"><a href="{{ route('recipe_create') }}">レシピ作成</a></button>
-        </div>
         
         <!--<button type="button"><a href="/recipes/getCategories">get categories</a></button>-->
         @foreach ($recipes as $recipe)

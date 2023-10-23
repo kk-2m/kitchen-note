@@ -64,6 +64,8 @@ class RecipeController extends Controller
     
     public function recipe_index(Recipe $recipe)
     {
+        
+        
         // $recipes = $recipe->get();
         // foreach ($recipes as $recipe) {
         //     dd($recipe->procedures());
@@ -280,9 +282,9 @@ class RecipeController extends Controller
                 // https://yama-weblog.com/can-not-save-multiple-record-using-foreach-in-laravel8/
                 
                 $procedure = Procedure::where('recipe_id', $recipeId)
-                    // $procedureIdは0から始まる
-                    ->where('id', $procedureId[$i-1])
-                    ->first();
+                                // $procedureIdは0から始まる
+                                ->where('id', $procedureId[$i-1])
+                                ->first();
                 // dd($i, count($input_procedures), count($recipe->procedures));
                 if ($i <= count($input_procedures) and $procedure) {
                     $procedure->fill(

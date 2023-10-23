@@ -24,6 +24,9 @@
                     <x-nav-link :href="route('menu_index')" :active="request()->routeIs('menu_index')">
                         {{ __('My Menus') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('shoppinglist_index')" :active="request()->routeIs('shoppinglist_index')">
+                        {{ __('My Shopping Lists') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('rakuten-recipe_category')" :active="request()->routeIs('rakuten-recipe_category')">
                         {{ __('Rakuten Recipes') }}
                     </x-nav-link>
@@ -90,6 +93,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('menu_index')" :active="request()->routeIs('menu_index')">
                 {{ __('My Menus') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('shoppinglist_index')" :active="request()->routeIs('shoppinglist_index')">
+                {{ __('My Shopping Lists') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('rakuten-recipe_category')" :active="request()->routeIs('rakuten-recipe_category')">
                 {{ __('Rakuten Recipes') }}

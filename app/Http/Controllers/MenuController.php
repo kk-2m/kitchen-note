@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\MenuRequest;
 use Carbon\Carbon;
 use App\Models\Recipe;
@@ -13,6 +14,8 @@ class MenuController extends Controller
 {
     public function menu_index(Menu $menu)
     {
+        $userId = Auth::id();
+        
         $today = Carbon::today();
         $weekLater = $today->copy()->addWeek();
         
@@ -21,6 +24,7 @@ class MenuController extends Controller
         return view('menus.menu_index')->with(
             [
                 'menus' => $menu
+                            ->where('user_id', $userId)
                             ->where('date', '>=', $today)
                             ->where('date', '<', $weekLater)
                             ->orderBy('date', 'ASC')
