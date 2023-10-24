@@ -59,11 +59,11 @@ Route::controller(MenuController::class)->middleware(['auth'])->group(function()
 Route::controller(ShoppingListController::class)->middleware(['auth'])->group(function(){
     Route::get('/shoppinglists', 'shoppinglist_index')->name('shoppinglist_index');
     Route::post('/shoppinglists', 'shoppinglist_store')->name('shoppinglist_store');
-    Route::get('/shoppinglists/create', 'shoppinglist_create')->name('shoppinglist_create');
-    Route::put('/shoppinglists/{shoppinglist}', 'shoppinglist_update')->name('shoppinglist_update');
-    Route::put('/shoppinglists/{shoppinglist}/status', 'shoppinglist_updateStatus')->name('shoppinglist_updateStatus');
-    Route::delete('/shoppinglists/{shoppinglist}', 'shoppinglist_delete')->name('shoppinglist_delete');
-    Route::get('/shoppinglists/{shoppinglist}/edit', 'shoppinglist_edit')->name('shoppinglist_edit');
+    Route::get('/shoppinglists/seach', 'shoppinglist_search')->name('shoppinglist_search');
+    Route::put('/shoppinglists/{slist}', 'shoppinglist_update')->name('shoppinglist_update');
+    Route::put('/shoppinglists/{slist}/status', 'shoppinglist_updateStatus')->name('shoppinglist_updateStatus');
+    Route::delete('/shoppinglists/{slist}', 'shoppinglist_delete')->name('shoppinglist_delete');
+    Route::get('/shoppinglists/{slist}/edit', 'shoppinglist_edit')->name('shoppinglist_edit');
 });
 
 Route::controller(RakutenRecipeController::class)->middleware(['auth'])->group(function(){

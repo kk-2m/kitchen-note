@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900">
 
                     <!--　/recipes/storeにフォームのデータが渡され、web.phpで指定したRecipeControllerのstoreメソッドが実行される　-->
-                    <form action="{{ route('stock_store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('shoppinglist_store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <!-- 食材の名前の入力 -->
