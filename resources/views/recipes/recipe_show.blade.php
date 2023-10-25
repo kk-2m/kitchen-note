@@ -20,7 +20,7 @@
                                 <div class="flex-none px-4">
                                     <div class="edit">
                                         <div class="my-btn">
-                                            <a href="/recipes/{{ $recipe->id }}/edit">編集</a>
+                                            <a href="{{ route('recipe_edit', ['recipe'=>$recipe->id]) }}">編集</a>
                                         </div>
                                     </div>
                                 </div>

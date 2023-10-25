@@ -23,7 +23,7 @@
                                 <div class="flex  mb-5 justify-between">
                                     <div class='title'>
                                         <div class="font-bold text-2xl hover:underline">
-                                            <a href="/recipes/{{ $recipe->id }}">{{ $recipe->title }}</a>
+                                            <a href="{{ route('recipe_show', ['recipe'=>$recipe->id]) }}">{{ $recipe->title }}</a>
                                         </div>
                                     </div>
                                     
@@ -33,7 +33,7 @@
                                             <button type="button" class="my-btn"><a href="{{ route('menu_create', ['recipe_id' => $recipe->id]) }}">献立追加</a></button>
                                         </div>
                                         <div class="flex-none px-4">
-                                            <form action="/recipes/{{ $recipe->id }}" id="form_{{ $recipe->id }}" method="post">
+                                            <form action=""{{ route('recipe_delete', ['recipe'=>$recipe->id]) }}"" id="form_{{ $recipe->id }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 {{--

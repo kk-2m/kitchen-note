@@ -31,10 +31,10 @@
                                     
                                     <div class="flex justify-end">
                                         <div class="flex-none">
-                                            <button type="button" class="my-btn"><a href="/stocks/{{ $stock->id }}/edit">編集</a></button>
+                                            <button type="button" class="my-btn"><a href="{{ route('stock_edit', ['stock'=>$stock->id]) }}">編集</a></button>
                                         </div>
                                         <div class="flex-none px-4">
-                                            <form action="/stocks/{{ $stock->id }}" id="form_{{ $stock->id }}" method="post">
+                                            <form action="{{ route('stock_delete', ['stock'=>$stock->id]) }}" id="form_{{ $stock->id }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 {{--

@@ -273,7 +273,7 @@
                     
                     <!-- 戻るボタン -->
                     <div class="footer">
-                        <button type="button" class="my-btn"><a href="/recipes">戻る</a></button>
+                        <button type="button" class="my-btn"><a href="{{ route('recipe_index') }}">戻る</a></button>
                     </div>
                 </div>
             </div>

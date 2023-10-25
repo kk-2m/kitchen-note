@@ -1,34 +1,35 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('買い物リスト') }}
+            {{ __('買い物情報一覧') }}
         </h2>
     </x-slot>
     <div class="py-12">
-        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto sm:px-2 md:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
+                <div class="p-3 md:p-6 text-gray-900">
                     <div class="text-2xl font-black">買い物リストへ追加</div>
                     <form action="{{ route('shoppinglist_store') }}" method="POST" enctype="multipart/form-data" class="mt-5">
                         @csrf
                   
                         <div class="flex flex-col">
-                            <div class="slist_name sm:mx-5 lg:mx-10">
-                                <label for="name" class="font-semibold">材料名：</label>
+                            <div class="slist_name sm:mx-4 md:mx-10">
+                                <label for="name" class="font-semibold">材料名</label>
                                 <input
-                                    class="placeholder:italic placeholder:text-slate-400 bg-white border border-slate-300 rounded-md py-4 pl-4 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                    class="placeholder:italic placeholder:text-slate-400 block bg-white border border-slate-300 rounded-md py-4 pl-4 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                     id="name" placeholder="じゃがいも" type="text" name="ingredient[name]" value="{{ old('ingredient.name') }}" autocomplete="off"/>
                                 <p class="ingredient_error" style="color:red">{{ $errors->first('ingredient.name') }}</p>
                             </div>
-                            <div class="flex sm:ml-5 lg:ml-10">
+                            <label for="quantity" class="font-semibold mt-4 sm:ml-4 md:mx-10">数量</label>
+                            <div class="flex sm:ml-4 md:mx-10">
                                 <div class="slist_quantity">
-                                    <label for="quantity" class="font-semibold">量：</label>
+                                    
                                     <input
-                                        class="placeholder:italic placeholder:text-slate-400 bg-white border border-slate-300 rounded-md py-4 pl-4 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="placeholder:italic placeholder:text-slate-400 block bg-white border border-slate-300 rounded-md py-4 pl-4 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         id="quantity" placeholder="7" type="number" name="slist[quantity]" value="{{ old('stock.quantity') }}" min="1" step="0.01" max="99999999"/>
                                     <p class="quantity_error" style="color:red">{{ $errors->first('slist.quantity') }}</p>
                                 </div>
-                                <div class="ingredient_unit pl-5">
+                                <div class="ingredient_unit pl-2 md:pl-5">
                                     <select name="slist[unit_id]" id="select_ingredient_unit"
                                             class="bg-white border border-slate-300 rounded-md py-4 pl-4 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1">
                                         <option value="">単位を選んでください</option>
@@ -56,26 +57,23 @@
         
         
         <div class="pb-12">
-            <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto sm:px-4 md:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
-                        <div class="text-2xl font-black">一覧</div>
+                        <div class="text-2xl font-black">買い物リスト</div>
                         @foreach ($slists as $slist)
-                            <div class='slist'>
-                                <div class="flex my-3 justify-between">
+                            <div class='slist border-b'>
+                                <div class="flex my-3 justify-between items-center">
                                     <div class="flex">
-                                        <form id="updateStatusForm">
+                                        <form id="updateStatusForm{{ $slist->id }}">
                                             @csrf
                                             <input type="hidden" name="slist[id]" value="{{ $slist->id }}"/>
-                                            {{-- var_dump($slist->id) --}}
                                             <input type="hidden" name="slist[status]" value="0"/>
-                                            <input id='status-checkbox' type="checkbox" name="slist[status]" value="1" {{ (int)$slist->status === 1 ? 'checked' : "" }}/>
+                                            <input id='status-checkbox{{ $loop->index }}' type="checkbox" name="slist[status]" data-id={{ $slist->id }} value="1" {{ (int)$slist->status === 1 ? 'checked' : "" }}/>
                                         </form>
-                                        <div class='flex text-xl ml-8'>
+                                        <div class='flex sm:text-xl ml-4 sm:ml-8'>
                                             <div class="ingredient_name">
-                                                <div class="font-bold">
-                                                    {{ $slist->ingredient->name }}
-                                                </div>
+                                                {{ $slist->ingredient->name }}
                                             </div>
                                             <div class='body ml-4'>
                                                 @if ($slist->quantity == (int)$slist->quantity) {{ number_format($slist->quantity) }}{{ $slist->unit->name }}
@@ -87,9 +85,9 @@
                                     
                                     <div class="flex justify-end">
                                         <div class="flex-none">
-                                            <button type="button" class="my-btn"><a href="route('shoppinglist_edit', ['slist' => $slist->id]) }}">編集</a></button>
+                                            <button type="button" class="my-btn"><a href="{{ route('shoppinglist_edit', ['slist' => $slist->id]) }}">編集</a></button>
                                         </div>
-                                        <div class="flex-none px-4">
+                                        <div class="flex-none sm:px-4 pl-2">
                                             <form action="{{ route('shoppinglist_delete', ['slist' => $slist->id]) }}" id="form_{{ $slist->id }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
@@ -113,7 +111,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
     <script>
-        
         $(document).ready(function () {
             // 入力候補から選ばれたかのflag
             var autoCompleteSelected = false;
@@ -153,22 +150,29 @@
                 autoCompleteSelected = false;
             });
             
-            $('#status-checkbox').change(function () {
+            $('[id*="status-checkbox"]').each(function () {
                 // チェックボックスが変更されたら非同期でサーバーにリクエストを送る
-                var formData = $('#updateStatusForm').serialize();
-                console.log(formData);
-                
-                // 指定のURLに非同期でPUTリクエストを送信
-                $.ajax({
-                    url: "{{ route('shoppinglist_updateStatus', ['slist' => $slist->id]) }}",
-                    method: "PUT",
-                    data: formData,
-                }).done(function (response) {
-                    console.log(response);
-                }).fail(function(){
-                    alert('通信の失敗をしました');
+                $(this).change(function () {
+                    // data-id属性を取得
+                    const dataId = $(this).data("id");
+                    
+                    var formData = $('#updateStatusForm'+dataId).serialize();
+                    console.log(formData);
+                    
+                    // 指定のURLに非同期でPUTリクエストを送信
+                    $.ajax({
+                        url: "{{ route('shoppinglist_updateStatus', ['slist' => $slist->id]) }}",
+                        method: "PUT",
+                        data: formData,
+                    }).done(function (response) {
+                        console.log(response);
+                    }).fail(function(){
+                        alert('通信の失敗をしました');
+                    });
                 });
             });
+            
+            
         });
     </script>
 </x-app-layout>

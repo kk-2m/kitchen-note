@@ -17,7 +17,7 @@
                         <!-- 食材の名前の入力 -->
                         <div class="text-2xl font-black pb-4">食材</div>
                         @empty (old('ingredient') && old('stock'))
-                            <div class="sotck-item px-4 rounded-lg border border-gray-300" id="ingredient-item1">
+                            <div class="sotck-item px-4 rounded-lg border border-gray-300" id="ingredient-item">
                                 <div class="px-8 py-6">
                                     <div class="stock_category px-8">
                                         <label for="category" class="font-semibold">カテゴリを選択：</label>
@@ -61,7 +61,7 @@
                                 </div>
                             </div>
                         @else
-                            <div class="ingredient-item px-4 rounded-lg border border-gray-300" id="ingredient-item1">
+                            <div class="ingredient-item px-4 rounded-lg border border-gray-300" id="ingredient-item">
                                 <div class="px-8 py-6">
                                     <div class="stock_category px-8">
                                         <label for="category" class="font-semibold">カテゴリを選択：</label>

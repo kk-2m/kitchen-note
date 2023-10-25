@@ -66,6 +66,25 @@ class ShoppingListController extends Controller
         return response()->json(['message' => 'Status update successfully']);
     }
     
+    public function shoppinglist_edit(ShoppingList $slist, Ingredient $ingredient, Unit $unit)
+    {
+        return view('shoppinglists.shoppinglist_edit')->with([
+            'slist' => $slist,
+            'ingredients' => $ingredient->get(),
+            'units' => $unit->get(),
+        ]);
+    }
+    
+    public function shoppinglist_update(Request $request, ShoppingList $slist)
+    {
+        $input_slist = $request['slist'];
+        // dd($input_slist);
+        
+        $slist->fill($input_slist)->save();
+        
+        return redirect('/shoppinglists/');
+    }
+    
     public function shoppinglist_delete(ShoppingList $slist)
     {
         $slist->delete();

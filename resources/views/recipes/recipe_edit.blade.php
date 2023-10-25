@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
     <div class="contents">
-        <form action="/recipes/{{ $recipe->id }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('recipe_update', ['recipe'=>$recipe->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             
@@ -248,7 +248,7 @@
                             
                             <!-- 戻るボタン -->
                             <div class='footer'>
-                                <button type="button" class="my-btn"><a href="/recipes/{{ $recipe->id }}">戻る</a></button>
+                                <button type="button" class="my-btn"><a href="{{ route('recipe_show', ['recipe'=>$recipe->id]) }}">戻る</a></button>
                             </div>
                         </div>
                     </div>
