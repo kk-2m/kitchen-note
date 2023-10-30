@@ -110,7 +110,6 @@
                                             </form>
                                         </div>
                                     </div>
-                                    
                                 </div>
                             </div>
                         @endforeach
@@ -167,13 +166,17 @@
                 $(this).change(function () {
                     // data-id属性を取得
                     const dataId = $(this).data("id");
-                    
+                    console.log(dataId);
                     var formData = $('#updateStatusForm'+dataId).serialize();
                     console.log(formData);
                     
+                    const updateStatusUrl = `/shoppinglists/${dataId}/status`;
+                    console.log(updateStatusUrl);
+
+                    
                     // 指定のURLに非同期でPUTリクエストを送信
                     $.ajax({
-                        url: "{{ route('shoppinglist_updateStatus', ['slist' => $slist->id]) }}",
+                        url: updateStatusUrl,
                         method: "PUT",
                         data: formData,
                     }).done(function (response) {

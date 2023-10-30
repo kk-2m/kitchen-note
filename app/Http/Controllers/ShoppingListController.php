@@ -107,7 +107,7 @@ class ShoppingListController extends Controller
         //         'units' => $unit->get()]);
         //     ]);
         // return response()->json(['message' => $slist]);
-        return response()->json(['message' => 'Status update successfully']);
+        return response()->json(['message' => $slist->id]);
     }
     
     public function shoppinglist_edit(ShoppingList $slist, Ingredient $ingredient, Unit $unit)

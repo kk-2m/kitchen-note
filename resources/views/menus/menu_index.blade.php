@@ -24,6 +24,19 @@
                                         <div>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $menu->date)->isoFormat('dddd') }}</div>
                                     </div>
                                     <div class="flex justify-end">
+                                        <div class="flex-none px-4">
+                                            <form id="shoppingDataForm{{ $menu->id }}">
+                                                @csrf
+                                                @foreach($menu->ingredients as $ingredient)
+                                                    <input type="hidden" name="slist[{{ $loop->index }}][user_id]" value="{{ Auth::user()->id }}"/>
+                                                    <input type="hidden" name="slist[{{ $loop->index }}][ingredient_id]" value="{{ $ingredient->id }}"/>
+                                                    <input type="hidden" name="slist[{{ $loop->index }}][menu_id]" value="{{ $menu->id }}"/>
+                                                    <input type="hidden" name="slist[{{ $loop->index }}][quantity]" value="{{ (int)$ingredient->pivot->quantity }}"/>
+                                                    <input type="hidden" name="slist[{{ $loop->index }}][unit_id]" value="{{ $ingredient->pivot->unit_id }}"/>
+                                                @endforeach
+                                                <button type="button" class="my-btn" id="add2shoppinglist{{ $loop->index }}" data-id='{{ $menu->id }}'>買い物リストに追加</button>
+                                            </form>
+                                        </div>
                                         <div class="flex-none">
                                             <button type='button' class="my-btn"><a href="/menus/{{ $menu->id }}/edit">編集</a></button>
                                         </div>
@@ -45,7 +58,6 @@
                                 <div class='title'>
                                         <a href="/recipes/{{ $menu->recipe_id }}" class="font-semibold text-xl hover:underline">{{ $menu->recipe->title }}</a>
                                 </div>
-                                
                                 <div class='flex pt-4'>
                                     <div class="flex-1">
                                         <p class='cooking_time'>調理時間 : {{ $menu->recipe->cooking_time }}
@@ -100,5 +112,36 @@
             </div>
         @endforeach
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
+    <script>
+        $(document).ready(function () {
+            $('[id*="add2shoppinglist"]').each(function () {
+                // チェックボックスが変更されたら非同期でコントローラーにリクエストを送る
+                $(this).on('click', function () {
+                    console.log('enter the function');
                     
+                    // data-id属性を取得
+                    const dataId = $(this).data("id");
+                    console.log(dataId);
+                    var formData = $('#shoppingDataForm'+dataId).serialize();
+                    console.log(formData);
+                    
+                    // 指定のURLに非同期でPUTリクエストを送信
+                    $.ajax({
+                        url: "{{ route('menu_add2shoppinglist', ['menu' => $menu->id]) }}",
+                        method: "PUT",
+                        data: formData,
+                    }).done(function (response) {
+                        console.log(response);
+                        alert(response['message']);
+                    }).fail(function(response){
+                        console.log(response);
+                        alert('通信の失敗をしました');
+                    });
+                });
+            });
+        });
+    </script>
 </x-app-layout>
