@@ -30,7 +30,7 @@ class IngredientSeeder extends Seeder
         ]);
         DB::table('ingredients')->insert([
             'ingredient_category_id' => 8,
-            'name' => 'カップ麵',
+            'name' => 'カップ麺',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);

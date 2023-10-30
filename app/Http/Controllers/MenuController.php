@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\MenuRequest;
 use Carbon\Carbon;
 use App\Models\Recipe;
 use App\Models\Menu;
 use App\Models\Stock;
+use App\Models\ShoppingList;
 
 class MenuController extends Controller
 {
@@ -46,20 +48,81 @@ class MenuController extends Controller
     public function menu_store(MenuRequest $request, Menu $menu)
     {
         $input_menu = $request['menu'];
-        $input_menu += array('user_id' => $request->user()->id);
+        $userId = $request->user()->id;
+        $input_menu += array('user_id' => $userId);
+        // dd($input_menu);
+        
         $menu->fill($input_menu)->save();
+        
+        $menuId = $menu->id;
         
         $recipe = $menu->recipe;
         $ingredients = $recipe->ingredients;
         foreach ($ingredients as $ingredient) {
             $quantity = $ingredient->pivot->quantity / $recipe->number * $menu->number;
+            $unitId = $ingredient->pivot->unit_id;
+            
             $menu->ingredients()->syncWithoutDetaching(
                     [
                         $ingredient->pivot->ingredient_id=>[
                                 'quantity' => $quantity,
-                                'unit_id' => $ingredient->pivot->unit_id,
+                                'unit_id' => $unitId,
                             ]
-                    ]);
+                    ]
+            );
+            $slist = new ShoppingList();
+            
+            $stockSum = Stock::where('user_id', $userId)
+                        ->where('ingredient_id', $ingredient->id)
+                        ->where('unit_id', $unitId)
+                        ->sum('quantity');
+            
+            $existingMenuSum = DB::table('ingredient_menu')
+                                ->where('ingredient_id', $ingredient->id)
+                                ->where('unit_id', $unitId)
+                                ->where('menu_id', '!=', $menuId)
+                                // 親テーブルが論理削除されていないものを取得
+                                ->whereIn('menu_id', function ($query) use ($userId) {
+                                    $query->select('id')
+                                        ->from('menus')
+                                        ->where('user_id', $userId)
+                                        ->whereNull('deleted_at');
+                                })
+                                ->sum('quantity');
+            // dd($existingMenuSum, $stockSum);
+            
+            // 同じ食材を使っている献立があるとき
+            if ($existingMenuSum > 0) {
+                // 在庫の方が献立の必要量より多い場合は残りの在庫量で判断
+                if ($stockSum > $existingMenuSum) {
+                    $rest = $stockSum - $existingMenuSum;
+                    if ($quantity > $rest) {
+                        // 差分を買い物リストとして登録
+                        $quantity -= $rest;
+                        $slist->saveShoppinglistByMenu($userId, $ingredient->id, $menuId, $quantity, $unitId);
+                    }
+                    // リクエストの必要量が在庫量を下回る場合はなにもしない
+                    // 在庫でまかなえるため
+                }
+                // そもそも今ある献立の必要量で在庫が足りていないなら、買い物リストを作成
+                else {
+                    $slist->saveShoppinglistByMenu($userId, $ingredient->id, $menuId, $quantity, $unitId);
+                }
+            }
+            else {
+                // 必要量が在庫量以上の場合は買い物リストに登録
+                if ($stockSum > 0) {
+                    // 必要量の方が多い場合は買い物リストに登録
+                    if ($quantity > $stockSum) {
+                        $quantity -= $stockSum;
+                        $slist->saveShoppinglistByMenu($userId, $ingredient->id, $menuId, $quantity, $unitId);
+                    }
+                }
+                else {
+                        $slist->saveShoppinglistByMenu($userId, $ingredient->id, $menuId, $quantity, $unitId);
+                }
+            }
+                
         }
         
         return redirect('/menus/');
@@ -79,7 +142,13 @@ class MenuController extends Controller
     {
         // *menusテーブルの保存*
         $input_menu = $request['menu'];
-        $input_menu += array('user_id' => $request->user()->id);
+        $userId = $request->user()->id;
+        $input_menu += array('user_id' => $userId);
+        
+        $previousMenuIngredients = $menu->ingredients;
+        
+        $menuId = $menu->id;
+        
         $menu->fill($input_menu)->save();
         
         // dd($menu['ingredients']['0']['pivot']);
@@ -92,12 +161,80 @@ class MenuController extends Controller
         $input_ingredient_menu = [];
         foreach ($ingredients as $ingredient) {
             $quantity = $ingredient->pivot->quantity / $recipe->number * $menu->number;
+            $unitId = $ingredient->pivot->unit_id;
             // dd($ingredient->pivot->unit_id);
             $input_ingredient_menu[] = array(
                                             'ingredient_id' => $ingredient->id,
                                             'quantity' => $quantity,
                                             'unit_id' => $ingredient->pivot->unit_id,
                                         );
+            
+            $slist = ShoppingList::firstOrNew(
+                    [
+                        'menu_id' => $menu->id,
+                        'ingredient_id' => $ingredient->id,
+                        'unit_id' => $ingredient->pivot->unit_id
+                    ]);
+            
+            $stockSum = Stock::where('user_id', $userId)
+                        ->where('ingredient_id', $ingredient->id)
+                        ->where('unit_id', $unitId)
+                        ->whereNull('deleted_at')
+                        ->sum('quantity');
+            
+            $slistSum = ShoppingList::where('user_id', $userId)
+                        ->where('ingredient_id', $ingredient->id)
+                        ->where('unit_id', $unitId)
+                        ->whereNull('deleted_at')
+                        ->sum('quantity');
+            
+            $existingMenuSum = DB::table('ingredient_menu')
+                                ->where('ingredient_id', $ingredient->id)
+                                ->where('unit_id', $unitId)
+                                ->where('menu_id', '!=', $menuId)
+                                // 親テーブルが論理削除されていないものを取得
+                                ->whereIn('menu_id', function ($query) use ($userId) {
+                                    $query->select('id')
+                                        ->from('menus')
+                                        ->where('user_id', $userId)
+                                        ->whereNull('deleted_at');
+                                })
+                                ->sum('quantity');
+            $existingMenuSum += $quantity;
+            
+            // dd($stockSum, $slistSum, $existingMenuSum);
+            
+            // 値を増やした場合
+            if ($quantity > $previousMenuIngredients["{$i}"]['pivot']['quantity']) {
+                // 買い物リストが存在
+                if ($slist->exists) { // O
+                    $difference = $quantity - $previousMenuIngredients["{$i}"]['pivot']['quantity'];
+                    $slistQuantity = $slist->quantity + $difference;
+                    $slist->saveShoppinglistByMenu($userId, $ingredient->id, $menuId, $slistQuantity, $unitId);
+                }
+                // 買い物リストが存在しない
+                else {
+                    // 必要量が在庫量を上回った場合
+                    if ($existingMenuSum > ($slistSum + $stockSum)) { // x
+                        $slistQuantity = $existingMenuSum - ($slistSum + $stockSum);
+                        $slist->saveShoppinglistByMenu($userId, $ingredient->id, $menuId, $slistQuantity, $unitId);
+                    }
+                }
+            }
+            // 値を減らした場合
+            else {
+                if ($slist->exists) {
+                    $difference = $previousMenuIngredients["{$i}"]['pivot']['quantity'] - $quantity;
+                    if ($slist->quantity > $difference) { // O
+                        $slistQuantity = $slist->quantity - $difference;
+                        $slist->saveShoppinglistByMenu($userId, $ingredient->id, $menuId, $slistQuantity, $unitId);
+                    }
+                    // 値を減らした結果, 買い物が必要なくなった
+                    else { // O
+                        $slist->delete();
+                    }
+                }
+            }
             
             // if ($menu["ingredients"]["{$i}"]["pivot"]["ingredient_id"] !== $ingredient->id) {
             //     $menu->pivot->ingredient_id = 100;
@@ -117,7 +254,29 @@ class MenuController extends Controller
     
     public function menu_delete(Menu $menu)
     {
+        $userId = $menu->user_id;
+        $menuId = $menu->id;
+        $i = 0;
+        foreach ($menu->ingredients as $ingredient) {
+            $slist = ShoppingList::where('user_id', $userId)
+                            ->where('menu_id', $menuId)
+                            ->where('status', 0)
+                            ->first();
+            if ($slist) {
+                if ($ingredient['pivot']['quantity'] >= $slist->quantity) {
+                    $slist->delete();
+                }
+                // もしかしたらこの処理はいらないかも
+                else {
+                    $slistQuantity = $slist->qunantity - $ingredient['pivot']['quantity'];
+                    $slist->saveShoppinglistByMenu($userId, $ingredient->id, $menuId, $slistQuantity, $ingredient["$i"]['pivot']['unit_id']);
+                }
+            }
+            $i += 1;
+        }
+        
         $menu->delete();
+        
         return redirect('/menus');
     }
     

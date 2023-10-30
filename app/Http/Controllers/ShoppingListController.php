@@ -57,22 +57,66 @@ class ShoppingListController extends Controller
         return response()->json($ingredients);
     }
     
-    public function shoppinglist_updateStatus(Request $request)
+    public function shoppinglist_updateStatus(Request $request, ShoppingList $slist)
     {
         $input_slist = $request['slist'];
         
-        ShoppingList::where('id', $input_slist['id'])->update(['status' => $input_slist['status']]);
+        $slist->fill($input_slist)->save();
         
+        // ShoppingList::where('id', $input_slist['id'])->update(['status' => $input_slist['status']]);
+        
+        // $stock = Stock::where('user_id' => $slist->user_id)
+        //                     ->where('ingredient_id' => $slist->ingredient_id)
+        //                     ->where('unit_id' => $slist->unit_id)
+        //                     ->orderBy('expiration_at', 'ASC')
+        //                     ->first();
+        
+        if ($input_slist['status'] === '1') {
+            $stockdata = array(
+                    'user_id' => $slist->user_id,
+                    'ingredient_id' => $slist->ingredient_id,
+                    'shopping_list_id' => $slist->id,
+                    'expired_at' => NULL,
+                    'quantity' => $slist->quantity,
+                    'unit_id' => $slist->unit_id,
+                    );
+            // 論理削除されているものがあれば再利用
+            // データの増大を防ぐ
+            $stock = Stock::onlyTrashed()->where('shopping_list_id', $slist->id)->first();
+            if ($stock) {
+                $stock->restore();
+                $stock->fill($stockdata)->save();
+            }
+            else {
+                $stock = new Stock();
+                $stock->fill($stockdata)->save();
+            }
+            
+        }
+        else {
+            $stock = Stock::where('user_id', $slist->user_id)->where('shopping_list_id', $slist->id)->where('quantity', '>=', $slist->quantity);
+            if ($stock) {
+                $stock->delete();
+            }
+        }
+        
+        
+        // return redirect(route('stock_create'))->with([
+        //         'stock' => $stock,
+        //         'ingredient_categories' => $ingredient_category->get(),
+        //         'units' => $unit->get()]);
+        //     ]);
+        // return response()->json(['message' => $slist]);
         return response()->json(['message' => 'Status update successfully']);
     }
     
     public function shoppinglist_edit(ShoppingList $slist, Ingredient $ingredient, Unit $unit)
     {
         return view('shoppinglists.shoppinglist_edit')->with([
-            'slist' => $slist,
-            'ingredients' => $ingredient->get(),
-            'units' => $unit->get(),
-        ]);
+                'slist' => $slist,
+                'ingredients' => $ingredient->get(),
+                'units' => $unit->get(),
+            ]);
     }
     
     public function shoppinglist_update(Request $request, ShoppingList $slist)

@@ -21,14 +21,14 @@
                             <div class="menu-item px-4 rounded-lg border border-gray-300" id="ingredient-item">
                                 <div class="px-8 py-6">
                                     <div class="menu-recipe px-8">
-                                        <label class="font-semibold pt-6" for="recipe">レシピ：</label>
-                                        <select name="menu[recipe_id]" id="recipe">
-                                            <option value="">レシピを選んでください</option>
+                                        <label class="font-semibold text-gray-400 pt-6" for="recipe">レシピ：</label>
+                                        <input type="text" class="bold-gray-200 text-gray-400" id="recipe" value="{{  $menu->recipe->title }}" readonly/>
+                                        <input type="hidden" name="menu[recipe_id]" value="{{  $menu->recipe->id }}"/>
+                                        {{-- <select class="bold-gray-200 text-gray-400" name="menu[recipe_id]" id="recipe" readonly>
                                             @foreach ($recipes as $recipe)
                                                 <option value="{{ $recipe->id }}" @if ((int)$menu->recipe_id === $recipe->id) selected @endif>{{ $recipe->title }}</option>
                                             @endforeach
-                                        </select><br>
-                                        <p class="recipe_error" style="color:red">{{ $errors->first('menu.recipe_id') }}</p>
+                                        </select><br> --}}
                                     </div>
                                     
                                     <div class='number pt-6 px-8'>
@@ -50,13 +50,8 @@
                                 <div class="px-8 py-6">
                                     <div class="menu-recipe px-8">
                                         <label class="font-semibold pt-6" for="recipe">レシピ：</label>
-                                        <select name="menu[recipe_id]" id="recipe">
-                                            <option value="">レシピを選んでください</option>
-                                            @foreach ($recipes as $recipe)
-                                                <option value="{{ $recipe->id }}" @if ((int)old("menu.recipe_id") == $recipe->id) selected @endif>{{ $recipe->title }}</option>
-                                            @endforeach
-                                        </select><br>
-                                        <p class="recipe_error" style="color:red">{{ $errors->first('menu.recipe_id') }}</p>
+                                        <input type="text" class="bold-gray-200 text-gray-400" id="recipe" value="{{  $menu->recipe->title }}" readonly/>
+                                        <input type="hidden" name="menu[recipe_id]" value="{{  $menu->recipe->id }}"/>
                                     </div>
                                     
                                     <div class='number pt-6 px-8'>

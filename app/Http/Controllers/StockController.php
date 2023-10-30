@@ -37,12 +37,22 @@ class StockController extends Controller
         $input_ingredient = $request['ingredient'];
         
         $ingredient = Ingredient::firstOrCreate(
-            ['name' => $input_ingredient["name"]],
-            ['ingredient_category_id' => $input_ingredient["ingredient_category_id"]
-        ]);
+                ['name' => $input_ingredient["name"]],
+                ['ingredient_category_id' => $input_ingredient["ingredient_category_id"]]
+            );
         
         $input_stock += array('user_id' => $request->user()->id, 'ingredient_id' => $ingredient->id);
         // dd($input_stock);
+        
+        // $stock = Stock::updateOrCreate(
+        //         ['ingredient_id' => $ingredient->id, 'unit_id' => $input_stock['unit_id']],
+        //         [
+        //             'user_id' => $request->user()->id,
+        //             'expiration_at' => $input_stock['expiration_at'],
+        //             // 直接SQL分を生成し、既存レコードのquantityカラムの値に入力値を足す
+        //             'quantity' => \DB::raw('quantity + ' . $input_stock['quantity'])
+        //         ]
+        //     );
         $stock->fill($input_stock)->save();
         
         // index bladeに取得したデータを渡す

@@ -20,7 +20,7 @@ class IngredientRecipeSeeder extends Seeder
             'recipe_id' => 1,
             'ingredient_id' => 3,
             'quantity' => 1,
-            'unit_id' => 26,
+            'unit_id' => 27,
         ]);
         DB::table('ingredient_recipe')->insert([
             'recipe_id' => 2,

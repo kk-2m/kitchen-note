@@ -14,10 +14,28 @@ class ShoppingList extends Model
     protected $fillable = [
         'user_id',
         'ingredient_id',
+        'menu_id',
         'status',
         'quantity',
         'unit_id'
     ];
+    
+    public function saveShoppinglistByMenu(string $userId, string $ingredientId, string $menuId, string $quantity, string $unitId)
+    {
+        return $this->fill([
+                                'user_id' => $userId,
+                                'ingredient_id' => $ingredientId,
+                                'menu_id' => $menuId,
+                                'quantity' => $quantity,
+                                'unit_id' => $unitId,
+                            ])->save();
+    }
+    
+    // 1対1のリレーション
+    public function stock()
+    {
+        return $this->hasOne(Stock::class);
+    }
     
     // 多対1のリレーション
     public function user()
@@ -27,6 +45,10 @@ class ShoppingList extends Model
     public function ingredient()
     {
         return $this->belongsTo(Ingredient::class);
+    }
+    public function menu()
+    {
+        return $this->belongsTo(Menu::class);
     }
     public function unit()
     {

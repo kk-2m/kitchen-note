@@ -22,10 +22,17 @@ class Stock extends Model
     protected $fillable = [
         'user_id',
         'ingredient_id',
+        'shopping_list_id',
         'expiration_at',
         'quantity',
         'unit_id',
     ];
+    
+    // 1対1のリレーション
+    public function shopping_list()
+    {
+        return $this->belongsTo(ShoppingList::class);
+    }
     
     // 多対1のリレーション
     public function user()

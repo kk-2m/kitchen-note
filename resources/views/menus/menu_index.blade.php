@@ -43,9 +43,7 @@
                                 </div>
                                 
                                 <div class='title'>
-                                    <div class='font-semibold text-xl hover:underline'>
-                                        <a href="/recipes/{{ $menu->recipe_id }}">{{ $menu->recipe->title }}</a>
-                                    </div>
+                                        <a href="/recipes/{{ $menu->recipe_id }}" class="font-semibold text-xl hover:underline">{{ $menu->recipe->title }}</a>
                                 </div>
                                 
                                 <div class='flex pt-4'>

@@ -67,7 +67,7 @@
                                     <div class="flex">
                                         <form id="updateStatusForm{{ $slist->id }}">
                                             @csrf
-                                            <input type="hidden" name="slist[id]" value="{{ $slist->id }}"/>
+                                            {{-- <input type="hidden" name="slist[id]" value="{{ $slist->id }}"/> --}}
                                             <input type="hidden" name="slist[status]" value="0"/>
                                             <input id='status-checkbox{{ $loop->index }}' type="checkbox" name="slist[status]" data-id={{ $slist->id }} value="1" {{ (int)$slist->status === 1 ? 'checked' : "" }}/>
                                         </form>
@@ -76,17 +76,28 @@
                                                 {{ $slist->ingredient->name }}
                                             </div>
                                             <div class='body ml-4'>
-                                                @if ($slist->quantity == (int)$slist->quantity) {{ number_format($slist->quantity) }}{{ $slist->unit->name }}
-                                                @else {{ $slist->quantity }}{{ $slist->unit->name }}
-                                                @endif 
+                                                <!--　小さじ, 大さじ　-->
+                                                @if ($slist->unit_id === 14 || $slist->unit_id === 15)
+                                                    <!-- 小数点以下が0は整数表記 -->
+                                                    @if ($slist->quantity == (int)$slist->quantity) {{ $slist->unit->name }} {{ number_format($slist->quantity) }}
+                                                    @else {{ $slist->unit->name }} {{ $slist->quantity }}
+                                                    @endif 
+                                                <!-- 適量は適量のみ表示 -->
+                                                @elseif ($slist->unit_id === 16) {{ $slist->unit->name }}
+                                                @else
+                                                    @if ($slist->quantity == (int)$slist->quantity) {{ number_format($slist->quantity) }} {{ $slist->unit->name }}
+                                                    @else {{ $slist->quantity }} {{ $slist->unit->name }}
+                                                    @endif 
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
-                                    
                                     <div class="flex justify-end">
-                                        <div class="flex-none">
-                                            <button type="button" class="my-btn"><a href="{{ route('shoppinglist_edit', ['slist' => $slist->id]) }}">編集</a></button>
-                                        </div>
+                                        @if ($slist->menu_id === NULL)
+                                            <div class="flex-none">
+                                                <button type="button" class="my-btn"><a href="{{ route('shoppinglist_edit', ['slist' => $slist->id]) }}">編集</a></button>
+                                            </div>
+                                        @endif
                                         <div class="flex-none sm:px-4 pl-2">
                                             <form action="{{ route('shoppinglist_delete', ['slist' => $slist->id]) }}" id="form_{{ $slist->id }}" method="post">
                                                 @csrf
@@ -99,6 +110,7 @@
                                             </form>
                                         </div>
                                     </div>
+                                    
                                 </div>
                             </div>
                         @endforeach
@@ -171,8 +183,6 @@
                     });
                 });
             });
-            
-            
         });
     </script>
 </x-app-layout>
