@@ -54,7 +54,16 @@
                                     @else {{ $stock->quantity }}{{ $stock->unit->name }}
                                     @endif <br>
                                     購入日：{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $stock->created_at)->format('Y-m-d') }}<br>
-                                    賞味・消費期限：{{ $stock->expiration_at }}
+                                    <div class="flex">
+                                        賞味・消費期限：
+                                        @if ($stock->expiration_at >= $today)
+                                            {{ $stock->expiration_at }}
+                                        @else
+                                            <div class="text-red-600">
+                                                {{ $stock->expiration_at }}
+                                            </div>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>

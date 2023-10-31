@@ -130,7 +130,7 @@
                     
                     // 指定のURLに非同期でPUTリクエストを送信
                     $.ajax({
-                        url: "{{ route('menu_add2shoppinglist', ['menu' => $menu->id]) }}",
+                        url: "{{ route('menu_add2shoppinglist') }}",
                         method: "PUT",
                         data: formData,
                     }).done(function (response) {

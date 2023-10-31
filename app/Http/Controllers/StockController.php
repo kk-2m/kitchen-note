@@ -16,8 +16,10 @@ class StockController extends Controller
     {
         // index bladeに取得したデータを渡す
         // Recipeモデルで定義したgetByLimitを使用
+        // dd(Carbon::today());
         return view('stocks.stock_index')->with([
             'stocks' => $stock->getPaginateByLimit(),
+            'today' => Carbon::today(),
         ]);
     }
     

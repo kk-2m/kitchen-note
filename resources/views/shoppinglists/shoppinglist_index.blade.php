@@ -92,6 +92,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    {{ var_dump($slist->status) }}
                                     <div class="flex justify-end">
                                         @if ($slist->menu_id === NULL)
                                             <div class="flex-none">
