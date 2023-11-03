@@ -47,8 +47,8 @@ class RakutenRecipeService
         if (preg_match('/（(.*?)人分）/', $recipeNumber, $matches)) {
             $number = $matches[1];
         }
-        
-        return (int)$number;
+        // mb_convert_kana($number, 'n')で全角の文字型の数字を半角に直す
+        return (int)mb_convert_kana($number, 'n');
     }
     
     public function getProcedure($url)

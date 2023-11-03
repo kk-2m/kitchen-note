@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StockRequest;
 use Carbon\Carbon;
 use App\Models\Stock;
+use App\Models\ShoppingList;
 use App\Models\Ingredient;
 use App\Models\IngredientCategory;
 use App\Models\Unit;
@@ -89,6 +90,10 @@ class StockController extends Controller
     
     public function stock_delete(Stock $stock)
     {
+        $slist = ShoppingList::where('user_id', $stock->user_id)
+                        ->where('id', $stock->shopping_list_id)
+                        ->first();
+        $slist->delete();
         $stock->delete();
         return redirect('/stocks');
     }

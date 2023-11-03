@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold py-1 text-xl text-gray-800 leading-tight">
             {{ __('買い物情報一覧') }}
         </h2>
     </x-slot>
@@ -37,7 +37,7 @@
                                             <option value="{{ $unit->id }}">{{ $unit->name }}</option>
                                         @endforeach
                                     </select>
-                                    <p class="unit_error" style="color:red">{{ $errors->first("ingredient_recipe.unit_id") }}</p>
+                                    <p class="unit_error" style="color:red">{{ $errors->first("slist.unit_id") }}</p>
                                 </div>
                             </div>
                             <div class="text-center">
@@ -69,7 +69,7 @@
                                             @csrf
                                             {{-- <input type="hidden" name="slist[id]" value="{{ $slist->id }}"/> --}}
                                             <input type="hidden" name="slist[status]" value="0"/>
-                                            <input id='status-checkbox{{ $loop->index }}' type="checkbox" name="slist[status]" data-id={{ $slist->id }} value="1" {{ (int)$slist->status === 1 ? 'checked' : "" }}/>
+                                            <input id='status-checkbox{{ $loop->index }}' type="checkbox" name="slist[status]" data-id="{{ $slist->id }}" data-status="{{ $slist->status }}" value="1" {{ (int)$slist->status === 1 ? 'checked' : "" }}/>
                                         </form>
                                         <div class='flex sm:text-xl ml-4 sm:ml-8'>
                                             <div class="ingredient_name">
@@ -92,13 +92,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{ var_dump($slist->status) }}
                                     <div class="flex justify-end">
-                                        @if ($slist->menu_id === NULL)
-                                            <div class="flex-none">
-                                                <button type="button" class="my-btn"><a href="{{ route('shoppinglist_edit', ['slist' => $slist->id]) }}">編集</a></button>
-                                            </div>
-                                        @endif
+                                        <div class="flex-none" id="editButtonContainer{{ $slist->id }}">
+                                            <button type="button" class="my-btn"><a href="{{ route('shoppinglist_edit', ['slist' => $slist->id]) }}">編集</a></button>
+                                        </div>
                                         <div class="flex-none sm:px-4 pl-2">
                                             <form action="{{ route('shoppinglist_delete', ['slist' => $slist->id]) }}" id="form_{{ $slist->id }}" method="post">
                                                 @csrf
@@ -163,11 +160,23 @@
             });
             
             $('[id*="status-checkbox"]').each(function () {
+                const dataId = $(this).data("id");
+                const dataStatus = $(this).data("status");
+                console.log(dataStatus);
+                // 初期表示の状態確認
+                // チェックされているなら隠す
+                if(dataStatus === 1){
+                    $('#editButtonContainer'+dataId).hide();
+                }
+                else{
+                    $('#editButtonContainer'+dataId).show();
+                }
+                
                 // チェックボックスが変更されたら非同期でサーバーにリクエストを送る
+                // チェックされたら編集ボタンを隠す
                 $(this).change(function () {
                     // data-id属性を取得
-                    const dataId = $(this).data("id");
-                    console.log(dataId);
+                    
                     var formData = $('#updateStatusForm'+dataId).serialize();
                     console.log(formData);
                     
@@ -182,6 +191,12 @@
                         data: formData,
                     }).done(function (response) {
                         console.log(response);
+                        if(response['status'] === '1'){
+                            $('#editButtonContainer'+dataId).hide();
+                        }
+                        else{
+                            $('#editButtonContainer'+dataId).show();
+                        }
                     }).fail(function(){
                         alert('通信の失敗をしました');
                     });

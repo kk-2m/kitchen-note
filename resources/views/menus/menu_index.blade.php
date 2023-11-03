@@ -11,10 +11,10 @@
         
     </x-slot>
 
-    <div class='menus'>
+    <div class='menus py-6'>
         
         @foreach ($menus as $menu)
-            <div class="py-12">
+            <div class="pt-6 pb-6">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6 text-gray-900">
@@ -84,14 +84,14 @@
                                                 <!--　小さじ, 大さじ　-->
                                                 @if ($ingredient->pivot->unit->id === 14 || $ingredient->pivot->unit->id === 15)
                                                     <!-- 小数点以下が0は整数表記 -->
-                                                    @if ($ingredient->pivot->quantity == (int)$ingredient->pivot->quantity) {{ $ingredient->pivot->unit->name }}{{ number_format($ingredient->pivot->quantity) }}
-                                                    @else {{ $ingredient->pivot->unit->name }}{{ $ingredient->pivot->quantity }}
+                                                    @if ($ingredient->pivot->quantity == (int)$ingredient->pivot->quantity) {{ $ingredient->pivot->unit->name }} {{ number_format($ingredient->pivot->quantity) }}
+                                                    @else {{ $ingredient->pivot->unit->name }} {{ $ingredient->pivot->quantity }}
                                                     @endif
                                                 <!-- 適量は適量のみ表示 -->
                                                 @elseif ($ingredient->pivot->unit->id === 16) {{ $ingredient->pivot->unit->name }}
                                                 @else
-                                                    @if ($ingredient->pivot->quantity == (int)$ingredient->pivot->quantity) {{ number_format($ingredient->pivot->quantity) }}{{ $ingredient->pivot->unit->name }}
-                                                    @else {{ $ingredient->pivot->quantity }}{{ $ingredient->pivot->unit->name }}
+                                                    @if ($ingredient->pivot->quantity == (int)$ingredient->pivot->quantity) {{ number_format($ingredient->pivot->quantity) }} {{ $ingredient->pivot->unit->name }}
+                                                    @else {{ $ingredient->pivot->quantity }} {{ $ingredient->pivot->unit->name }}
                                                     @endif
                                                 @endif
                                             </p>
@@ -127,10 +127,10 @@
                     console.log(dataId);
                     var formData = $('#shoppingDataForm'+dataId).serialize();
                     console.log(formData);
-                    
+                    add2ShoppinglistUrl = `/menus/${dataId}/add2shoppinglist`;
                     // 指定のURLに非同期でPUTリクエストを送信
                     $.ajax({
-                        url: "{{ route('menu_add2shoppinglist') }}",
+                        url: add2ShoppinglistUrl,
                         method: "PUT",
                         data: formData,
                     }).done(function (response) {

@@ -10,14 +10,14 @@
         </div>
     </x-slot>
     
-    <div class='stocks'>
+    <div class='stocks py-6'>
         {{-- <div class="max-w-3xl mx-auto sm:px-6 lg:px-8 mt-5 -mb-7">
             {{--<input type="button" onclick="location.href='{{ route('stock_create') }}'" value="遷移"> --}
             <button type="button" class="my-btn"><a href="{{ route('stock_create') }}">stock create</a></button>
         </div> --}}
         
         @foreach ($stocks as $stock)
-            <div class="py-12">
+            <div class="pt-6">
                 <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6 text-gray-900">
@@ -74,38 +74,39 @@
     </div>
     
     {{-- <div class='paginate'>{{ $stocks->links() }}</div> --}}
-    @if ($stocks->lastPage() > 1)
-        <div class="flex items-center justify-center">
-            <ul class="flex space-x-2 border border-2 border-gray-300 rounded overflow-hidden">
-                <li class="page-item {{ ($stocks->currentPage() == 1) ? ' disabled' : '' }} border-r-2 border-gray-300 hover:underline">
-                    <a class="page-link block py-2 px-4" href="{{ $stocks->url(1) }}">First Page</a>
-                </li>
-                @if ($stocks->currentPage() > 1)
-                    <li class="page-item border-r-2 border-gray-300 hover:underline">
-                        <a class="page-link block py-2 px-4" href="{{ $stocks->url($stocks->currentPage()-1) }}">
-                            <span aria-hidden="true">«</span>
-                            {{-- Previous --}}
-                        </a>
+    <div class="pagination pt-6">
+        @if ($stocks->lastPage() > 1)
+            <div class="flex items-center justify-center">
+                <ul class="flex space-x-2 border border-2 border-gray-300 rounded overflow-hidden">
+                    <li class="page-item {{ ($stocks->currentPage() == 1) ? ' disabled' : '' }} border-r-2 border-gray-300 hover:underline">
+                        <a class="page-link block py-2 px-4" href="{{ $stocks->url(1) }}">First Page</a>
                     </li>
-                @endif
-                @for ($i = 1; $i <= $stocks->lastPage(); $i++)
-                    <li class="page-item {{ ($stocks->currentPage() == $i) ? ' active bg-blue-500 text-white' : '' }} border-r-2 border-gray-300 hover:underline">
-                        <a class="page-link block py-2 px-4" href="{{ $stocks->url($i) }}">{{ $i }}</a>
+                    @if ($stocks->currentPage() > 1)
+                        <li class="page-item border-r-2 border-gray-300 hover:underline">
+                            <a class="page-link block py-2 px-4" href="{{ $stocks->url($stocks->currentPage()-1) }}">
+                                <span aria-hidden="true">«</span>
+                                {{-- Previous --}}
+                            </a>
+                        </li>
+                    @endif
+                    @for ($i = 1; $i <= $stocks->lastPage(); $i++)
+                        <li class="page-item {{ ($stocks->currentPage() == $i) ? ' active bg-blue-500 text-white' : '' }} border-r-2 border-gray-300 hover:underline">
+                            <a class="page-link block py-2 px-4" href="{{ $stocks->url($i) }}">{{ $i }}</a>
+                        </li>
+                    @endfor
+                    @if ($stocks->currentPage() < $stocks->lastPage())
+                        <li class="page-item border-r-2 border-gray-300 hover:underline">
+                            <a class="page-link block py-2 px-4" href="{{ $stocks->url($stocks->currentPage() + 1) }}">
+                                <span aria-hidden="true">»</span>
+                                {{-- Next --}}
+                            </a>
+                        </li>
+                    @endif
+                    <li class="page-item {{ ($stocks->currentPage() == $stocks->lastPage()) ? ' disabled' : '' }} hover:underline">
+                        <a class="page-link block py-2 px-4" href="{{ $stocks->url($stocks->lastPage()) }}">Last Page</a>
                     </li>
-                @endfor
-                @if ($stocks->currentPage() < $stocks->lastPage())
-                    <li class="page-item border-r-2 border-gray-300 hover:underline">
-                        <a class="page-link block py-2 px-4" href="{{ $stocks->url($stocks->currentPage() + 1) }}">
-                            <span aria-hidden="true">»</span>
-                            {{-- Next --}}
-                        </a>
-                    </li>
-                @endif
-                <li class="page-item {{ ($stocks->currentPage() == $stocks->lastPage()) ? ' disabled' : '' }} hover:underline">
-                    <a class="page-link block py-2 px-4" href="{{ $stocks->url($stocks->lastPage()) }}">Last Page</a>
-                </li>
-            </ul>
-        </div>
-    @endif
-    
+                </ul>
+            </div>
+        @endif
+    </div>
 </x-app-layout>

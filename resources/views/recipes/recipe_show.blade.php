@@ -70,15 +70,15 @@
                                 {{ $ingredient->name }}　
                                 @if ($ingredient->pivot->unit->id === 14 || $ingredient->pivot->unit->id === 15)
                                     <!-- 小数点以下が0は整数表記 -->
-                                    @if ($ingredient->pivot->quantity == (int)$ingredient->pivot->quantity) {{ $ingredient->pivot->unit->name }}{{ number_format($ingredient->pivot->quantity) }}
-                                    @else {{ $ingredient->pivot->unit->name }}{{ $ingredient->pivot->quantity }}
+                                    @if ($ingredient->pivot->quantity == (int)$ingredient->pivot->quantity) {{ $ingredient->pivot->unit->name }} {{ number_format($ingredient->pivot->quantity) }}
+                                    @else {{ $ingredient->pivot->unit->name }} {{ $ingredient->pivot->quantity }}
                                     @endif
                                 @elseif ($ingredient->pivot->unit->id === 16)
                                     {{ $ingredient->pivot->unit->name }}
                                 @else
                                     <!-- 小数点以下が0は整数表記 -->
-                                    @if ($ingredient->pivot->quantity == (int)$ingredient->pivot->quantity) {{ number_format($ingredient->pivot->quantity) }}{{ $ingredient->pivot->unit->name }}
-                                    @else {{ $ingredient->pivot->quantity }}{{ $ingredient->pivot->unit->name }}
+                                    @if ($ingredient->pivot->quantity == (int)$ingredient->pivot->quantity) {{ number_format($ingredient->pivot->quantity) }} {{ $ingredient->pivot->unit->name }}
+                                    @else {{ $ingredient->pivot->quantity }} {{ $ingredient->pivot->unit->name }}
                                     @endif
                                 @endif
                             </div>

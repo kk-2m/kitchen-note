@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ShoppinglistRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Recipe;
 use App\Models\Ingredient;
@@ -30,7 +31,7 @@ class ShoppingListController extends Controller
         ]);
     }
     
-    public function shoppinglist_store(Request $request, ShoppingList $slist)
+    public function shoppinglist_store(ShoppinglistRequest $request, ShoppingList $slist)
     {
         $input_ingredient = $request['ingredient'];
         $input_slist = $request['slist'];
@@ -107,7 +108,7 @@ class ShoppingListController extends Controller
         //         'units' => $unit->get()]);
         //     ]);
         // return response()->json(['message' => $slist]);
-        return response()->json(['message' => $slist->id]);
+        return response()->json(['message' => $slist->id, 'status' => $slist->status]);
     }
     
     public function shoppinglist_edit(ShoppingList $slist, Ingredient $ingredient, Unit $unit)

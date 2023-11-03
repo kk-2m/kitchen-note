@@ -27,9 +27,9 @@
                     <x-nav-link :href="route('shoppinglist_index')" :active="request()->routeIs('shoppinglist_index')">
                         {{ __('My Shopping Lists') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('rakuten-recipe_category')" :active="request()->routeIs('rakuten-recipe_category')">
+                    {{-- <x-nav-link :href="route('rakuten-recipe_category')" :active="request()->routeIs('rakuten-recipe_category')">
                         {{ __('Rakuten Recipes') }}
-                    </x-nav-link>
+                    </x-nav-link> --}}
                 </div>
             </div>
 
@@ -97,9 +97,9 @@
             <x-responsive-nav-link :href="route('shoppinglist_index')" :active="request()->routeIs('shoppinglist_index')">
                 {{ __('My Shopping Lists') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('rakuten-recipe_category')" :active="request()->routeIs('rakuten-recipe_category')">
+            {{-- <x-responsive-nav-link :href="route('rakuten-recipe_category')" :active="request()->routeIs('rakuten-recipe_category')">
                 {{ __('Rakuten Recipes') }}
-            </x-responsive-nav-link>
+            </x-responsive-nav-link> --}}
         </div>
 
         <!-- Responsive Settings Options -->

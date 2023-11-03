@@ -12,7 +12,7 @@ class Stock extends Model
     use HasFactory;
     use SoftDeletes;
     
-    public function getPaginateByLimit(int $limit_count = 1)
+    public function getPaginateByLimit(int $limit_count = 5)
     {
         $userId = Auth::id();
         // paginate関数でget()を実行しているので、書く必要がない

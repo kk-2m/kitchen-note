@@ -62,15 +62,8 @@ class RecipeController extends Controller
         return redirect('/recipes');
     }
     
-    public function recipe_index(Recipe $recipe)
+    public function dashboard()
     {
-        
-        
-        // $recipes = $recipe->get();
-        // foreach ($recipes as $recipe) {
-        //     dd($recipe->procedures());
-        // }
-        
         $apiKey = config('services.rakuten_recipe.token');
         
         // GET通信するURL
@@ -89,28 +82,32 @@ class RecipeController extends Controller
         // $serviceにRakutenRecipeServiceクラスをインスタンス化
         $service = app()->make('RakutenRecipeService');
         
-        // for ($i=0; $i<count($rakuten_recipes); $i++)
-        // {
-        //     // レシピの材料を取得
-        //     $quantity = $service->getQuantity($rakuten_recipes[$i]['recipeUrl']);
-        //     $rakuten_recipes[$i] += array("recipeMaterialQuantity" => $quantity);
-        //     // レシピの想定人数を取得
-        //     $number = $service->getNumber($rakuten_recipes[$i]['recipeUrl']);
-        //     $rakuten_recipes[$i] += array("recipeNumber" => $number);
-        //     // レシピの調理手順を取得
-        //     $procedure = $service->getProcedure($rakuten_recipes[$i]['recipeUrl']);
-        //     $rakuten_recipes[$i] += array("recipeProcedure" => $procedure);
-        // }
+        for ($i=0; $i<count($rakuten_recipes); $i++)
+        {
+            // レシピの材料を取得
+            $quantity = $service->getQuantity($rakuten_recipes[$i]['recipeUrl']);
+            $rakuten_recipes[$i] += array("recipeMaterialQuantity" => $quantity);
+            // レシピの想定人数を取得
+            $number = $service->getNumber($rakuten_recipes[$i]['recipeUrl']);
+            $rakuten_recipes[$i] += array("recipeNumber" => $number);
+            
+            // レシピの調理手順を取得
+            $procedure = $service->getProcedure($rakuten_recipes[$i]['recipeUrl']);
+            $rakuten_recipes[$i] += array("recipeProcedure" => $procedure);
+        }
         
         
         
         // index bladeに取得したデータを渡す
         // Recipeモデルで定義したgetByLimitを使用
-        return view('recipes.recipe_index')->with(
-            [
-                'recipes' => $recipe->getPaginateByLimit(),
-                // 'rakuten_recipes' => $rakuten_recipes,
-            ]);
+        return view('dashboard')->with(['rakuten_recipes' => $rakuten_recipes]);
+    }
+    
+    public function recipe_index(Recipe $recipe)
+    {
+        // index bladeに取得したデータを渡す
+        // Recipeモデルで定義したgetByLimitを使用
+        return view('recipes.recipe_index')->with(['recipes' => $recipe->getPaginateByLimit()]);
     }
     
     public function recipe_show(Recipe $recipe)
