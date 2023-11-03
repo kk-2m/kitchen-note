@@ -28,7 +28,7 @@ class StockRequest extends FormRequest
             "ingredient.ingredient_category_id" => "required|integer",
             'stock.quantity' => 'required|decimal:0,2|between:1, 99999999',
             'stock.unit_id' => 'required|integer',
-            'stock.expiration_at' => 'required|date',
+            'stock.expiration_at' => 'date',
         ];
     }
 }

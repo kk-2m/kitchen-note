@@ -13,9 +13,17 @@ class Kernel extends ConsoleKernel
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
+    
+    protected $commands = [
+        // コマンドの登録
+        Commands\MenuExpiredDelete::class,
+    ];
+     
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        // スケジュールの登録
+        // 毎日深夜0:00に実行
+        $schedule->command('menu:expired-delete')->dailyAt();
     }
 
     /**

@@ -12,36 +12,24 @@ document.addEventListener('DOMContentLoaded', function () {
         
         // 新しい'procedure-item'のdivタグ
         const newProcedure = document.createElement('div');
-        newProcedure.classList.add('procedure-item');
+        newProcedure.classList.add('procedure-item', 'px-4', 'rounded-lg', 'border', 'border-gray-300');
         newProcedure.id = `procedure-item${formCount}`;
         
-        // 新しい'textarea'のdivタグ
-        const newTextarea = document.createElement('div');
-        newTextarea.classList.add('textarea');
+        const newFlexItem = document.createElement('div');
+        newFlexItem.classList.add('flex', 'py-2');
         
         // 新しいラベル
-        const label = document.createElement('label');
-        label.htmlFor = `procedure${formCount}`;
-        label.textContent = `手順${formCount}：`;
+        const label = document.createElement('h3');
+        label.classList.add(`procedure${formCount}`, 'font-semibold', 'pt-2');
+        label.textContent = `手順${formCount}`;
         
-        // 新しいテキストエリア
-        const textarea = document.createElement('textarea');
-        textarea.name = `procedure[${formCount}][body]`;
-        textarea.rows = 4;
-        textarea.cols = 40;
-        textarea.className = 'procedures';
-        textarea.id = `form${formCount}`;
-        textarea.placeholder = '例）ケトルで沸かしたお湯を注ぎ、3分待つ。';
-        
-        // 新しいバリデーションエラー表示タグ
-        const newValidation = document.createElement('p');
-        newValidation.className = 'procedure_error';
-        newValidation.setAttribute('style', "color:red");
+        const newPadding = document.createElement('div');
+        newPadding.classList.add('px-2');
         
         // 新しい削除ボタン
         const deleteButton = document.createElement('button');
         deleteButton.type = 'button';
-        deleteButton.classList.add('procedure-delete-button');
+        deleteButton.classList.add('procedure-delete-button', 'my-btn');
         deleteButton.dataset.id = `${formCount}`;
         deleteButton.textContent = '削除';
         
@@ -63,14 +51,34 @@ document.addEventListener('DOMContentLoaded', function () {
             renumberProcedureItems(currentProcedureCount);
         });
         
-        newTextarea.appendChild(label);
+        // 新しい'textarea'のdivタグ
+        const newTextarea = document.createElement('div');
+        newTextarea.classList.add('textarea');
+        
+        // 新しいテキストエリア
+        const textarea = document.createElement('textarea');
+        textarea.name = `procedure[${formCount}][body]`;
+        textarea.rows = 4;
+        textarea.cols = 40;
+        textarea.classList.add('procedures', 'w-full');
+        textarea.id = `form${formCount}`;
+        textarea.placeholder = '例）ケトルで沸かしたお湯を注ぎ、3分待つ。';
+        
+        // 新しいバリデーションエラー表示タグ
+        // const newValidation = document.createElement('p');
+        // newValidation.className = 'procedure_error';
+        // newValidation.setAttribute('style', "color:red");
+        
+        newPadding.appendChild(deleteButton);
+        
+        newFlexItem.appendChild(label);
+        newFlexItem.appendChild(newPadding);
+        
         newTextarea.appendChild(textarea);
         newTextarea.appendChild(document.createElement('br'));
         
+        newProcedure.appendChild(newFlexItem);
         newProcedure.appendChild(newTextarea);
-        newProcedure.appendChild(newValidation);
-        newProcedure.appendChild(deleteButton);
-        
         
         container.appendChild(newProcedure);
     });
@@ -83,9 +91,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const procedureItem = document.getElementById(`procedure-item${i}`);
             if (procedureItem) {
                 procedureItem.id = `procedure-item${i - 1}`;
-                const label = procedureItem.querySelector('label');
-                label.htmlFor = `procedure${i - 1}`;
-                label.textContent = `手順${i - 1}：`;
+                const label = procedureItem.querySelector('h3');
+                label.textContent = `材料${i - 1}`;
                 const textarea = procedureItem.querySelector('textarea');
                 textarea.name = `procedure[${i - 1}][body]`;
                 textarea.id = `form${i - 1}`;

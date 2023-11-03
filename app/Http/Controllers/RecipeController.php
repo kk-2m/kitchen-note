@@ -62,13 +62,8 @@ class RecipeController extends Controller
         return redirect('/recipes');
     }
     
-    public function recipe_index(Recipe $recipe)
+    public function dashboard()
     {
-        // $recipes = $recipe->get();
-        // foreach ($recipes as $recipe) {
-        //     dd($recipe->procedures());
-        // }
-        
         $apiKey = config('services.rakuten_recipe.token');
         
         // GET通信するURL
@@ -95,6 +90,7 @@ class RecipeController extends Controller
             // レシピの想定人数を取得
             $number = $service->getNumber($rakuten_recipes[$i]['recipeUrl']);
             $rakuten_recipes[$i] += array("recipeNumber" => $number);
+            
             // レシピの調理手順を取得
             $procedure = $service->getProcedure($rakuten_recipes[$i]['recipeUrl']);
             $rakuten_recipes[$i] += array("recipeProcedure" => $procedure);
@@ -104,11 +100,14 @@ class RecipeController extends Controller
         
         // index bladeに取得したデータを渡す
         // Recipeモデルで定義したgetByLimitを使用
-        return view('recipes.recipe_index')->with(
-            [
-                'recipes' => $recipe->getPaginateByLimit(),
-                'rakuten_recipes' => $rakuten_recipes,
-            ]);
+        return view('dashboard')->with(['rakuten_recipes' => $rakuten_recipes]);
+    }
+    
+    public function recipe_index(Recipe $recipe)
+    {
+        // index bladeに取得したデータを渡す
+        // Recipeモデルで定義したgetByLimitを使用
+        return view('recipes.recipe_index')->with(['recipes' => $recipe->getPaginateByLimit()]);
     }
     
     public function recipe_show(Recipe $recipe)
@@ -133,7 +132,7 @@ class RecipeController extends Controller
     
     public function recipe_store(RecipeRequest $request, Recipe $recipe)
     {
-        // dd($request['procedure']);
+        // dd($request['ingredient_recipe']);
         
         // viewでrecipeに格納された内容をinputに渡す
         $input_recipe = $request['recipe'];
@@ -219,6 +218,8 @@ class RecipeController extends Controller
         $input_ingredients = $request['ingredient'];
         $input_ingredient_recipe = $request['ingredient_recipe'];
         
+        // dd($input_ingredients);
+        
         // *recipesテーブルへの保存*
         // ログイン処理がログイン情報に基づいて、ユーザーIDを取得する処理に変える
         // requestの送信者のuser_idを$input_recipeに追加
@@ -278,9 +279,9 @@ class RecipeController extends Controller
                 // https://yama-weblog.com/can-not-save-multiple-record-using-foreach-in-laravel8/
                 
                 $procedure = Procedure::where('recipe_id', $recipeId)
-                    // $procedureIdは0から始まる
-                    ->where('id', $procedureId[$i-1])
-                    ->first();
+                                // $procedureIdは0から始まる
+                                ->where('id', $procedureId[$i-1])
+                                ->first();
                 // dd($i, count($input_procedures), count($recipe->procedures));
                 if ($i <= count($input_procedures) and $procedure) {
                     $procedure->fill(
@@ -343,7 +344,6 @@ class RecipeController extends Controller
         //     $i += 1;
         // }
         
-        // dd($input_ingredient_recipe);
         for ($i=1; $i<count($input_ingredients)+1; $i++) {
             // nameによりDBからingredientを取得します
             // DBにない場合はname、ingredient_category_id属性を使用してingredientを作成します。
@@ -351,9 +351,10 @@ class RecipeController extends Controller
                 ['name' => $input_ingredients["{$i}"]["name"]],
                 ['ingredient_category_id' => $input_ingredients["{$i}"]["ingredient_category_id"]]
             );
+            // 中間テーブルのリクエストにrecipe_idと、ingredient_idを追加
+            $input_ingredient_recipe["{$i}"] += array('recipe_id'=>$recipeId, 'ingredient_id'=>$ingredient->id);
         }
         // *ingredient_recipeテーブルへの保存*
-        // syncWithoutDetachingで完全な重複以外を許容
         $recipe->ingredients()->sync($input_ingredient_recipe);
         
         return redirect('/recipes/' . $recipeId);

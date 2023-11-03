@@ -18,6 +18,12 @@ class Menu extends Model
         'date',
     ];
     
+    // 1対多のリレーション
+    public function shopping_lists()
+    {
+        return $this->hasMany(ShoppingList::class);
+    }
+    
     // 多対1のリレーション
     public function recipe()
     {

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StockRequest;
 use Carbon\Carbon;
 use App\Models\Stock;
+use App\Models\ShoppingList;
 use App\Models\Ingredient;
 use App\Models\IngredientCategory;
 use App\Models\Unit;
@@ -16,8 +17,10 @@ class StockController extends Controller
     {
         // index bladeに取得したデータを渡す
         // Recipeモデルで定義したgetByLimitを使用
+        // dd(Carbon::today());
         return view('stocks.stock_index')->with([
             'stocks' => $stock->getPaginateByLimit(),
+            'today' => Carbon::today(),
         ]);
     }
     
@@ -37,12 +40,22 @@ class StockController extends Controller
         $input_ingredient = $request['ingredient'];
         
         $ingredient = Ingredient::firstOrCreate(
-            ['name' => $input_ingredient["name"]],
-            ['ingredient_category_id' => $input_ingredient["ingredient_category_id"]
-        ]);
+                ['name' => $input_ingredient["name"]],
+                ['ingredient_category_id' => $input_ingredient["ingredient_category_id"]]
+            );
         
         $input_stock += array('user_id' => $request->user()->id, 'ingredient_id' => $ingredient->id);
         // dd($input_stock);
+        
+        // $stock = Stock::updateOrCreate(
+        //         ['ingredient_id' => $ingredient->id, 'unit_id' => $input_stock['unit_id']],
+        //         [
+        //             'user_id' => $request->user()->id,
+        //             'expiration_at' => $input_stock['expiration_at'],
+        //             // 直接SQL分を生成し、既存レコードのquantityカラムの値に入力値を足す
+        //             'quantity' => \DB::raw('quantity + ' . $input_stock['quantity'])
+        //         ]
+        //     );
         $stock->fill($input_stock)->save();
         
         // index bladeに取得したデータを渡す
@@ -77,6 +90,10 @@ class StockController extends Controller
     
     public function stock_delete(Stock $stock)
     {
+        $slist = ShoppingList::where('user_id', $stock->user_id)
+                        ->where('id', $stock->shopping_list_id)
+                        ->first();
+        $slist->delete();
         $stock->delete();
         return redirect('/stocks');
     }

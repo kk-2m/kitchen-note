@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('ingredient_id')->constrained();
+            $table->foreignId('ingredient_id')->constrained()->onDelete('cascade');;
+            $table->foreignId('shopping_list_id')->nullable()->constrained()->onDelete('cascade');
             $table->date('expiration_at')->nullable();
             $table->unsignedDecimal('quantity', 10, 2)->unsigned();
             $table->foreignId('unit_id')->constrained()->onDelete('cascade');

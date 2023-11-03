@@ -11,9 +11,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         deleteButton.addEventListener('click', () => {
             'use strict';
-
+            console.log("enter the function");
+            
             if (confirm('削除すると復元できません。\n本当に削除しますか？')) {
                 document.getElementById(`form_${deleteId}`).submit();
+                console.log(`削除処理事項`);
             }
         });
     });
