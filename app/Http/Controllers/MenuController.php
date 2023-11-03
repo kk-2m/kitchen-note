@@ -332,7 +332,7 @@ class MenuController extends Controller
         foreach ($input_slists as $input_slist) {
             if ($exists) {
                 if ($input_slist['quantity'] == $previousIngredients["{$i}"]->quantity) {
-                    return response()->json(['message' => "買い物リストが既にあります。", 'data' => $previousIngredients["{$i}"]->quantity]);
+                    return response()->json(['message' => "買い物リストが既にあります。", 'data' => $previousIngredients["{$i}"]]);
                 }
                 else {
                     $slist = ShoppingList::where(
@@ -344,52 +344,18 @@ class MenuController extends Controller
                             'deleted_at' => NULL,
                         ])->first();
                     $slist->fill($input_slist)->save();
-                    return response()->json(['message' => "買い物リストを更新しました。", 'data' => $previousIngredients["{$i}"]->quantity]);
+                    return response()->json(['message' => "買い物リストを更新しました。", 'data' => $previousIngredients["{$i}"]]);
                 }
             }
             else {
                 $slist = new ShoppingList();
+                $input_slist += array("status" => 0);
+                
                 $slist->fill($input_slist)->save();
             }
             $i += 1;
         }
         
-        return response()->json(['message' => "買い物リストに追加しました。", 'data' => $previousIngredients["{$i}"]->quantity]);
+        return response()->json(['message' => "買い物リストに追加しました。", 'data' => $input_slists]);
     }
 }
-
-// $previousIngredients = $menu->ingredients;
-//         $input_slists = $request['slist'];
-//         $userId = $menu->user_id;
-//         $menuId = $menu->id;
-        
-//         $exists = ShoppingList::where('user_id', $userId)
-//                         ->where('menu_id', $menuId)
-//                         ->whereNull('deleted_at')
-//                         ->exists();
-//         $i = 0;
-//         foreach ($input_slists as $input_slist) {
-//             if ($exists) {
-//                 if ($input_slist['quantity'] == $previousIngredients["{$i}"]['pivot']['quantity']) {
-//                     return response()->json(['message' => "買い物リストが既にあります。"]);
-//                 }
-//                 else {
-//                     $slist = ShoppingList::firstOrNew(
-//                         [
-//                             'user_id' => $input_slist['user_id'],
-//                             'ingredient_id' => $input_slist['ingredient_id'],
-//                             'menu_id' => $input_slist['menu_id'],
-//                             'unit_id' => $input_slist['unit_id'],
-//                             'deleted_at' => NULL,
-//                         ]);
-//                     $slist->fill($input_slist)->save();
-//                     return response()->json(['message' => "買い物リストを更新しました。"]);
-//                 }
-//             }
-//             else {
-//                 $slist = new ShoppingList();
-//                 $slist->fill($input_slist)->save();
-//                 return response()->json(['message' => "買い物リストに追加しました。"]);
-//             }
-//             $i += 1;
-//         }
