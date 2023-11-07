@@ -18,14 +18,14 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name' => "test1",
-            'email' => "test1@gmail.com",
+            'email' => "test1@email.com",
             'password' => bcrypt('testaccount'),
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
         DB::table('users')->insert([
             'name' => "test2",
-            'email' => "test2@gmail.com",
+            'email' => "test2@email.com",
             'password' => bcrypt('testaccount'),
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
