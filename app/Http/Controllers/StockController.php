@@ -93,7 +93,7 @@ class StockController extends Controller
         $slist = ShoppingList::where('user_id', $stock->user_id)
                         ->where('id', $stock->shopping_list_id)
                         ->first();
-        $slist->delete();
+        if ($slist) $slist->delete();
         $stock->delete();
         return redirect('/stocks');
     }

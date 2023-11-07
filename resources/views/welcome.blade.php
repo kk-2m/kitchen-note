@@ -51,7 +51,7 @@
                     @auth
                         <div class="mt-6">
                             <p>
-                                今すぐ始めまる。
+                                今すぐ始める。
                             </p>
                             <button class="mt-4 bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-400">
                                 <a href="{{ url('/dashboard') }}" >Dashboard</a>
