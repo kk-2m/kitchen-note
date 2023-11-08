@@ -14,4 +14,44 @@
     .my-store-btn{
         @apply rounded text-center p-1 bg-gray-900 text-gray-100 w-64 hover:bg-gray-700
     }
+    .circle1 {
+        background: #FFCC00;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        color: #fff;
+        font-size: 25px;
+        text-align: center;
+        line-height: 35px;
+    }
+    .circle2 {
+        background: #C0C0C0;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        color: #fff;
+        font-size: 25px;
+        text-align: center;
+        line-height: 35px;
+    }
+    .circle3 {
+        background: #993300;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        color: #fff;
+        font-size: 25px;
+        text-align: center;
+        line-height: 35px;
+    }
+    .circle {
+        background: #222222;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        color: #fff;
+        font-size: 25px;
+        text-align: center;
+        line-height: 35px;
+    }
 }

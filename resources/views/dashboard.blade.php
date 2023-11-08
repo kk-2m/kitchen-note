@@ -20,14 +20,41 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
-                        <div class="text-2xl font-black">人気ランキング</div>
+                        <div class="text-2xl font-black">
+                            <div class="flex">
+                                <div class="text-yellow-500">・</div>
+                                <div class="text-yellow-700">・</div>
+                                <div class="text-yellow-500 pr-2">・</div>
+                                人気のレシピ
+                            </div>
+                        </div>
+                            
                             @foreach($rakuten_recipes as $rakuten_recipe)
                                 <div class='rakuten_recipe border-b border-gray-300 py-4'>
                                     <div class="">
-                                        <div class="font-bold text-2xl hover:underline">
-                                            <a href={{ $rakuten_recipe->url }}>
-                                                {{ $rakuten_recipe->title }}
-                                            </a>
+                                        <div class="flex font-bold text-2xl">
+                                            @if ($loop->iteration == 1)
+                                                <div class="circle1">
+                                                    {{ $loop->iteration }}
+                                                </div>
+                                            @elseif ($loop->iteration == 2)
+                                                <div class="circle2">
+                                                    {{ $loop->iteration }}
+                                                </div>
+                                            @elseif ($loop->iteration == 3)
+                                                <div class="circle3">
+                                                    {{ $loop->iteration }}
+                                                </div>
+                                            @else
+                                                <div class="circle">
+                                                    {{ $loop->iteration }}
+                                                </div>
+                                            @endif
+                                            <div class="ml-3 hover:underline">
+                                                <a href={{ $rakuten_recipe->url }}>
+                                                    {{ $rakuten_recipe->title }}
+                                                </a>
+                                            </div>
                                         </div>
                                         <div class="flex">
                                             <div class="flex-1">
