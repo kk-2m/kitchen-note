@@ -17,90 +17,15 @@ use App\Models\User;
 use App\Models\Unit;
 use App\Models\UnitConversion;
 use App\Models\RakutenRecipeCategory;
+use App\Models\RakutenRecipe;
 
 class RecipeController extends Controller
 {
-    public function getCategories()
+    public function dashboard(RakutenRecipe $rakuten_recipe)
     {
-        $apiKey = config('services.rakuten_recipe.token');
-        
-        // GET通信するURL
-        $url = "https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20170426?format=json&applicationId={$apiKey}";
-        
-        // Guzzleクライアントのインスタンスを作成
-        $client = new \GuzzleHttp\Client();
-        
-        // Guzzleを使用してHTMLを取得
-        $response = $client->request('GET', $url);
-        
-        // API通信で取得したデータはjson形式なので
-        // PHPファイルに対応した連想配列にデコードする
-        $contents = json_decode($response->getBody(), true);
-        $rakuten_recipe_categories = $contents['result'];
-        
-        // カテゴリ一覧の「料理から探す」カテゴリのみ取得
-        for ($i=1; $i<12; $i++) {
-            $recipe_categories[$i] = $rakuten_recipe_categories['large'][$i]['categoryId'];
-        }
-        $recipe_categories += array(12 => $rakuten_recipe_categories['large'][0]['categoryId']);
-        // dd($recipe_categories);
-        
-        foreach ($rakuten_recipe_categories['medium'] as $medium_categories) {
-            $store_model = new RakutenRecipeCategory();
-            if (in_array($medium_categories['parentCategoryId'], $recipe_categories, true)) {
-                $rakuten_recipe_category = [
-                    'category_id' => array_search($medium_categories['parentCategoryId'], $recipe_categories),
-                    'parent_id' => $medium_categories['parentCategoryId'],
-                    'rakuten_category_id' => $medium_categories['categoryId'],
-                    'category_name' => $medium_categories['categoryName'],
-                    'category_url' => $medium_categories['categoryUrl'],
-                ];
-                $store_model->fill($rakuten_recipe_category)->save();
-            }
-        }
-        
-        return redirect('/recipes');
-    }
-    
-    public function dashboard()
-    {
-        $apiKey = config('services.rakuten_recipe.token');
-        
-        // GET通信するURL
-        $url = "https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426?applicationId={$apiKey}";
-        
-        // クライアントインスタンス生成
-        $client = new \GuzzleHttp\Client();
-        // リクエスト送信と返却データの取得
-        $response = $client->request('GET', $url);
-        
-        // API通信で取得したデータはjson形式なので
-        // PHPファイルに対応した連想配列にデコードする
-        $contents = json_decode($response->getBody(), true);
-        $rakuten_recipes = $contents['result'];
-        
-        // $serviceにRakutenRecipeServiceクラスをインスタンス化
-        $service = app()->make('RakutenRecipeService');
-        
-        for ($i=0; $i<count($rakuten_recipes); $i++)
-        {
-            // レシピの材料を取得
-            $quantity = $service->getQuantity($rakuten_recipes[$i]['recipeUrl']);
-            $rakuten_recipes[$i] += array("recipeMaterialQuantity" => $quantity);
-            // レシピの想定人数を取得
-            $number = $service->getNumber($rakuten_recipes[$i]['recipeUrl']);
-            $rakuten_recipes[$i] += array("recipeNumber" => $number);
-            
-            // レシピの調理手順を取得
-            $procedure = $service->getProcedure($rakuten_recipes[$i]['recipeUrl']);
-            $rakuten_recipes[$i] += array("recipeProcedure" => $procedure);
-        }
-        
-        
-        
         // index bladeに取得したデータを渡す
         // Recipeモデルで定義したgetByLimitを使用
-        return view('dashboard')->with(['rakuten_recipes' => $rakuten_recipes]);
+        return view('dashboard')->with(['rakuten_recipes' => $rakuten_recipe->get()]);
     }
     
     public function recipe_index(Recipe $recipe)

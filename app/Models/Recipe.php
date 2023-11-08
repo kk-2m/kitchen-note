@@ -13,7 +13,7 @@ class Recipe extends Model
     use SoftDeletes;
     
     // 1度のページに表示する件数を制限
-    public function getPaginateByLimit(int $limit_count = 2)
+    public function getPaginateByLimit(int $limit_count = 5)
     {
         $userId = Auth::id();
         // paginate関数でget()を実行しているので、書く必要がない
