@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         // コマンドの登録
         Commands\MenuExpiredDelete::class,
+        Commands\UpdateRanking::class,
     ];
      
     protected function schedule(Schedule $schedule)
@@ -24,6 +25,7 @@ class Kernel extends ConsoleKernel
         // スケジュールの登録
         // 毎日深夜0:00に実行
         $schedule->command('menu:expired-delete')->dailyAt();
+        $schedule->command('update:ranking')->dailyAt();
     }
 
     /**

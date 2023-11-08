@@ -25,27 +25,27 @@
                                 <div class='rakuten_recipe border-b border-gray-300 py-4'>
                                     <div class="">
                                         <div class="font-bold text-2xl hover:underline">
-                                            <a href={{ $rakuten_recipe['recipeUrl'] }}>
-                                                {{ $rakuten_recipe['recipeTitle'] }}
+                                            <a href={{ $rakuten_recipe->url }}>
+                                                {{ $rakuten_recipe->title }}
                                             </a>
                                         </div>
                                         <div class="flex">
                                             <div class="flex-1">
-                                                <p class='cooking_time'>調理時間 : {{ $rakuten_recipe['recipeIndication'] }}</p>
+                                                <p class='cooking_time'>調理時間 : {{ $rakuten_recipe->cooking_time }}</p>
                                                 
                                                 <div class='ingrediens'>
                                                     <div class="text-lg font-semibold pt-4">
-                                                        材料リスト({{ $rakuten_recipe['recipeNumber'] }}人前)
+                                                        材料リスト({{ $rakuten_recipe->number }}人前)
                                                     </div>
                                                 </div>
-                                                @foreach ($rakuten_recipe['recipeMaterialQuantity'] as $ingredient)
+                                                @foreach ($rakuten_recipe->rakuten_ingredients as $ingredient)
                                                     <p class='ingredient'>
-                                                        {{ $ingredient['name'] }}　{{ $ingredient['serving'] }}
+                                                        {{ $ingredient->name }}　{{ $ingredient->pivot->serving }}
                                                     </p>
                                                 @endforeach
                                             </div>
                                             <div class="flex-1">
-                                                <img src="{{ $rakuten_recipe['foodImageUrl'] }}" width='300px'>
+                                                <img src="{{ $rakuten_recipe->image }}" width='300px'>
                                             </div>
                                         </div>
                                     </div>
