@@ -1,66 +1,229 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
+# KitcheNote
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+    ![KitchenNote](https://github.com/kk-2m/kitchen-note/assets/112247999/0eae7934-7b85-4e77-a83c-9b89dac8e4f1)
 </p>
 
-## About Laravel
+<!--<p align="center">-->
+<!--<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>-->
+<!--<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>-->
+<!--<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>-->
+<!--<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>-->
+<!--</p>-->
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## URL
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+アプリ[URL](https://kitchen-note-732a61d9545e.herokuapp.com/)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 背景・概要
 
-## Learning Laravel
+「冷蔵庫の中に何があったかな？」このような疑問はもうおしまいです。
+KitcheNoteはシンプルながらも、効果的な機能で日常の小さな悩みを解決します。
+レシピの管理から賞味・消費期限などの在庫情報まで、このアプリは毎日の食事準備を簡単に効率的にします。
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+献立を考える際も、KitcheNoteがあればスマートに計画を立てられます。
+ボタン1つで瞬時に買い物リストが生成され、アイテムにチェックを入れるだけで在庫が自動更新されます。
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+KitcheNoteはただのレシピ管理アプリではありません。
+これは、料理をより楽しく、生活をより効率的にするあなたの新しいキッチンパートナーです。
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## アプリケーションのイメージ
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
+## 使用技術
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+以下はアプリ開発に使った技術になります。
 
-## Contributing
+### フロントエンド
+    * HTML/CSS
+        - Tailwind CSS：レスポンシブなデザイン作成
+    * JavaScript
+        - jQuery：ユーザーインタラクション、Ajax通信
+### バックエンド
+    * PHP（8.0.30）
+        - Laravel（9.52.15）：MVCアーキテクチャの構築
+        - Guzzle（7.8.0）：Webスクレイピング
+        - Breeze（v1.19.2）：認証機能
+### データベース
+    * MariaDB（10.2.38）：開発時に使用
+    * PostgresSQL：デプロイ時に使用
+### その他のツール・技術
+    * AWS
+        - Amazon EC2：テストサーバー
+        - AWS Cloud9：Cloud IDE
+    * Git（2.40.1）：バージョン管理
+    * GitHub
+    * Xserver
+    * Heroku：デプロイ時に使用
+    * API
+        - 楽天レシピカテゴリ別ランキングAPI
+
+## ER図
 
 Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
+## 機能一覧
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# HTML test
 
-## Security Vulnerabilities
+<table>
+<thead>
+<tr>
+<td>トップ画面</td>
+<td>ログイン画面</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://qiita-image-store.s3.amazonaws.com/0/140610/d4184ea0-0c21-3b78-5154-90bae839a05f.png">You <strong style="color: blue; text-decoration: underline;">should never</strong>&nbsp;use inline styles!</td>
+<td><strong style="font-size: 17px; color: #2b2301;">x</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>メールアドレスとパスワードを用いた認証機能を実装しました</td>
+</tr>
+</tbody>
+</table>
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+<table>
+<thead>
+<tr>
+<td>ダッシュボード</td>
+<td>レシピ一覧画面</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://qiita-image-store.s3.amazonaws.com/0/140610/d4184ea0-0c21-3b78-5154-90bae839a05f.png">You <strong style="color: blue; text-decoration: underline;">should never</strong>&nbsp;use inline styles!</td>
+<td><strong style="font-size: 17px; color: #2b2301;">x</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>メールアドレスとパスワードを用いた認証機能を実装しました</td>
+</tr>
+</tbody>
+</table>
 
-## License
+<table>
+<thead>
+<tr>
+<td>レシピ詳細画面</td>
+<td>レシピ作成画面</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://qiita-image-store.s3.amazonaws.com/0/140610/d4184ea0-0c21-3b78-5154-90bae839a05f.png">You <strong style="color: blue; text-decoration: underline;">should never</strong>&nbsp;use inline styles!</td>
+<td><strong style="font-size: 17px; color: #2b2301;">x</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>メールアドレスとパスワードを用いた認証機能を実装しました</td>
+</tr>
+</tbody>
+</table>
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<table>
+<thead>
+<tr>
+<td>レシピ編集画面</td>
+<td>在庫情報一覧画面</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://qiita-image-store.s3.amazonaws.com/0/140610/d4184ea0-0c21-3b78-5154-90bae839a05f.png">You <strong style="color: blue; text-decoration: underline;">should never</strong>&nbsp;use inline styles!</td>
+<td><strong style="font-size: 17px; color: #2b2301;">x</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>メールアドレスとパスワードを用いた認証機能を実装しました</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<td>新規在庫作成画面</td>
+<td>在庫情報編集画面</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://qiita-image-store.s3.amazonaws.com/0/140610/d4184ea0-0c21-3b78-5154-90bae839a05f.png">You <strong style="color: blue; text-decoration: underline;">should never</strong>&nbsp;use inline styles!</td>
+<td><strong style="font-size: 17px; color: #2b2301;">x</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>メールアドレスとパスワードを用いた認証機能を実装しました</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<td>献立一覧画面</td>
+<td>献立作成画面</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://qiita-image-store.s3.amazonaws.com/0/140610/d4184ea0-0c21-3b78-5154-90bae839a05f.png">You <strong style="color: blue; text-decoration: underline;">should never</strong>&nbsp;use inline styles!</td>
+<td><strong style="font-size: 17px; color: #2b2301;">x</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>メールアドレスとパスワードを用いた認証機能を実装しました</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<td>献立編集画面</td>
+<td>買い物情報一覧画面</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://qiita-image-store.s3.amazonaws.com/0/140610/d4184ea0-0c21-3b78-5154-90bae839a05f.png">You <strong style="color: blue; text-decoration: underline;">should never</strong>&nbsp;use inline styles!</td>
+<td><strong style="font-size: 17px; color: #2b2301;">x</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>メールアドレスとパスワードを用いた認証機能を実装しました</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<td>買い物情報一覧画面</td>
+<td>買い物情報編集画面</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://qiita-image-store.s3.amazonaws.com/0/140610/d4184ea0-0c21-3b78-5154-90bae839a05f.png">You <strong style="color: blue; text-decoration: underline;">should never</strong>&nbsp;use inline styles!</td>
+<td><strong style="font-size: 17px; color: #2b2301;">x</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>メールアドレスとパスワードを用いた認証機能を実装しました</td>
+</tr>
+</tbody>
+</table>
+
+## テストアカウント
+
+```
+user name : test1
+
+user email : test1@email.com
+
+password : testaccount
+```
