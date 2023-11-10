@@ -10,9 +10,9 @@
 
 ## URL
 
-testアカウントは下記に記載があります
+testアカウントは[下記](https://github.com/kk-2m/kitchen-note#%E3%83%86%E3%82%B9%E3%83%88%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88)に記載があります
 
-(https://kitchen-note-732a61d9545e.herokuapp.com/)
+アプリURL(https://kitchen-note-732a61d9545e.herokuapp.com/)
 
 ## 背景・概要
 
