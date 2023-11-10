@@ -1,5 +1,5 @@
 # KitcheNote
-![KitchenNote](https://github.com/kk-2m/kitchen-note/assets/112247999/0eae7934-7b85-4e77-a83c-9b89dac8e4f1)
+![KitchenNote](https://github.com/kk-2m/kitchen-note/assets/112247999/5348554d-940e-4849-ae06-e2af3d09e886)
 
 <!--<p align="center">-->
 <!--<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>-->
@@ -10,9 +10,9 @@
 
 ## URL
 
-testアカウントは下記に記載
+testアカウントは下記に記載があります
 
-アプリ[URL](https://kitchen-note-732a61d9545e.herokuapp.com/)
+(https://kitchen-note-732a61d9545e.herokuapp.com/)
 
 ## 背景・概要
 
