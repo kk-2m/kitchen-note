@@ -1,7 +1,5 @@
 # KitcheNote
-<p align="center">
-    ![KitchenNote](https://github.com/kk-2m/kitchen-note/assets/112247999/0eae7934-7b85-4e77-a83c-9b89dac8e4f1)
-</p>
+![KitchenNote](https://github.com/kk-2m/kitchen-note/assets/112247999/0eae7934-7b85-4e77-a83c-9b89dac8e4f1)
 
 <!--<p align="center">-->
 <!--<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>-->
@@ -11,6 +9,8 @@
 <!--</p>-->
 
 ## URL
+
+testアカウントは下記に記載
 
 アプリ[URL](https://kitchen-note-732a61d9545e.herokuapp.com/)
 
@@ -35,28 +35,28 @@ KitcheNoteはただのレシピ管理アプリではありません。
 以下はアプリ開発に使った技術になります。
 
 ### フロントエンド
-    * HTML/CSS
-        - Tailwind CSS：レスポンシブなデザイン作成
-    * JavaScript
-        - jQuery：ユーザーインタラクション、Ajax通信
+* HTML/CSS
+    - Tailwind CSS：レスポンシブなデザイン作成
+* JavaScript
+    - jQuery：ユーザーインタラクション、Ajax通信
 ### バックエンド
-    * PHP（8.0.30）
-        - Laravel（9.52.15）：MVCアーキテクチャの構築
-        - Guzzle（7.8.0）：Webスクレイピング
-        - Breeze（v1.19.2）：認証機能
+* PHP（8.0.30）
+    - Laravel（9.52.15）：MVCアーキテクチャの構築
+    - Guzzle（7.8.0）：Webスクレイピング
+    - Breeze（v1.19.2）：認証機能
 ### データベース
-    * MariaDB（10.2.38）：開発時に使用
-    * PostgresSQL：デプロイ時に使用
+* MariaDB（10.2.38）：開発時に使用
+* PostgresSQL：デプロイ時に使用
 ### その他のツール・技術
-    * AWS
-        - Amazon EC2：テストサーバー
-        - AWS Cloud9：Cloud IDE
-    * Git（2.40.1）：バージョン管理
-    * GitHub
-    * Xserver
-    * Heroku：デプロイ時に使用
-    * API
-        - 楽天レシピカテゴリ別ランキングAPI
+* AWS
+    - Amazon EC2：テストサーバー
+    - AWS Cloud9：Cloud IDE
+* Git（2.40.1）：バージョン管理
+* GitHub
+* Xserver
+* Heroku：デプロイ時に使用
+* API
+    - 楽天レシピカテゴリ別ランキングAPI
 
 ## ER図
 
