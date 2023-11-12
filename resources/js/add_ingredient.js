@@ -127,8 +127,9 @@ document.addEventListener('DOMContentLoaded', function () {
         ingredientQuantityInput.type = "number";
         ingredientQuantityInput.name = `ingredient_recipe[${ingredientCount}][quantity]`;
         ingredientQuantityInput.id = `input_ingredient_quantity${ingredientCount}`;
-        ingredientQuantityInput.placeholder = "量を入力";
-        ingredientQuantityInput.min = 1;
+        ingredientQuantityInput.placeholder = "値を入力";
+        ingredientQuantityInput.min = 0.01;
+        ingredientQuantityInput.step = 0.01;
         ingredientQuantityInput.max = 99999999;
         
         // 新しいバリデーションエラー表示タグ
