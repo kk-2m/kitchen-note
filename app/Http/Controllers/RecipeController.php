@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RecipeRequest;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\RecipeRequest;
 use App\Models\Recipe;
 use App\Models\Procedure;
 use App\Models\Category;
@@ -66,16 +67,24 @@ class RecipeController extends Controller
         $input_ingredients = $request['ingredient'];
         $input_ingredient_recipe = $request['ingredient_recipe'];
         
+        $userId = $request->user()->id;
+        
         // *recipesテーブルへの保存*
         // ログイン処理がログイン情報に基づいて、ユーザーIDを取得する処理に変える
-        // それまでは便宜上user_idを1とする
-        $input_recipe += array('user_id'=>$request->user()->id);
+        $input_recipe += array('user_id'=>$userId);
         if ($request->file('recipe.image')) {
             // アップロードされたファイル名を取得
-            $file_name = $request->file('recipe.image')->getClientOriginalName();
+            // $file_name = $request->file('recipe.image')->getClientOriginalName();
+            $file = $request->file('recipe.image');
+            if(!\Storage::disk('sftp')->exists($userId)) {
+                \Storage::disk('sftp')->makeDirectory($userId);
+            }
+            // ファイルをSFTPサーバーの 'KitchenNote' ディレクトリに保存
+            // Laravelはファイル名を自動的に生成
+            $path = Storage::disk('sftp')->putFile($userId, $file);
+            
             // 取得したファイル名で保存
-            $request->file('recipe.image')->storeAs('public/dish_image/', $file_name);
-            $input_recipe['image'] = 'storage/dish_image/' . $file_name;
+            $input_recipe['image'] = $path;
         }
         $recipe->fill($input_recipe)->save();
         
@@ -144,6 +153,7 @@ class RecipeController extends Controller
         $input_ingredient_recipe = $request['ingredient_recipe'];
         
         // dd($input_ingredients);
+        $userId = $request->user()->id;
         
         // *recipesテーブルへの保存*
         // ログイン処理がログイン情報に基づいて、ユーザーIDを取得する処理に変える
@@ -151,10 +161,19 @@ class RecipeController extends Controller
         $input_recipe += array('user_id'=>$request->user()->id);
         if ($request->file('recipe.image')) {
             // アップロードされたファイル名を取得
-            $file_name = $request->file('recipe.image')->getClientOriginalName();
+            // $file_name = $request->file('recipe.image')->getClientOriginalName();
+            // 元々登録されていた画像は削除
+            Storage::disk('sftp')->delete($recipe->image);
+            $file = $request->file('recipe.image');
+            if(!\Storage::disk('sftp')->exists($userId)) {
+                \Storage::disk('sftp')->makeDirectory($userId);
+            }
+            // ファイルをSFTPサーバーの 'KitchenNote' ディレクトリに保存
+            // Laravelはファイル名を自動的に生成
+            $path = Storage::disk('sftp')->putFile($userId, $file);
+            
             // 取得したファイル名で保存
-            $request->file('recipe.image')->storeAs('public/dish_image/', $file_name);
-            $input_recipe['image'] = 'storage/dish_image/' . $file_name;
+            $input_recipe['image'] = $path;
         }
         $recipe->fill($input_recipe)->save();
         
@@ -287,6 +306,8 @@ class RecipeController extends Controller
     
     public function recipe_delete(Recipe $recipe)
     {
+        // 元々登録されていた画像は削除
+        Storage::disk('sftp')->delete($recipe->image);
         $recipe->delete();
         return redirect('/recipes');
     }

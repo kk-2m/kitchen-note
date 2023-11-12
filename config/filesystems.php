@@ -43,6 +43,17 @@ return [
             'visibility' => 'public',
             'throw' => false,
         ],
+        
+        'sftp' => [
+            'driver' => 'sftp',
+            'host' => env('SFTP_HOST','162.43.104.201'),
+            'port' => (int) env('SFTP_PORT',10022),
+            'username' => env('SFTP_USER'),
+            'password' => env('SFTP_PW'),
+            'privateKey' => base64_decode(getenv('SFTP_PRIVATE_KEY')),
+            'root' => env('SFTP_ROOT_DIR'),
+            'timeout' => 30,
+          ],
 
         's3' => [
             'driver' => 's3',

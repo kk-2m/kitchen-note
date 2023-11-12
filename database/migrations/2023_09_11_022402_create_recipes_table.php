@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('number');
             $table->integer('cooking_time');
             $table->unsignedTinyInteger('cooking_time_unit');
-            $table->string('image', 100)->nullable();
+            $table->string('image', 200)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

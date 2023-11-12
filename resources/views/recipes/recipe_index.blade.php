@@ -33,7 +33,7 @@
                                             <button type="button" class="my-btn"><a href="{{ route('menu_create', ['recipe_id' => $recipe->id]) }}">献立追加</a></button>
                                         </div>
                                         <div class="flex-none px-4">
-                                            <form action=""{{ route('recipe_delete', ['recipe'=>$recipe->id]) }}"" id="form_{{ $recipe->id }}" method="post">
+                                            <form action="{{ route('recipe_delete', ['recipe'=>$recipe->id]) }}" id="form_{{ $recipe->id }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 {{--
@@ -89,9 +89,9 @@
                                     </div>
                                     <div class="flex-1">
                                         @if ($recipe->image != '')
-                                            <img src="{{ asset($recipe->image) }}" alt='料理写真' width='50%'>
+                                            <img src="https://rihwablog.com/KitchenNote/{{ $recipe->image }}" alt='料理写真' width='50%'>
                                         @else
-                                            <img src="{{ asset('storage/dish_image/noimage.png') }}" alt='料理写真'>
+                                            <img src="https://rihwablog.com/KitchenNote/noimage.png" alt='料理写真'>
                                         @endif
                                     </div>
                                 </div>

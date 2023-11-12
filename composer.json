@@ -11,7 +11,9 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "league/flysystem-sftp-v3": "^3.0",
         "nesbot/carbon": "^2.71",
+        "phpseclib/phpseclib": "^3.0",
         "symfony/dom-crawler": "^6.0",
         "symfony/http-client": "^6.0",
         "symfony/mailgun-mailer": "^6.0"
