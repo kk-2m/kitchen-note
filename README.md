@@ -1,4 +1,4 @@
-# KitcheNote
+# KitchenNote
 ![KitchenNote](https://github.com/kk-2m/kitchen-note/assets/112247999/5348554d-940e-4849-ae06-e2af3d09e886)
 
 <!--<p align="center">-->
@@ -88,84 +88,84 @@ Thank you for considering contributing to the Laravel framework! The contributio
 <table>
 <thead>
 <tr>
+<td></td>
 <td>ダッシュボード</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://qiita-image-store.s3.amazonaws.com/0/140610/d4184ea0-0c21-3b78-5154-90bae839a05f.png">You <strong style="color: blue; text-decoration: underline;">should never</strong>&nbsp;use inline styles!</td>
+<td><strong style="font-size: 17px; color: #2b2301;">x</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>メールアドレスとパスワードを用いた認証機能を実装しました</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
 <td>レシピ一覧画面</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><img src="https://qiita-image-store.s3.amazonaws.com/0/140610/d4184ea0-0c21-3b78-5154-90bae839a05f.png">You <strong style="color: blue; text-decoration: underline;">should never</strong>&nbsp;use inline styles!</td>
-<td><strong style="font-size: 17px; color: #2b2301;">x</strong></td>
-</tr>
-<tr>
-<td></td>
-<td>メールアドレスとパスワードを用いた認証機能を実装しました</td>
-</tr>
-</tbody>
-</table>
-
-<table>
-<thead>
-<tr>
 <td>レシピ詳細画面</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://qiita-image-store.s3.amazonaws.com/0/140610/d4184ea0-0c21-3b78-5154-90bae839a05f.png">You <strong style="color: blue; text-decoration: underline;">should never</strong>&nbsp;use inline styles!</td>
+<td><strong style="font-size: 17px; color: #2b2301;">x</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>メールアドレスとパスワードを用いた認証機能を実装しました</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
 <td>レシピ作成画面</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><img src="https://qiita-image-store.s3.amazonaws.com/0/140610/d4184ea0-0c21-3b78-5154-90bae839a05f.png">You <strong style="color: blue; text-decoration: underline;">should never</strong>&nbsp;use inline styles!</td>
-<td><strong style="font-size: 17px; color: #2b2301;">x</strong></td>
-</tr>
-<tr>
-<td></td>
-<td>メールアドレスとパスワードを用いた認証機能を実装しました</td>
-</tr>
-</tbody>
-</table>
-
-<table>
-<thead>
-<tr>
 <td>レシピ編集画面</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://qiita-image-store.s3.amazonaws.com/0/140610/d4184ea0-0c21-3b78-5154-90bae839a05f.png">You <strong style="color: blue; text-decoration: underline;">should never</strong>&nbsp;use inline styles!</td>
+<td><strong style="font-size: 17px; color: #2b2301;">x</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>メールアドレスとパスワードを用いた認証機能を実装しました</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
 <td>在庫情報一覧画面</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><img src="https://qiita-image-store.s3.amazonaws.com/0/140610/d4184ea0-0c21-3b78-5154-90bae839a05f.png">You <strong style="color: blue; text-decoration: underline;">should never</strong>&nbsp;use inline styles!</td>
-<td><strong style="font-size: 17px; color: #2b2301;">x</strong></td>
-</tr>
-<tr>
-<td></td>
-<td>メールアドレスとパスワードを用いた認証機能を実装しました</td>
-</tr>
-</tbody>
-</table>
-
-<table>
-<thead>
-<tr>
 <td>新規在庫作成画面</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://qiita-image-store.s3.amazonaws.com/0/140610/d4184ea0-0c21-3b78-5154-90bae839a05f.png">You <strong style="color: blue; text-decoration: underline;">should never</strong>&nbsp;use inline styles!</td>
+<td><strong style="font-size: 17px; color: #2b2301;">x</strong></td>
+</tr>
+<tr>
+<td></td>
+<td>メールアドレスとパスワードを用いた認証機能を実装しました</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
 <td>在庫情報編集画面</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><img src="https://qiita-image-store.s3.amazonaws.com/0/140610/d4184ea0-0c21-3b78-5154-90bae839a05f.png">You <strong style="color: blue; text-decoration: underline;">should never</strong>&nbsp;use inline styles!</td>
-<td><strong style="font-size: 17px; color: #2b2301;">x</strong></td>
-</tr>
-<tr>
-<td></td>
-<td>メールアドレスとパスワードを用いた認証機能を実装しました</td>
-</tr>
-</tbody>
-</table>
-
-<table>
-<thead>
-<tr>
 <td>献立一覧画面</td>
-<td>献立作成画面</td>
 </tr>
 </thead>
 <tbody>
@@ -183,8 +183,8 @@ Thank you for considering contributing to the Laravel framework! The contributio
 <table>
 <thead>
 <tr>
+<td>献立作成画面</td>
 <td>献立編集画面</td>
-<td>買い物情報一覧画面</td>
 </tr>
 </thead>
 <tbody>
