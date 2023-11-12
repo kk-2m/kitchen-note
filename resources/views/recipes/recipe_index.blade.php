@@ -89,9 +89,9 @@
                                     </div>
                                     <div class="flex-1">
                                         @if ($recipe->image != '')
-                                            <img src="{{ asset($recipe->image) }}" alt='料理写真' width='50%'>
+                                            <img src="{{ $recipe->image }}" alt='料理写真' width='50%'>
                                         @else
-                                            <img src="{{ asset('storage/dish_image/noimage.png') }}" alt='料理写真'>
+                                            <img src="https://rihwablog.com/KitchenNote/noimage.png" alt='料理写真'>
                                         @endif
                                     </div>
                                 </div>
