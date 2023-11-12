@@ -100,7 +100,7 @@
                                         <div class="flex py-1 px-8">
                                             <div class="ingredient_qantity">
                                                 <label for="ingredient_quantity1">量：</label>
-                                                <input type="number" name="ingredient_recipe[1][quantity]" id="input_ingredient_quantity1" placeholder="値を入力" value="{{ old('ingredient_recipe.1.quantity') }}" min="1" step="0.01" max="99999999"/>
+                                                <input type="number" name="ingredient_recipe[1][quantity]" id="input_ingredient_quantity1" placeholder="値を入力" value="{{ old('ingredient_recipe.1.quantity') }}" min="0.01" step="0.01" max="99999999"/>
                                                 <p class="ingredient_quantity_error" style="color:red">{{ $errors->first('ingredient_recipe.1.quantity') }}</p>
                                             </div>
                                             <div class="ingredient_unit pl-2">
@@ -142,7 +142,7 @@
                                         <div class="flex py-1 px-8">
                                             <div class="ingredient_qantity">
                                                 <label for="ingredient_quantity2">量：</label>
-                                                <input type="number" name="ingredient_recipe[2][quantity]" id="input_ingredient_quantity2" placeholder="値を入力" value="{{ old('ingredient_recipe.2.quantity') }}" min="1" step="0.01" max="99999999"/>
+                                                <input type="number" name="ingredient_recipe[2][quantity]" id="input_ingredient_quantity2" placeholder="値を入力" value="{{ old('ingredient_recipe.2.quantity') }}" min="0.01" step="0.01" max="99999999"/>
                                                 <p class="ingredient_quantity_error" style="color:red">{{ $errors->first('ingredient_recipe.2.quantity') }}</p>
                                             </div>
                                             <div class="ingredient_unit pl-2">
@@ -191,7 +191,7 @@
                                             <div class="flex py-1 px-8">
                                                 <div class="ingredient_qantity">
                                                     <label for="ingredient_quantity{{ $key }}">量：</label>
-                                                    <input type="number" name="ingredient_recipe[{{ $key }}][quantity]" id="input_ingredient_quantity{{ $key }}" placeholder="値を入力" value="{{ old("ingredient_recipe.{$key}.quantity") }}" min="1" step="0.01" max="99999999"/>
+                                                    <input type="number" name="ingredient_recipe[{{ $key }}][quantity]" id="input_ingredient_quantity{{ $key }}" placeholder="値を入力" value="{{ old("ingredient_recipe.{$key}.quantity") }}" min="0.01" step="0.01" max="99999999"/>
                                                     <p class="ingredient_quantity_error" style="color:red">{{ $errors->first("ingredient_recipe.{$key}.quantity") }}</p>
                                                 </div>
                                                 <div class="ingredient_unit pl-2">

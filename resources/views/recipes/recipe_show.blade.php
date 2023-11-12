@@ -87,9 +87,13 @@
                         <div class='cooking_procedures'>
                             <div class="text-lg font-semibold pt-4">作り方</div>
                         </div>
-                        @foreach ($procedures as $procedure)
-                            <p class='cooking_procedure'>{{ $procedure->body }}</p>
-                        @endforeach
+                        <div class="px-6">
+                            @foreach ($procedures as $procedure)
+                                <p class='procedure_count font-semibold'>手順{{ $loop->iteration }}</p>
+                                <p class='cooking_procedure pl-4'>{{ $procedure->body }}</p>
+                            @endforeach    
+                        </div>
+                        
                         
                         <div class="footer w-20 pt-4">
                             <button type="button" class="my-btn" onclick="history.back()">戻る</button>
