@@ -29,9 +29,10 @@ class RakutenRecipeController extends Controller
         // $serviceにRakutenRecipeServiceクラスをインスタンス化
         $service = app()->make('RakutenRecipeService');
         
-        $input_ringredientrecipe = [];
+        
         for ($i=0; $i<count($api_rakutenrecipes); $i++)
         {
+            $input_ringredientrecipe = [];
             $quantities = $service->getQuantity($api_rakutenrecipes[$i]['recipeUrl']);
             foreach ($quantities as $quantity) {
                 // 同じ名前のものがあったらfirstでDBからとる
@@ -44,6 +45,7 @@ class RakutenRecipeController extends Controller
                         "serving" => $quantity["serving"],
                     );
             }
+            
             // レシピの想定人数を取得
             $number = $service->getNumber($api_rakutenrecipes[$i]['recipeUrl']);
             
@@ -62,9 +64,9 @@ class RakutenRecipeController extends Controller
             // print_r($input_rrecipe);
             $rakutenrecipe = RakutenRecipe::firstOrNew(['id' => $i+1]);
             $rakutenrecipe->fill($input_rrecipe)->save();
+            $rakutenrecipe->rakuten_ingredients()->sync($input_ringredientrecipe);
         }
         // print_r($input_ringredientrecipe);
-        $rakutenrecipe->rakuten_ingredients()->sync($input_ringredientrecipe);
     }
     
     public function getCategories()
