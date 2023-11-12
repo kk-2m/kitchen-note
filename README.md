@@ -63,8 +63,50 @@ KitcheNoteはただのレシピ管理アプリではありません。
 Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
 ## 機能一覧
+| トップ画面 |　アカウント登録画面 |
+| ---- | ---- |
+| ![TopPage](https://github.com/kk-2m/kitchen-note/assets/112247999/4d70ade7-dd73-4699-9572-13c9fa599824) | ![RegisterPage](https://github.com/kk-2m/kitchen-note/assets/112247999/4c4767ca-f62d-4fdb-bbc8-3b7fc12dacb3) |
+| URLを読み込ませる毎にトップページの画像が変わる機能を実装しました。 | メール認証を用いたアカウント登録を実装しました。 |
 
-# HTML test
+| ログイン画面 |　パスワードリセット画面 |
+| ---- | ---- |
+| ![LoginPage](https://github.com/kk-2m/kitchen-note/assets/112247999/19e7c814-9d90-47a3-b3e3-a2676d2bc96a) | ![PasswordResetPage](https://github.com/kk-2m/kitchen-note/assets/112247999/9c34823d-6257-4c3f-8cab-467714d90409) |
+| メールアドレスとパスワードでの認証機能を実装しました。 | メールアドレスを用いてパスワードを再設定できる機能を実装しました。 |
+
+| ダッシュボード |　プロフィール画面 |
+| ---- | ---- |
+| ![TopPage](https://github.com/kk-2m/kitchen-note/assets/112247999/4d70ade7-dd73-4699-9572-13c9fa599824) | ![LoginPage](https://github.com/kk-2m/kitchen-note/assets/112247999/19e7c814-9d90-47a3-b3e3-a2676d2bc96a) |
+| 登録せずにサービスをお試しいただくためのトライアル機能を実装しました。 | ログインIDとパスワードでの認証機能を実装しました。 |
+
+| レシピ一覧画面 |　レシピ作成画面 |
+| ---- | ---- |
+| ![TopPage](https://github.com/kk-2m/kitchen-note/assets/112247999/4d70ade7-dd73-4699-9572-13c9fa599824) | ![LoginPage](https://github.com/kk-2m/kitchen-note/assets/112247999/19e7c814-9d90-47a3-b3e3-a2676d2bc96a) |
+| 登録せずにサービスをお試しいただくためのトライアル機能を実装しました。 | ログインIDとパスワードでの認証機能を実装しました。 |
+
+| レシピ詳細画面 |　レシピ編集画面 |
+| ---- | ---- |
+| ![TopPage](https://github.com/kk-2m/kitchen-note/assets/112247999/4d70ade7-dd73-4699-9572-13c9fa599824) | ![LoginPage](https://github.com/kk-2m/kitchen-note/assets/112247999/19e7c814-9d90-47a3-b3e3-a2676d2bc96a) |
+| 登録せずにサービスをお試しいただくためのトライアル機能を実装しました。 | ログインIDとパスワードでの認証機能を実装しました。 |
+
+| 在庫情報一覧画面 |　新規在庫作成画面 |
+| ---- | ---- |
+| ![TopPage](https://github.com/kk-2m/kitchen-note/assets/112247999/4d70ade7-dd73-4699-9572-13c9fa599824) | ![LoginPage](https://github.com/kk-2m/kitchen-note/assets/112247999/19e7c814-9d90-47a3-b3e3-a2676d2bc96a) |
+| 登録せずにサービスをお試しいただくためのトライアル機能を実装しました。 | ログインIDとパスワードでの認証機能を実装しました。 |
+
+| 在庫情報編集画面 |　献立一覧画面 |
+| ---- | ---- |
+| ![TopPage](https://github.com/kk-2m/kitchen-note/assets/112247999/4d70ade7-dd73-4699-9572-13c9fa599824) | ![LoginPage](https://github.com/kk-2m/kitchen-note/assets/112247999/19e7c814-9d90-47a3-b3e3-a2676d2bc96a) |
+| 登録せずにサービスをお試しいただくためのトライアル機能を実装しました。 | ログインIDとパスワードでの認証機能を実装しました。 |
+
+| 献立作成画面 |　献立編集画面 |
+| ---- | ---- |
+| ![TopPage](https://github.com/kk-2m/kitchen-note/assets/112247999/4d70ade7-dd73-4699-9572-13c9fa599824) | ![LoginPage](https://github.com/kk-2m/kitchen-note/assets/112247999/19e7c814-9d90-47a3-b3e3-a2676d2bc96a) |
+| 登録せずにサービスをお試しいただくためのトライアル機能を実装しました。 | ログインIDとパスワードでの認証機能を実装しました。 |
+
+| 買い物情報一覧画面 |　買い物情報編集画面 |
+| ---- | ---- |
+| ![TopPage](https://github.com/kk-2m/kitchen-note/assets/112247999/4d70ade7-dd73-4699-9572-13c9fa599824) | ![LoginPage](https://github.com/kk-2m/kitchen-note/assets/112247999/19e7c814-9d90-47a3-b3e3-a2676d2bc96a) |
+| 登録せずにサービスをお試しいただくためのトライアル機能を実装しました。 | ログインIDとパスワードでの認証機能を実装しました。 |
 
 <table>
 <thead>
@@ -75,7 +117,7 @@ Thank you for considering contributing to the Laravel framework! The contributio
 </thead>
 <tbody>
 <tr>
-<td><img src="https://qiita-image-store.s3.amazonaws.com/0/140610/d4184ea0-0c21-3b78-5154-90bae839a05f.png">You <strong style="color: blue; text-decoration: underline;">should never</strong>&nbsp;use inline styles!</td>
+<td><img src="https://drive.google.com/file/d/1CNXhYHGPcXcRFjdV-zVjTFCiPq3Kd_Fv/view?usp=sharing">You <strong style="color: blue; text-decoration: underline;">should never</strong>&nbsp;use inline styles!</td>
 <td><strong style="font-size: 17px; color: #2b2301;">x</strong></td>
 </tr>
 <tr>
@@ -88,7 +130,7 @@ Thank you for considering contributing to the Laravel framework! The contributio
 <table>
 <thead>
 <tr>
-<td></td>
+<td>プロフィール画面</td>
 <td>ダッシュボード</td>
 </tr>
 </thead>
