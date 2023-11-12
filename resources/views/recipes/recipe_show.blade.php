@@ -31,9 +31,9 @@
                             <div class="flex-auto max-w-md mx-auto">
                                 <div class="image">
                                     @if ($recipe->image != '')
-                                        <img src="{{ asset($recipe->image) }}">
+                                        <img src="https://rihwablog.com/KitchenNote/{{ $recipe->image }}">
                                     @else
-                                        <img src="{{ \Storage::url('dish_image/noimage.png') }}", alt='料理写真' width="50%">
+                                        <img src="https://rihwablog.com/KitchenNote/noimage.png", alt='料理写真' width="50%">
                                     @endif
                                 </div>
                             </div>

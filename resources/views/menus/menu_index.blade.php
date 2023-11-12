@@ -99,7 +99,7 @@
                                     </div>
                                     <div class="flex-1">
                                         @if ($menu->recipe->image != '')
-                                            <img src="{{ $menu->recipe->image }}" alt='料理写真' width='50%'>
+                                            <img src="https://rihwablog.com/KitchenNote/{{ $menu->recipe->image }}" alt='料理写真' width='50%'>
                                         @else
                                             <img src="https://rihwablog.com/KitchenNote/noimage.png" alt='料理写真' width='300px'>
                                         @endif
