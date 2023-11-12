@@ -1,11 +1,19 @@
 {
+    "Are you sure you want to delete your account?":"本当にアカウントを削除しますか？",
     "Log in":"ログイン",
+    "Cancel":"キャンセル",
+    "Click button below and reset password.":"下のボタンをクリックしてパスワードを再設定してください。",
+    "click here to request another":"こちらをクリックして再送信してください。",
+    "Current Password":"現在のパスワード",
+    "Delete Account":"アカウントの削除",
     "E-Mail Address":"メールアドレス",
+    "Ensure your account is using a long, random password to stay secure.":"アカウントの安全性を保つために、長くてランダムなパスワードを使用していることを確認してください。",
     "Password":"パスワード",
-    "Remember me":"ログイン状態を保存",
+    
     "Forgot your password?":"パスワードをお忘れですか？",
     "Register":"登録",
     "Already registered?":"登録済みの方はこちら",
+    "New Password":"新しいパスワード",
     "Name":"氏名",
     "Email":"メールアドレス",
     "Confirm Password":"パスワード(確認用)",
@@ -25,24 +33,33 @@
     "A fresh verification link has been sent to your email address.":"新しいリンクをあなたのメールアドレスに送信しました。",
     "Before proceeding, please check your email for a verification link.":"メールに記載されているリンクをクリックして、登録手続きを完了してください。",
     "If you did not receive the email":"メールが届いていなければ、",
-    "click here to request another":"こちらをクリックして再送信してください。",
+    
     
     "Hello!": "こんにちは！",
     "Whoops!": "おっと！",
     "Regards": "どうぞよろしくお願いします",
     
     "If you’re having trouble clicking the \":actionText\" button, copy and paste the URL below\ninto your web browser: [:actionURL](:actionURL)": "「:actionText」ボタンをクリックするのに問題がある場合は、下記のURLをコピーしてウェブブラウザに貼り付けてください：[:actionURL](:actionURL)",
-    
+    "Profile Information":"プロフィール情報",
     "Please click the button below to verify your email address.":"メールアドレスを確認するために下のボタンをクリックしてください。",
     "Verify Email Address":"メールアドレスの確認",
     "If you did not create an account, no further action is required.":"心当たりがない場合は、本メッセージは破棄してください。",
     
     
-    "Click button below and reset password.":"下のボタンをクリックしてパスワードを再設定してください。",
-    "You are receiving this email because we received a password reset request for your account.":"あなたのアカウントでパスワードリセットのリクエストが行われたため、このメールを受け取っています。",
-    "This password reset link will expire in :count minutes.": "このパスワードリセットリンクは:count分で期限切れになります。",
-    "Reset Password Notification":"パスワードの再設定",
     
+    
+    "This password reset link will expire in :count minutes.": "このパスワードリセットリンクは:count分で期限切れになります。",
+    "Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.":"アカウントが削除されると2度と復元できません。アカウントを削除する前に、本当に削除して良いかよく確認してください。",
+    "Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.":"アカウントが削除されると2度と復元できません。よろしければ、パスワードを入力してアカウントを削除してください。",
+    "Reset Password Notification":"パスワードの再設定",
     "Reset password":"パスワードリセット",
+    "Remember me":"ログイン状態を保存",
+    "Save":"保存",
+    "Saved.":"保存しました。",
+    "Update Password":"パスワードの更新",
+    "Update your account's profile information and email address.":"アカウントのプロフィール情報とメールアドレスを更新します。",
+    
+    "You are receiving this email because we received a password reset request for your account.":"あなたのアカウントでパスワードリセットのリクエストが行われたため、このメールを受け取っています。",
+    "Your email address is unverified.":"",
     "If you did not request a password reset, no further action is required.":"心当たりがない場合は、本メッセージは破棄してください。"
 } 
