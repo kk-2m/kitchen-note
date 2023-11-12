@@ -126,7 +126,7 @@
                                                 <div class="flex  py-1 px-8">
                                                     <div class="ingredient_qantity">
                                                         <label for="ingredient_quantity{{ $loop->iteration }}">量：</label>
-                                                        <input type="number" name="ingredient_recipe[{{ $loop->iteration }}][quantity]" id="input_ingredient_quantity{{ $loop->iteration }}" placeholder="必要な量を入力してください" value="{{ $ingredient->pivot->quantity }}" min="1" max="99999999"/>
+                                                        <input type="number" name="ingredient_recipe[{{ $loop->iteration }}][quantity]" id="input_ingredient_quantity{{ $loop->iteration }}" placeholder="必要な量を入力してください" value="{{ $ingredient->pivot->quantity }}" min="0.01" step="0.01" max="99999999"/>
                                                         <p class="ingredient_quantity_error" style="color:red">{{ $errors->first("ingredient_recipe.{$loop->iteration}.quantity") }}</p>
                                                     </div>
                                                     <div class="ingredient_unit pl-2">
@@ -176,7 +176,7 @@
                                                 <div class="flex py-1 px-8">
                                                     <div class="ingredient_qantity">
                                                         <label for="ingredient_quantity{{ $key }}">量：</label>
-                                                        <input type="number" name="ingredient_recipe[{{ $key }}][quantity]" id="input_ingredient_quantity{{ $key }}" placeholder="必要な量を入力してください" value="{{ old("ingredient_recipe.{$key}.quantity") }}" min="1" max="99999999"/>
+                                                        <input type="number" name="ingredient_recipe[{{ $key }}][quantity]" id="input_ingredient_quantity{{ $key }}" placeholder="必要な量を入力してください" value="{{ old("ingredient_recipe.{$key}.quantity") }}" min="0.01" step="0.01" max="99999999"/>
                                                         <p class="ingredient_quantity_error" style="color:red">{{ $errors->first("ingredient_recipe.{$key}.quantity") }}</p>
                                                     </div>
                                                     <div class="ingredient_unit pl-2">
