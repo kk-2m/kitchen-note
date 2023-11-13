@@ -25,7 +25,7 @@
                                 <div class="text-yellow-500">・</div>
                                 <div class="text-yellow-700">・</div>
                                 <div class="text-yellow-500 pr-2">・</div>
-                                人気のレシピ
+                                楽天レシピで人気のレシピ
                             </div>
                         </div>
                             
