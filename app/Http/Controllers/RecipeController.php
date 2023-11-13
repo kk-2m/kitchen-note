@@ -308,6 +308,9 @@ class RecipeController extends Controller
     {
         // 元々登録されていた画像は削除
         if($recipe->image != null) Storage::disk('sftp')->delete($recipe->image);
+        foreach($recipe->menus as $menu){
+            $menu->delete();
+        }
         $recipe->delete();
         return redirect('/recipes');
     }
