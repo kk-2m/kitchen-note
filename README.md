@@ -52,17 +52,17 @@ KitcheNoteはただのレシピ管理アプリではありません。
 
 | レシピ詳細画面 |　レシピ編集画面 |
 | ---- | ---- |
-| ![RecipeShowPage](https://github.com/kk-2m/kitchen-note/assets/112247999/fe0fb4a1-d0e4-4524-a2f6-33bd6eb47bf5) | ![LoginPage](https://github.com/kk-2m/kitchen-note/assets/112247999/19e7c814-9d90-47a3-b3e3-a2676d2bc96a) |
+| ![RecipeShowPage](https://github.com/kk-2m/kitchen-note/assets/112247999/fe0fb4a1-d0e4-4524-a2f6-33bd6eb47bf5) | ![RecipeEditPage](https://github.com/kk-2m/kitchen-note/assets/112247999/e90849eb-e81c-4204-a316-057c9eba5747) |
 | レシピの手順を見ることができます。 | 初期表示は登録情報ですが、バリデーションが機能した時は項目に入っていた値が再度格納されるようになっています。詳しくは動画をご覧ください。 |
 
 | 在庫情報一覧画面 |　新規在庫作成画面 |
 | ---- | ---- |
-| ![TopPage](https://github.com/kk-2m/kitchen-note/assets/112247999/4d70ade7-dd73-4699-9572-13c9fa599824) | ![LoginPage](https://github.com/kk-2m/kitchen-note/assets/112247999/19e7c814-9d90-47a3-b3e3-a2676d2bc96a) |
+| ![StockIndexPage](https://github.com/kk-2m/kitchen-note/assets/112247999/89e623d6-67c9-41cc-821d-67fbfef6f1b3) | ![StockCreatePage](https://github.com/kk-2m/kitchen-note/assets/112247999/4e9381a9-a879-4f8c-bce0-8a7c5b34dcc4) |
 | 登録せずにサービスをお試しいただくためのトライアル機能を実装しました。 | ログインIDとパスワードでの認証機能を実装しました。 |
 
 | 在庫情報編集画面 |　献立一覧画面 |
 | ---- | ---- |
-| ![TopPage](https://github.com/kk-2m/kitchen-note/assets/112247999/4d70ade7-dd73-4699-9572-13c9fa599824) | ![MenuIndexPage](https://github.com/kk-2m/kitchen-note/assets/112247999/ea9a4ca8-25ce-4c98-b4cd-e8682d476635) |
+| ![StockEditPage](https://github.com/kk-2m/kitchen-note/assets/112247999/313c1620-aabd-44fa-8e7a-2af4161eba03) | ![MenuIndexPage](https://github.com/kk-2m/kitchen-note/assets/112247999/ea9a4ca8-25ce-4c98-b4cd-e8682d476635) |
 | 登録せずにサービスをお試しいただくためのトライアル機能を実装しました。 | 各献立は曜日によってソートされます。また、表示される献立は今日から１週間です。買い物リスト作成ボタンによって表示されている材料を買い物リストに追加することができます。 |
 
 | 献立作成画面 |　献立編集画面 |
@@ -77,7 +77,7 @@ KitcheNoteはただのレシピ管理アプリではありません。
 
 | 買い物リストへ追加 |　買い物リスト |
 | ---- | ---- |
-| ![ShoppingIndexPage](https://github.com/kk-2m/kitchen-note/assets/112247999/75c093b5-b232-40fb-b47a-1ab46936321c) | ![ShoppingIndexPage](https://github.com/kk-2m/kitchen-note/assets/112247999/75c093b5-b232-40fb-b47a-1ab46936321c) |
+| ![ShoppingCreate](https://github.com/kk-2m/kitchen-note/assets/112247999/50fd4f30-5ea2-4b4d-a6c9-399e1956ebd8) | ![ShoppingList](https://github.com/kk-2m/kitchen-note/assets/112247999/d08f0cf9-70f5-46b6-a0e7-7a3a5d5777fa) |
 | この画面で新規に買い物リストへ追加することもできます。追加する材料はオートコンプリート機能により、登録されている材料からしか選べない仕様になっています。 | また、買い物リストにチェックがつけられると、Ajax通信により買い物情報が在庫情報に登録されます。 |
 
 ## 使用技術
