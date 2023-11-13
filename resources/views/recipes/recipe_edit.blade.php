@@ -13,7 +13,13 @@
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6 text-gray-900">
-                            
+                            <div class="max-w-lg">
+                                @if ($recipe->image != '')
+                                    <img src="https://rihwablog.com/KitchenNote/{{ $recipe->image }}" alt='料理写真' width='50%'>
+                                @else
+                                    <img src="https://rihwablog.com/KitchenNote/noimage.png" alt='料理写真'>
+                                @endif
+                            </div>
                             <!-- タイトルの編集 -->
                             <div class="title">
                                 <div class="font-semibold">タイトル</div>
@@ -23,13 +29,9 @@
                             
                             <!-- 料理写真の編集 -->
                             <div class="image">
-                                @if ($recipe->image != '')
-                                    <img src="https://rihwablog.com/KitchenNote/{{ $recipe->image }}">
-                                @else
-                                    <img src="https://rihwablog.com/KitchenNote/noimage.png", alt='料理写真' width="50%">
-                                @endif
                                 <div class="font-semibold">料理写真</div>
-                                <input type="file" name="recipe[image]"/>
+                                <p>新しい画像に差し替えたい場合は新しい画像をアップロードしてください。</p>
+                                <input type="file" name="recipe[image]" accept=".jpg, .jpeg, .png"/>
                             </div>
                             
                             <!-- 調理時間の編集 -->
@@ -54,9 +56,8 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            
-                             <!-- カテゴリの編集 -->
+                        
+                            <!-- カテゴリの編集 -->
                             <div class='categories'>
                                 <div class="font-semibold pt-6">
                                     カテゴリ : 
@@ -93,7 +94,7 @@
                                 <div class="font-semibold pt-6">何人前？</div>
                                 <input type="number" name="recipe[number]" placeholder="人数" value="{{ old('recipe.number', $recipe->number) }}"/>人前
                                 <p class="title_error" style="color:red">{{ $errors->first('recipe.number') }}</p><br>
-                            </div>
+                            </div>    
                             
                             <!-- 材料の編集 -->
                             <div class="ingredients" id="ingredient-container" data-ingredientcategories='@json($ingredient_categories)' data-units='@json($units)'>

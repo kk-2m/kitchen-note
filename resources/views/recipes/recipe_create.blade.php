@@ -24,7 +24,7 @@
                         <!-- 料理写真の入力 -->
                         <div class="image">
                             <div class="font-semibold">料理写真</div>
-                            <input type="file" name="recipe[image]"/>
+                            <input type="file" name="recipe[image]" accept=".jpg, .jpeg, .png"/>
                         </div>
                         
                         <!-- 調理時間の入力 -->
