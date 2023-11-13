@@ -31,7 +31,7 @@
                                                     <input type="hidden" name="slist[{{ $loop->index }}][user_id]" value="{{ Auth::user()->id }}"/>
                                                     <input type="hidden" name="slist[{{ $loop->index }}][ingredient_id]" value="{{ $ingredient->id }}"/>
                                                     <input type="hidden" name="slist[{{ $loop->index }}][menu_id]" value="{{ $menu->id }}"/>
-                                                    <input type="hidden" name="slist[{{ $loop->index }}][quantity]" value="{{ (int)$ingredient->pivot->quantity }}"/>
+                                                    <input type="hidden" name="slist[{{ $loop->index }}][quantity]" value="{{ (float)$ingredient->pivot->quantity }}"/>
                                                     <input type="hidden" name="slist[{{ $loop->index }}][unit_id]" value="{{ $ingredient->pivot->unit_id }}"/>
                                                 @endforeach
                                                 <button type="button" class="my-btn" id="add2shoppinglist{{ $loop->index }}" data-id='{{ $menu->id }}'>買い物リストに追加</button>
