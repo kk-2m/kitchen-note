@@ -53,7 +53,7 @@
                                     @if ($stock->quantity == (int)$stock->quantity) {{ number_format($stock->quantity) }}{{ $stock->unit->name }}
                                     @else {{ $stock->quantity }}{{ $stock->unit->name }}
                                     @endif <br>
-                                    購入日：{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $stock->created_at)->format('Y-m-d') }}<br>
+                                    登録日：{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $stock->created_at)->format('Y-m-d') }}<br>
                                     <div class="flex">
                                         賞味・消費期限：
                                         @if ($stock->expiration_at >= $today)

@@ -24,11 +24,11 @@
                             <!-- 料理写真の編集 -->
                             <div class="image">
                                 @if ($recipe->image != '')
-                                    <img src="{{ asset($recipe->image) }}">
+                                    <img src="https://rihwablog.com/KitchenNote/{{ $recipe->image }}">
                                 @else
-                                    <img src="{{ \Storage::url('dish_image/noimage.png') }}", alt='料理写真' width="50%">
+                                    <img src="https://rihwablog.com/KitchenNote/noimage.png", alt='料理写真' width="50%">
                                 @endif
-                                <h2>料理写真</h2>
+                                <div class="font-semibold">料理写真</div>
                                 <input type="file" name="recipe[image]"/>
                             </div>
                             
