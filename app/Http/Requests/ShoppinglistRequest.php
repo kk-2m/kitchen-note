@@ -25,7 +25,7 @@ class ShoppinglistRequest extends FormRequest
     {
         return [
             "ingredient.name" => "required|string|max:50",
-            'slist.quantity' => 'decimal:0,2|between:1, 99999999',
+            'slist.quantity' => 'decimal:0,2|between:0.01, 99999999',
             'slist.unit_id' => 'required|integer',
         ];
     }

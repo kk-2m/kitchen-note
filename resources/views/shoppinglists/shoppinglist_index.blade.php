@@ -26,7 +26,7 @@
                                     
                                     <input
                                         class="placeholder:italic placeholder:text-slate-400 block bg-white border border-slate-300 rounded-md py-4 pl-4 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
-                                        id="quantity" placeholder="7" type="number" name="slist[quantity]" value="{{ old('stock.quantity') }}" min="1" step="0.01" max="99999999"/>
+                                        id="quantity" placeholder="7" type="number" name="slist[quantity]" value="{{ old('stock.quantity') }}" min="0.01" step="0.01" max="99999999"/>
                                     <p class="quantity_error" style="color:red">{{ $errors->first('slist.quantity') }}</p>
                                 </div>
                                 <div class="ingredient_unit pl-2 md:pl-5">
