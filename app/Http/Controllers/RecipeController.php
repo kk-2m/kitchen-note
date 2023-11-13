@@ -165,7 +165,6 @@ class RecipeController extends Controller
             // 元々登録されていた画像は削除
             if($recipe->image != null) Storage::disk('sftp')->delete($recipe->image);
             $file = $request->file('recipe.image');
-            // dd(is_readable(Storage::disk('sftp')->putFile($userId, $file)));
             if(!\Storage::disk('sftp')->exists($userId)) {
                 \Storage::disk('sftp')->makeDirectory($userId);
             }
