@@ -95,17 +95,17 @@ Thank you for considering contributing to the Laravel framework! The contributio
 
 | 在庫情報編集画面 |　献立一覧画面 |
 | ---- | ---- |
-| ![TopPage](https://github.com/kk-2m/kitchen-note/assets/112247999/4d70ade7-dd73-4699-9572-13c9fa599824) | ![LoginPage](https://github.com/kk-2m/kitchen-note/assets/112247999/19e7c814-9d90-47a3-b3e3-a2676d2bc96a) |
+| ![TopPage](https://github.com/kk-2m/kitchen-note/assets/112247999/4d70ade7-dd73-4699-9572-13c9fa599824) | ![MenuIndexPage](https://github.com/kk-2m/kitchen-note/assets/112247999/ea9a4ca8-25ce-4c98-b4cd-e8682d476635) |
 | 登録せずにサービスをお試しいただくためのトライアル機能を実装しました。 | ログインIDとパスワードでの認証機能を実装しました。 |
 
 | 献立作成画面 |　献立編集画面 |
 | ---- | ---- |
-| ![TopPage](https://github.com/kk-2m/kitchen-note/assets/112247999/4d70ade7-dd73-4699-9572-13c9fa599824) | ![LoginPage](https://github.com/kk-2m/kitchen-note/assets/112247999/19e7c814-9d90-47a3-b3e3-a2676d2bc96a) |
+| ![MenuCreatePage](https://github.com/kk-2m/kitchen-note/assets/112247999/61132de6-3cd9-421e-9df8-b9fdb038a711) | ![MenuEditPage](https://github.com/kk-2m/kitchen-note/assets/112247999/50c773ec-a875-4df8-a7fe-5b587c8b5f72) |
 | 登録せずにサービスをお試しいただくためのトライアル機能を実装しました。 | ログインIDとパスワードでの認証機能を実装しました。 |
 
 | 買い物情報一覧画面 |　買い物情報編集画面 |
 | ---- | ---- |
-| ![TopPage](https://github.com/kk-2m/kitchen-note/assets/112247999/4d70ade7-dd73-4699-9572-13c9fa599824) | ![LoginPage](https://github.com/kk-2m/kitchen-note/assets/112247999/19e7c814-9d90-47a3-b3e3-a2676d2bc96a) |
+| ![ShoppingIndexPage](https://github.com/kk-2m/kitchen-note/assets/112247999/75c093b5-b232-40fb-b47a-1ab46936321c) | ![ShoppingEditPage](https://github.com/kk-2m/kitchen-note/assets/112247999/1a120bff-9733-4926-9df5-26b3bb4befa9) |
 | 登録せずにサービスをお試しいただくためのトライアル機能を実装しました。 | ログインIDとパスワードでの認証機能を実装しました。 |
 
 ## テストアカウント
