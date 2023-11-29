@@ -16,23 +16,23 @@
         <!--<button type="button"><a href="/recipes/getCategories">get categories</a></button>-->
         @foreach ($recipes as $recipe)
             <div class="pt-6">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-6 text-gray-900">
+                        <div class="p-2 sm:p-6 text-gray-900">
                             <div class='recipe'>
                                 <div class="flex  mb-5 justify-between">
                                     <div class='title'>
-                                        <div class="font-bold text-2xl hover:underline">
+                                        <div class="font-bold text-2xl pl-2 hover:underline">
                                             <a href="{{ route('recipe_show', ['recipe'=>$recipe->id]) }}">{{ $recipe->title }}</a>
                                         </div>
                                     </div>
                                     
                                     <div class="flex justify-end">
-                                        <div class="flex-none">
+                                        <div class="flex-none px-2">
                                             <!-- リンクを使用し、献立作成画面に各レシピのidを渡す -->
                                             <button type="button" class="my-btn"><a href="{{ route('menu_create', ['recipe_id' => $recipe->id]) }}">献立追加</a></button>
                                         </div>
-                                        <div class="flex-none px-4">
+                                        <div class="flex-none pl-2 sm:px-4">
                                             <form action="{{ route('recipe_delete', ['recipe'=>$recipe->id]) }}" id="form_{{ $recipe->id }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
@@ -87,9 +87,9 @@
                                             </p>
                                         @endforeach
                                     </div>
-                                    <div class="flex-1">
+                                    <div class="flex-1 max-w-xs">
                                         @if ($recipe->image != '')
-                                            <img src="https://rihwablog.com/KitchenNote/{{ $recipe->image }}" alt='料理写真' width='50%'>
+                                            <img src="https://rihwablog.com/KitchenNote/{{ $recipe->image }}" alt='料理写真' max-width='100px'>
                                         @else
                                             <img src="https://rihwablog.com/KitchenNote/noimage.png" alt='料理写真'>
                                         @endif
