@@ -15,16 +15,16 @@
         
         @foreach ($menus as $menu)
             <div class="pt-6 pb-6">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-6 text-gray-900">
+                        <div class="p-2 sm:p-6 text-gray-900">
                             <div class='menu'>
                                 <div class="date flex mb-3 justify-between">
                                     <div class="font-bold text-2xl">
                                         <div>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $menu->date)->isoFormat('dddd') }}</div>
                                     </div>
                                     <div class="flex justify-end">
-                                        <div class="flex-none px-4">
+                                        <div class="flex-none px-1 sm:px-4">
                                             <form id="shoppingDataForm{{ $menu->id }}">
                                                 @csrf
                                                 @foreach($menu->ingredients as $ingredient)
@@ -40,7 +40,7 @@
                                         <div class="flex-none">
                                             <button type='button' class="my-btn"><a href="/menus/{{ $menu->id }}/edit">編集</a></button>
                                         </div>
-                                        <div class="flex-none px-4">
+                                        <div class="flex-none px-1 sm:px-4">
                                             <form action="/menus/{{ $menu->id }}" id="form_{{ $menu->id }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
@@ -97,9 +97,9 @@
                                             </p>
                                         @endforeach
                                     </div>
-                                    <div class="flex-1">
+                                    <div class="flex-1 max-w-xs">
                                         @if ($menu->recipe->image != '')
-                                            <img src="https://rihwablog.com/KitchenNote/{{ $menu->recipe->image }}" alt='料理写真' width='50%'>
+                                            <img src="https://rihwablog.com/KitchenNote/{{ $menu->recipe->image }}" alt='料理写真'>
                                         @else
                                             <img src="https://rihwablog.com/KitchenNote/noimage.png" alt='料理写真' width='300px'>
                                         @endif
